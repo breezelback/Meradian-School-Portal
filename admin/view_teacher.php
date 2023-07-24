@@ -60,7 +60,6 @@
               <div class="card-body">
                 <div class="tab-content p-0">
                   
-                  <form action="../function_php/update_data.php?id=<?php echo $row['id']; ?>" method="POST">
                     <div class="row">
                       <div class="col-md-2">
                         <img src="../images/user_image.jpg" alt="" width="100">
@@ -120,11 +119,11 @@
                               <tr style="font-size: 14px;">
                                 <td><center><?php echo $sub['subject_name']; ?></center></td>
                                 <td><center><?php echo $sub['subject_code']; ?></center></td>
-                                <td><center><?php echo $sub['teaching_day']; ?> | <?php echo $sub['teaching_time']; ?></center></td>
+                                <td><center><?php echo $sub['teaching_day']; ?> | <?php echo date('h:i A', strtotime($sub['teaching_time'])); ?></center></td>
                                 <td><center>
                                   <div class="btn-group">
                                     <a href="edit_user.php?id=<?php echo $sub['id']; ?>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
-                                    <a href="../function_php/delete_user.php?id=<?php echo $sub['id']; ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                    <a href="../function_php/delete_schedule.php?id=<?php echo $sub['id']; ?>&user_id=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
 
                                     <a href="view_teacher.php?id=<?php echo $sub['id']; ?>" class="btn btn-warning btn-sm text-white"><i class="fa fa-cog"></i></a>
                                   </div></center>
@@ -136,14 +135,7 @@
 
                         </table>
                       </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-12">
-                        <center><button type="submit" class="btn btn-lg btn-success">Update <i class="fa fa-edit"></i></button></center>
-                      </div>
-                    </div>    
-
-                  </form>
+                    </div>  
 
                 </div>
               </div><!-- /.card-body -->
