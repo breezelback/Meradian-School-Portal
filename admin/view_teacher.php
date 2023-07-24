@@ -100,20 +100,33 @@
                           </thead>
                           <tbody>
                             <?php 
-                              $sql = ' SELECT `id`, `teacher_id`, `subject_id`, `teaching_day`, `teaching_time`, `schedule_code`, `status`, `date_created` FROM `tbl_schedule` WHERE teacher_id = '.$_GET['id'].' ';
+                              $sql = ' 
+                              SELECT a.id, 
+                                    a.teacher_id, 
+                                    a.subject_id, 
+                                    a.teaching_day, 
+                                    a.teaching_time, 
+                                    a.schedule_code, 
+                                    a.status,
+                                    a.date_created , 
+                                    b.subject_name,
+                                    b.subject_code
+                                FROM tbl_schedule a
+                                LEFT JOIN tbl_subject b ON b.id = a.subject_id
+                                WHERE teacher_id = '.$_GET['id'].' ';
                               $exec = $conn->query($sql);
-                              while ( $row = $exec->fetch_assoc() ) {
+                              while ( $sub = $exec->fetch_assoc() ) {
                             ?>
                               <tr style="font-size: 14px;">
-                                <td><center><?php echo $row['subject_id']; ?></center></td>
-                                <td><center><?php echo $row['subject_id']; ?></center></td>
-                                <td><center><?php echo $row['teaching_day']; ?> | <?php echo $row['teaching_time']; ?></center></td>
+                                <td><center><?php echo $sub['subject_name']; ?></center></td>
+                                <td><center><?php echo $sub['subject_code']; ?></center></td>
+                                <td><center><?php echo $sub['teaching_day']; ?> | <?php echo $sub['teaching_time']; ?></center></td>
                                 <td><center>
                                   <div class="btn-group">
-                                    <a href="edit_user.php?id=<?php echo $row['id']; ?>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
-                                    <a href="../function_php/delete_user.php?id=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                    <a href="edit_user.php?id=<?php echo $sub['id']; ?>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
+                                    <a href="../function_php/delete_user.php?id=<?php echo $sub['id']; ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
 
-                                    <a href="view_teacher.php?id=<?php echo $row['id']; ?>" class="btn btn-warning btn-sm text-white"><i class="fa fa-cog"></i></a>
+                                    <a href="view_teacher.php?id=<?php echo $sub['id']; ?>" class="btn btn-warning btn-sm text-white"><i class="fa fa-cog"></i></a>
                                   </div></center>
                                 </td>
                               </tr>
