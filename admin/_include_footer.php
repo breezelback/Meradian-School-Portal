@@ -59,4 +59,9 @@
 		  unset($_SESSION['toastr']);
 		}
 	?>
+
+	$(function () {
+	  $('[data-toggle="tooltip"]').tooltip()
+	})
 </script>
+

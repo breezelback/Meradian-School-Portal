@@ -91,8 +91,9 @@
                           <td><?php echo $row['school_year']; ?> | <?php echo $row['section']; ?></td>
                           <td>
                             <div class="btn-group">
-                              <a href="edit_user.php?id=<?php echo $row['id']; ?>" class="btn btn-primary btn-sm">Edit</a>
-                              <a href="../function_php/delete_user.php?id=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm">Delete</a>
+                              <a href="edit_user.php?id=<?php echo $row['id']; ?>" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update Information"><i class="fa fa-edit"></i></a>
+                              <a href="view_student_academic.php?id=<?php echo $row['id']; ?>" class="btn btn-warning btn-sm text-white" data-toggle="tooltip" data-placement="bottom" title="View Academic Information"><i class="fa fa-cog"></i></a>
+                              <a href="../function_php/delete_user.php?id=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Delete Student Record"><i class="fa fa-trash"></i></a>
                             </div>
                           </td>
                         </tr>
