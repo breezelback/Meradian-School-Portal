@@ -64,6 +64,7 @@
                     <tr>
                       <th><center>SUBJECT CODE</center></th>
                       <th><center>NAME</center></th>
+                      <!-- <th><center>YEAR</center></th> -->
                       <th><center>DATE CREATED</center></th>
                       <th><center>ACTION</center></th>
                     </tr>
@@ -71,13 +72,14 @@
                     <tbody>
 
                       <?php 
-                        $sql = ' SELECT `id`, `subject_name`, `subject_code`, `date_created` FROM `tbl_subject` ';
+                        $sql = ' SELECT `id`, `subject_name`, `subject_code`, DATE_FORMAT(`date_created`, "%M %d, %Y") AS date_created, `school_year` FROM `tbl_subject` ';
                         $exec = $conn->query($sql);
                         while ( $row = $exec->fetch_assoc() ) {
                       ?>
                         <tr style="font-size: 14px;">
                           <td><center><?php echo $row['subject_code']; ?></center></td>
                           <td><center><?php echo $row['subject_name']; ?></center></td>
+                          <!-- <td><center><?php echo $row['school_year']; ?></center></td> -->
                           <td><center><?php echo $row['date_created']; ?></td>
                           <td><center>
                             <div class="btn-group">
@@ -134,6 +136,26 @@
             <input type="text" class="form-control" name="subject_code" id="subject_code" placeholder="">
             <label for="name-l" style="color: grey;">Subject Name</i></label>
             <input type="text" class="form-control" name="subject_name" id="subject_name" placeholder="">
+            <!-- <label for="email">Year</label>
+            <select class="form-control" name="school_year">
+              <option value="Kinder">Kinder</option>
+              <option value="Grade 1">Grade 1</option>
+              <option value="Grade 2">Grade 2</option>
+              <option value="Grade 3">Grade 3</option>
+              <option value="Grade 4">Grade 4</option>
+              <option value="Grade 5">Grade 5</option>
+              <option value="Grade 6">Grade 6</option>
+              <option value="Grade 7">Grade 7</option>
+              <option value="Grade 8">Grade 8</option>
+              <option value="Grade 9">Grade 9</option>
+              <option value="Grade 10">Grade 10</option>
+              <option value="Grade 11">Grade 11</option>
+              <option value="Grade 12">Grade 12</option>
+              <option value="First Year">First Year</option>
+              <option value="Second Year">Second Year</option>
+              <option value="Third Year">Third Year</option>
+              <option value="Fourth Year">Fourth Year</option>
+            </select> -->
           </div>
           <div class="modal-footer">  
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

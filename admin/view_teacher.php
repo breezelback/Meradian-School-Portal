@@ -15,6 +15,16 @@
   <title>The Meradian School | Admin Portal</title>
 
   <?php include '_include_header.php'; ?>
+  <style>
+    .schedule_day
+    {
+      background-color: seagreen;
+      padding: 2.5px;
+      color: white;
+      border-radius: 5px;
+      margin: 3px;
+    }
+  </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -93,6 +103,8 @@
                           <tr>
                             <th><center>SUBJECT NAME</center></th>
                             <th><center>CODE</center></th>
+                            <th><center>YEAR</center></th>
+                            <th><center>SECTION</center></th>
                             <th><center>SCHEDULE</center></th>
                             <th><center>ACTION</center></th>
                           </tr>
@@ -108,6 +120,16 @@
                                     a.schedule_code, 
                                     a.status,
                                     a.date_created , 
+                                    a.teaching_time_to, 
+                                    a.monday,
+                                    a.tuesday,
+                                    a.wednesday,
+                                    a.thursday,
+                                    a.friday,
+                                    a.saturday,
+                                    a.sunday,
+                                    a.school_year,
+                                    a.section,
                                     b.subject_name,
                                     b.subject_code
                                 FROM tbl_schedule a
@@ -119,7 +141,18 @@
                               <tr style="font-size: 14px;">
                                 <td><center><?php echo $sub['subject_name']; ?></center></td>
                                 <td><center><?php echo $sub['subject_code']; ?></center></td>
-                                <td><center><?php echo $sub['teaching_day']; ?> | <?php echo date('h:i A', strtotime($sub['teaching_time'])); ?></center></td>
+                                <td><center><?php echo $sub['school_year']; ?></center></td>
+                                <td><center><?php echo $sub['section']; ?></center></td>
+                                <td><center>  
+                                  
+                                  <?php echo ($sub['monday'] == true ? "<span class='schedule_day'>Monday</span>" : "" ); ?> 
+                                  <?php echo ($sub['tuesday'] == true ? "<span class='schedule_day'>Tuesday</span>" : "" ); ?> 
+                                  <?php echo ($sub['wednesday'] == true ? "<span class='schedule_day'>Wednesday</span>" : "" ); ?> 
+                                  <?php echo ($sub['thursday'] == true ? "<span class='schedule_day'>Thursday</span>" : "" ); ?> 
+                                  <?php echo ($sub['friday'] == true ? "<span class='schedule_day'>Friday</span>" : "" ); ?> 
+                                  <?php echo ($sub['saturday'] == true ? "<span class='schedule_day'>Saturday</span>" : "" ); ?> 
+                                  <?php echo ($sub['sunday'] == true ? "<span class='schedule_day'>Sunday</span>" : "" ); ?> 
+                                | <b><?php echo date('h:i A', strtotime($sub['teaching_time'])); ?> - <?php echo date('h:i A', strtotime($sub['teaching_time_to'])); ?></b></center></td>
                                 <td><center>
                                   <div class="btn-group">
                                     <a href="edit_user.php?id=<?php echo $sub['id']; ?>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
@@ -177,18 +210,91 @@
 
               <?php } ?>
             </select>
-            <label for="name-l" style="color: grey;">Day</i></label>
-            <select class="form-control" name="teaching_day" id="teaching_day">
-              <option value="Monday">Monday</option>
-              <option value="Tuesday">Tuesday</option>
-              <option value="Wednesday">Wednesday</option>
-              <option value="Thursday">Thursday</option>
-              <option value="Friday">Friday</option>
-              <option value="Saturday">Saturday</option>
-              <option value="Sunday">Sunday</option>
+            <label for="email" style="color: grey;">Year</label>
+            <select class="form-control" name="school_year">
+              <option value="Kinder">Kinder</option>
+              <option value="Grade 1">Grade 1</option>
+              <option value="Grade 2">Grade 2</option>
+              <option value="Grade 3">Grade 3</option>
+              <option value="Grade 4">Grade 4</option>
+              <option value="Grade 5">Grade 5</option>
+              <option value="Grade 6">Grade 6</option>
+              <option value="Grade 7">Grade 7</option>
+              <option value="Grade 8">Grade 8</option>
+              <option value="Grade 9">Grade 9</option>
+              <option value="Grade 10">Grade 10</option>
+              <option value="Grade 11">Grade 11</option>
+              <option value="Grade 12">Grade 12</option>
+              <option value="First Year">First Year</option>
+              <option value="Second Year">Second Year</option>
+              <option value="Third Year">Third Year</option>
+              <option value="Fourth Year">Fourth Year</option>
+            </select>
+            <label for="name-l" style="color: grey;">Section</i></label>
+            <select class="form-control" name="section" id="section">
+              <?php 
+                $sql = ' SELECT DISTINCT(section) AS section FROM `tbl_user` ';
+                $exec = $conn->query($sql);
+                while ($section = $exec->fetch_assoc()) {
+               ?>
+               <option value="<?php echo $section['section']; ?>"><?php echo $section['section']; ?></option>
+              <?php } ?>
             </select>
             <label for="name-l" style="color: grey;">Time</i></label>
-            <input type="time" class="form-control" name="teaching_time">
+            <div class="row">
+              <div class="col-sm-6">
+                <input type="time" class="form-control" name="teaching_time">
+              </div>
+              <div class="col-sm-6">
+                <input type="time" class="form-control" name="teaching_time_to">
+              </div>
+            </div>
+
+            <label for="name-l" style="color: grey;">Day</i></label>
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" value="true" name="monday">Monday
+                  </label>
+                </div>
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" value="sss" name="tuesday">Tuesday
+                  </label>
+                </div>
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" value="true" name="wednesday">Wednesday
+                  </label>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" value="true" name="thursday">Thursday
+                  </label>
+                </div>
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" value="true" name="friday">Friday
+                  </label>
+                </div>
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" value="true" name="saturday">Saturday
+                  </label>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" value="true" name="sunday">Sunday
+                  </label>
+                </div>
+              </div>
+            </div>
+
           </div>
           <div class="modal-footer">  
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
