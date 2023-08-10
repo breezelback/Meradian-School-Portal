@@ -3,6 +3,8 @@ session_start();
 require('conn.php');
 
 
+$usertype = $_GET['usertype'];
+
 $profile_picture = $_POST['profile_picture'];
 $id_number = $_POST['id_number'];
 $firstname = $_POST['firstname'];
@@ -20,8 +22,10 @@ $barangay = $_POST['barangay'];
 $house_no = $_POST['house_no'];
 $school_year = $_POST['school_year'];
 $section = $_POST['section'];
+$password = $_POST['password'];
 
-$sql = ' INSERT INTO tbl_user (id_number, firstname, middlename, lastname, suffix, gender, email, contact_number, telephone, birthdate, province, city, barangay, house_no, school_year, section) VALUES ("'.$id_number.'", "'.$firstname.'", "'.$middlename.'", "'.$lastname.'", "'.$suffix.'", "'.$gender.'", "'.$email.'", "'.$contact_number.'", "'.$telephone.'", "'.$birthdate.'", "'.$province.'", "'.$city.'", "'.$barangay.'", "'.$house_no.'", "'.$school_year.'", "'.$section.'") ';
+$sql = ' INSERT INTO tbl_user (id_number, firstname, middlename, lastname, suffix, gender, email, contact_number, telephone, birthdate, province, city, barangay, house_no, school_year, section, password, user_type) VALUES ("'.$id_number.'", "'.$firstname.'", "'.$middlename.'", "'.$lastname.'", "'.$suffix.'", "'.$gender.'", "'.$email.'", "'.$contact_number.'", "'.$telephone.'", "'.$birthdate.'", "'.$province.'", "'.$city.'", "'.$barangay.'", "'.$house_no.'", "'.$school_year.'", "'.$section.'", "'.$password.'", "'.$usertype.'") ';
+
 $exec = $conn->query($sql);
 
 
@@ -29,4 +33,12 @@ $_SESSION['toastr']['title'] = 'Success';
 $_SESSION['toastr']['message'] = 'User Add!';
 $_SESSION['toastr']['color'] = 'green';
  
-header('location: ../admin/	students.php');
+
+if ($usertype == "student") 
+{
+	header('location: ../admin/students.php');
+}
+else
+{
+	header('location: ../admin/teachers.php');
+}

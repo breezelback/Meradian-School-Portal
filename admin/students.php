@@ -52,7 +52,7 @@
                 <div class="card-tools">
                   <ul class="nav nav-pills ml-auto">
                     <li class="nav-item">
-                      <a class="nav-link btn-success text-white" href="add_student.php">Add New Student &nbsp;<i class="fa fa-user-plus"></i></a>
+                      <a class="nav-link btn-success text-white" href="add_user.php?usertype=student">Add New Student &nbsp;<i class="fa fa-user-plus"></i></a>
                     </li>
                   </ul>
                 </div>
@@ -76,7 +76,7 @@
                     <tbody>
 
                       <?php 
-                        $sql = ' SELECT `id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, DATE_FORMAT(birthdate, "%M %d, %Y") AS birthdate, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `username`, `password`, `usert_type`, `status`, `date_created` FROM `tbl_user` ';
+                        $sql = ' SELECT `id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, DATE_FORMAT(birthdate, "%M %d, %Y") AS birthdate, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `username`, `password`, `user_type`, `status`, `date_created` FROM `tbl_user` WHERE user_type = "student" ';
                         $exec = $conn->query($sql);
                         while ( $row = $exec->fetch_assoc() ) {
                       ?>
@@ -93,7 +93,7 @@
                             <div class="btn-group">
                               <a href="edit_user.php?id=<?php echo $row['id']; ?>" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update Information"><i class="fa fa-edit"></i></a>
                               <a href="view_student_academic.php?id=<?php echo $row['id']; ?>" class="btn btn-warning btn-sm text-white" data-toggle="tooltip" data-placement="bottom" title="View Academic Information"><i class="fa fa-cog"></i></a>
-                              <a href="../function_php/delete_user.php?id=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Delete Student Record"><i class="fa fa-trash"></i></a>
+                              <a href="../function_php/delete_user.php?id=<?php echo $row['id']; ?>&user_type=student" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Delete Student Record"><i class="fa fa-trash"></i></a>
                             </div>
                           </td>
                         </tr>

@@ -20,12 +20,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Add New Data</h1>
+            <h1 class="m-0">Add New <?php echo strtoupper($_GET['usertype']); ?></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Add New Data</li>
+              <li class="breadcrumb-item active">Add New <?php echo strtoupper($_GET['usertype']); ?></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -45,13 +45,17 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">
-                  <a class="nav-link btn btn-warning text-white" href="students.php"><i class="fa fa-arrow-left"></i> Back</a> 
+                  <?php if ($_GET['usertype'] == "student"): ?>
+                    <a class="nav-link btn btn-warning text-white" href="students.php"><i class="fa fa-arrow-left"></i> Back</a> 
+                  <?php else: ?>
+                    <a class="nav-link btn btn-warning text-white" href="teachers.php"><i class="fa fa-arrow-left"></i> Back</a> 
+                  <?php endif ?>
                 </h3>
               </div><!-- /.card-header -->
               <div class="card-body">
                 <div class="tab-content p-0">
                   
-                  <form action="../function_php/insert_user_data.php" method="POST">
+                  <form action="../function_php/insert_user_data.php?usertype=<?php echo $_GET['usertype']; ?>" method="POST">
                     <div class="row">
                       <div class="col-md-4">
                         Profile Picture
@@ -64,6 +68,10 @@
                       <div class="col-sm-4 form-group">
                         <label for="name-f">ID Number <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" name="id_number" id="id_number" placeholder="Enter ID Number">
+                      </div>
+                      <div class="col-sm-4 form-group">
+                        <label for="name-f">Default Password <span class="text-danger">*</span></label>
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Enter ID Number">
                       </div>
                     </div>
                     <div class="row">

@@ -6,7 +6,7 @@ require('conn.php');
 $id_number = $_POST['id_number'];
 $password = $_POST['password'];
 
-$sql = ' SELECT `id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, `birthdate`, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `usert_type`, `status`, `date_created` FROM `tbl_user` WHERE id_number = "'.$id_number.'" AND password = "'.$password.'" ';
+$sql = ' SELECT `id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, `birthdate`, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `user_type`, `status`, `date_created` FROM `tbl_user` WHERE id_number = "'.$id_number.'" AND password = "'.$password.'" ';
 $exec = $conn->query($sql);
 
 
@@ -31,15 +31,28 @@ if ($exec->num_rows > 0)
 	$house_no = $row['house_no'];
 	$school_year = $row['school_year'];
 	$section = $row['section'];
-	$usert_type = $row['usert_type'];
+	$user_type = $row['user_type'];
 
-	if ($usert_type == 'admin') {
-		header('location: ../admin/');	
-
-		$_SESSION['toastr']['title'] = 'Success';
-		$_SESSION['toastr']['message'] = 'Admin Login';
+	if ($user_type == 'student') {
+		$_SESSION['toastr']['title'] = 'Looks Good!';
+		$_SESSION['toastr']['message'] = 'Successfully Login as Student';
 		$_SESSION['toastr']['color'] = 'green';
+		header('location: ../index.php');
 	}
+	else if ($user_type == 'teacher') {
+		$_SESSION['toastr']['title'] = 'Looks Good!';
+		$_SESSION['toastr']['message'] = 'Successfully Login as Teacher';
+		$_SESSION['toastr']['color'] = 'green';
+		header('location: ../index.php');
+	}
+	else
+	{
+		header('location: ../admin/');	
+	}
+
+	// $_SESSION['toastr']['title'] = 'Looks Good!';
+	// $_SESSION['toastr']['message'] = 'Successfully Login';
+	// $_SESSION['toastr']['color'] = 'green';
 }
 else
 {

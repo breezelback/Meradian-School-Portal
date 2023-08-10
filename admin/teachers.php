@@ -52,7 +52,7 @@
                 <div class="card-tools">
                   <ul class="nav nav-pills ml-auto">
                     <li class="nav-item">
-                      <a class="nav-link btn-success text-white" href="add_student.php">Add New Teacher &nbsp;<i class="fa fa-user-plus"></i></a>
+                      <a class="nav-link btn-success text-white" href="add_user.php?usertype=teacher">Add New Teacher &nbsp;<i class="fa fa-user-plus"></i></a>
                     </li>
                   </ul>
                 </div>
@@ -76,7 +76,7 @@
                     <tbody>
 
                       <?php 
-                        $sql = ' SELECT `id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, DATE_FORMAT(birthdate, "%M %d, %Y") AS birthdate, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `username`, `password`, `usert_type`, `status`, `date_created` FROM `tbl_user` ';
+                        $sql = ' SELECT `id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, DATE_FORMAT(birthdate, "%M %d, %Y") AS birthdate, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `username`, `password`, `user_type`, `status`, `date_created` FROM `tbl_user` WHERE user_type = "teacher" ';
                         $exec = $conn->query($sql);
                         while ( $row = $exec->fetch_assoc() ) {
                       ?>
