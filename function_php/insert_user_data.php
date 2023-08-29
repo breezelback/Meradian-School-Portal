@@ -23,8 +23,9 @@ $house_no = $_POST['house_no'];
 $school_year = $_POST['school_year'];
 $section = $_POST['section'];
 $password = $_POST['password'];
+$student_status = $_POST['student_status'];
 
-$sql = ' INSERT INTO tbl_user (id_number, firstname, middlename, lastname, suffix, gender, email, contact_number, telephone, birthdate, province, city, barangay, house_no, school_year, section, password, user_type) VALUES ("'.$id_number.'", "'.$firstname.'", "'.$middlename.'", "'.$lastname.'", "'.$suffix.'", "'.$gender.'", "'.$email.'", "'.$contact_number.'", "'.$telephone.'", "'.$birthdate.'", "'.$province.'", "'.$city.'", "'.$barangay.'", "'.$house_no.'", "'.$school_year.'", "'.$section.'", "'.$password.'", "'.$usertype.'") ';
+$sql = ' INSERT INTO tbl_user (id_number, firstname, middlename, lastname, suffix, gender, email, contact_number, telephone, birthdate, province, city, barangay, house_no, school_year, section, password, user_type, date_created, student_status) VALUES ("'.$id_number.'", "'.$firstname.'", "'.$middlename.'", "'.$lastname.'", "'.$suffix.'", "'.$gender.'", "'.$email.'", "'.$contact_number.'", "'.$telephone.'", "'.$birthdate.'", "'.$province.'", "'.$city.'", "'.$barangay.'", "'.$house_no.'", "'.$school_year.'", "'.$section.'", "'.$password.'", "'.$usertype.'", NOW(), "'.$student_status.'") ';
 
 $exec = $conn->query($sql);
 
