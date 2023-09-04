@@ -119,6 +119,15 @@
             </a>
           </li>
 
+          <li class="nav-item">
+            <a href="announcements.php" class="nav-link">
+              <i class="nav-icon fa fa-exclamation-circle"></i>
+              <p>
+                Announcements
+              </p>
+            </a>
+          </li>
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

@@ -54,7 +54,6 @@
 	<?php 
 		if (isset($_SESSION['toastr'])) 
 		{
-		  // echo 'toastr.'.$_SESSION['toastr']['type'].'("'.$_SESSION['toastr']['message'].'", "'.$_SESSION['toastr']['title'].'")';
 		  echo "iziToast.show({ title: '".$_SESSION['toastr']['title']."', message: '".$_SESSION['toastr']['message']."',theme: 'light',position: 'topRight',color: '".$_SESSION['toastr']['color']."'});";
 		  unset($_SESSION['toastr']);
 		}

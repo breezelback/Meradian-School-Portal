@@ -62,12 +62,22 @@
                         <img src="../images/user_image.jpg" alt="" width="100">
                         <input type="file" class="mt-2" name="profile_picture">
                       </div>
+                      <div class="col-md-4"></div>
+                      <div class="col-md-4">
+                         <?php if ($_GET['usertype'] == "student"): ?>
+                          <label for="name-f">Enrollment Status <span class="text-danger">*</span></label>
+                          <select name="enrollment_status" id="enrollment_status" class="form-control">
+                            <option value="Enrolled">Enrolled</option>
+                            <option value="Not Enrolled">Not Enrolled</option>
+                          </select>
+                        <?php endif ?>
+                      </div>
                     </div>
                     <hr>
                     <div class="row">
                       <div class="col-sm-4 form-group">
                         <label for="name-f">ID Number <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="id_number" id="id_number" placeholder="Enter ID Number">
+                        <input type="text" class="form-control" name="id_number" id="id_number" placeholder="Enter ID Number" required="">
                       </div>
                       <div class="col-sm-4 form-group">
                         <label for="name-f">Default Password <span class="text-danger">*</span></label>
