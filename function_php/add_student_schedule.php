@@ -3,6 +3,7 @@ session_start();
 require('conn.php');
 $student_id = $_POST['student_id'];
 $check_id = $_POST['check_id'];
+$academic_year_id = $_POST['academic_year_id'];
 
 if(empty($check_id))
 {
@@ -16,7 +17,7 @@ if(empty($check_id))
 else
 {
 	for ($i=0; $i < count($check_id); $i++) { 
-		$sql = ' INSERT INTO `tbl_student_schedule`(`student_id`, `schedule_id`, `date_created`) VALUES ( '.$student_id.', '.$check_id[$i].', NOW() ) ';
+		$sql = ' INSERT INTO `tbl_student_schedule`(`student_id`, `schedule_id`, `date_created`, `academic_year_id`) VALUES ( '.$student_id.', '.$check_id[$i].', NOW(), '.$academic_year_id.' ) ';
 		$exec = $conn->query($sql);
 	}
 

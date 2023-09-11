@@ -47,7 +47,7 @@
           <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block"><?php echo $_SESSION['lastname']; ?>, <?php echo $_SESSION['firstname']; ?> <?php echo $_SESSION['middlename']; ?></a>
         </div>
       </div>
 
@@ -58,94 +58,35 @@
                with font-awesome or any other icon font library -->
 
           <li class="nav-item">
-            <a href="/meradian%20school%20portal/admin/" class="nav-link active">
+            <a href="/meradian%20school%20portal/teacher/" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>Dashboard</p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="teachers.php" class="nav-link">
-              <i class="nav-icon fa fa-user-tie"></i>
-              <p>
-                Teachers Information
-              </p>
-            </a>
-          </li>
+
           <li class="nav-item">
             <a href="students.php" class="nav-link">
-              <i class="nav-icon fa fa-user-graduate"></i>
-              <p>
-                Students
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-sync"></i>
-              <p>
-                Transactions
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="academic_year.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Academic Year</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="student_academic_data.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Enrollment</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-      <!--     <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-user-graduate"></i>
-              <p>
-                Students
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="students.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Information</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/collapsed-sidebar.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Enrolled Subject</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/collapsed-sidebar.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Others</p>
-                </a>
-              </li>
-            </ul>
-          </li> -->
-
-          <li class="nav-item">
-            <a href="subjects.php" class="nav-link">
               <i class="nav-icon fa fa-copy"></i>
               <p>
-                Subjects
+                My Students
               </p>
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="announcements.php" class="nav-link">
-              <i class="nav-icon fa fa-exclamation-circle"></i>
+            <a href="view_student_academic.php" class="nav-link">
+              <i class="nav-icon fa fa-copy"></i>
               <p>
-                Announcements
+                Enrolled Subjects
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="edit_user.php" class="nav-link">
+              <i class="nav-icon fa fa-cog"></i>
+              <p>
+                Update Profile
               </p>
             </a>
           </li>

@@ -1,4 +1,9 @@
-<?php require('../function_php/conn.php'); ?>
+<?php require('../function_php/conn.php'); 
+
+$sql1 = ' SELECT `id`, `academic_year`, `status`, `date_created` FROM `tbl_academic_year` WHERE status = "Active" ';
+$exec1 = $conn->query($sql1);
+$active = $exec1->fetch_assoc();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +26,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Students</h1>
+            <h1 class="m-0">My Students</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -50,15 +55,16 @@
                   Student Information
                 </h3>
                 <div class="card-tools">
-                  <ul class="nav nav-pills ml-auto">
+                 <!--  <ul class="nav nav-pills ml-auto">
                     <li class="nav-item">
                       <a class="nav-link btn-success text-white" href="add_user.php?usertype=student">Add New Student &nbsp;<i class="fa fa-user-plus"></i></a>
                     </li>
-                  </ul>
+                  </ul> -->
                 </div>
               </div><!-- /.card-header -->
               <div class="card-body">
                 <div class="tab-content p-0">
+                  <h3>Current Academic Year: <span style="color: darkred; font-weight: bold;"><?php if(!empty($active['academic_year'])) { echo $active['academic_year'];} else {echo "";}  ?></span></h3>
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                     <tr>
@@ -75,10 +81,19 @@
                     </thead>
                     <tbody>
 
-                      <?php 
-                        $sql = ' SELECT `id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, DATE_FORMAT(birthdate, "%M %d, %Y") AS birthdate, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `username`, `password`, `user_type`, `status`, `date_created` FROM `tbl_user` WHERE user_type = "student" ';
-                        $exec = $conn->query($sql);
-                        while ( $row = $exec->fetch_assoc() ) {
+                      <?php   
+
+                        $selectSched = ' SELECT `id`, `teacher_id`, `subject_id`, `teaching_day`, `teaching_time`, `schedule_code`, `status`, `date_created`, `teaching_time_to`, `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`, `school_year`, `section` FROM `tbl_schedule` WHERE teacher_id = '.$_SESSION['id'];
+                        $execSched = $conn->query($selectSched);
+                        while ( $sched = $execSched->fetch_assoc() ) {
+
+                          $selectStudSched = ' SELECT `id`, `student_id`, `schedule_id`, `date_created`, `academic_year_id` FROM `tbl_student_schedule` WHERE schedule_id = '.$sched['id'].' AND academic_year_id = '.$active['id'];
+                          $execStudSched = $conn->query($selectStudSched);
+                          $stud = $execStudSched->fetch_assoc();
+
+                            $sql = ' SELECT `id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, DATE_FORMAT(birthdate, "%M %d, %Y") AS birthdate, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `username`, `password`, `user_type`, `status`, `date_created` FROM `tbl_user` WHERE id = '.$stud['student_id'];
+                            $exec = $conn->query($sql);
+                            $row = $exec->fetch_assoc();
                       ?>
                         <tr style="font-size: 14px;">
                           <td><?php echo $row['id_number']; ?></td>
@@ -87,18 +102,11 @@
                           <td><?php echo $row['email']; ?></td>
                           <td><?php echo $row['contact_number']; ?></td>
                           <td><?php echo $row['birthdate']; ?></td>
-                          <!-- <td><?php echo $row['house_no']; ?> <?php echo $row['barangay']; ?> <?php echo $row['city']; ?> <?php echo $row['province']; ?></td> -->
-                          <td>
-                            <select class="form-control" name="province" id="my-province-dropdown" style="background-color: #fff;"></select>
-                            <select class="form-control" name="city" id="my-city-dropdown" style="background-color: #fff;"></select>
-                            <select class="form-control" name="barangay" id="my-barangay-dropdown" style="background-color: #fff;"></select>
-                          </td>
+                          <td><?php echo $row['house_no']; ?> <?php echo $row['barangay']; ?> <?php echo $row['city']; ?> <?php echo $row['province']; ?></td>
                           <td><?php echo $row['school_year']; ?> | <?php echo $row['section']; ?></td>
                           <td>
                             <div class="btn-group">
-                              <a href="edit_user.php?id=<?php echo $row['id']; ?>" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update Information"><i class="fa fa-edit"></i></a>
-                              <a href="view_student_academic.php?id=<?php echo $row['id']; ?>" class="btn btn-warning btn-sm text-white" data-toggle="tooltip" data-placement="bottom" title="View Academic Information"><i class="fa fa-cog"></i></a>
-                              <a href="../function_php/delete_user.php?id=<?php echo $row['id']; ?>&user_type=student" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Delete Student Record"><i class="fa fa-trash"></i></a>
+                              <a href="view_student_academic.php?id=<?php echo $row['id']; ?>" class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-placement="bottom" title="View Grades"><i class="fa fa-cog"></i></a>
                             </div>
                           </td>
                         </tr>
@@ -151,27 +159,6 @@
 
 
 <script>  
-  var delayInMilliseconds = 2000; //1 second
-  //jeck pending
-  alert('<?php echo $row['province']; ?>');
-  $('#my-province-dropdown').ph_locations({'location_type': 'provinces'});
-  $('#my-province-dropdown').ph_locations( 'fetch_list');
-  $('#my-city-dropdown').ph_locations({'location_type': 'cities'});
-  $('#my-city-dropdown').ph_locations( 'fetch_list', [{"province_code": '<?php echo $row['province']; ?>'}]);
-
-  $('#my-barangay-dropdown').ph_locations({'location_type': 'barangays'});
-  $('#my-barangay-dropdown').ph_locations( 'fetch_list', [{"city_code": '<?php echo $row['city']; ?>'}]);
-
-  setTimeout(function() {
-    $('#my-province-dropdown').val('<?php echo $row['province']; ?>');
-    $('#my-city-dropdown').val('<?php echo $row['city']; ?>');
-    $('#my-barangay-dropdown').val('<?php echo $row['barangay']; ?>');
-  }, delayInMilliseconds);
-
-
-
-
-
   $(function () {
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,

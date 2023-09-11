@@ -44,7 +44,7 @@ if ($exec->num_rows > 0)
 		$_SESSION['toastr']['title'] = 'Looks Good!';
 		$_SESSION['toastr']['message'] = 'Successfully Login as Teacher';
 		$_SESSION['toastr']['color'] = 'green';
-		header('location: ../index.php');
+		header('location: ../teacher/');
 	}
 	else
 	{

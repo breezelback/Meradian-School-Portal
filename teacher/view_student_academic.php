@@ -1,24 +1,21 @@
-<?php 
-  require('../function_php/conn.php'); 
-  $sql = ' SELECT `id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, `birthdate`, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `username`, `password`, `user_type`, `status`, `date_created` FROM `tbl_user` WHERE id = '.$_GET['id'].' ';
-  $exec = $conn->query($sql);
-  $row = $exec->fetch_assoc();
 
-
-  $sql1 = ' SELECT `id`, `academic_year`, `status`, `date_created` FROM `tbl_academic_year` WHERE status = "Active" ';
-  $exec1 = $conn->query($sql1);
-  $active = $exec1->fetch_assoc();
-
-?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>The Meradian School | Admin Portal</title>
+  <title>The Meradian School | Student Portal</title>
 
-  <?php include '_include_header.php'; ?>
+  <?php include '_include_header.php'; 
+
+  require('../function_php/conn.php'); 
+  $sql = ' SELECT `id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, `birthdate`, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `username`, `password`, `user_type`, `status`, `date_created` FROM `tbl_user` WHERE id = '.$_SESSION['id'].' ';
+  $exec = $conn->query($sql);
+  $row = $exec->fetch_assoc();
+
+
+?>
   <style>
     .schedule_day
     {
@@ -69,7 +66,7 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">
-                  <a class="nav-link btn btn-warning text-white" href="students.php"><i class="fa fa-arrow-left"></i> Back</a>  
+                  <!-- <a class="nav-link btn btn-warning text-white" href="students.php"><i class="fa fa-arrow-left"></i> Back</a>   -->
                 </h3>
               </div><!-- /.card-header -->
               <div class="card-body">
@@ -95,15 +92,9 @@
                       </div>
                     </div>
                     <hr>
+                    
                     <div class="row">
                       <div class="col-md-12">
-                      <button type="button" class="btn btn-primary text-white float-sm-right" data-toggle="modal" data-target="#modal_add_schedule">Add New Schedule &nbsp;<i class="fa fa-plus"></i></button>
-                      </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                      <div class="col-md-12">
-                  <h3>Current Academic Year: <span style="color: darkred; font-weight: bold;"><?php if(!empty($active['academic_year'])) { echo $active['academic_year'];} else {echo "";}  ?></span></h3>
                         <table id="example1" class="table table-bordered table-striped">
                           <thead>
                           <tr>
@@ -118,7 +109,6 @@
                             <?php 
                               $sql = ' 
                               SELECT 
-                                    x.id as sched_id,
                                     x.student_id,
                                     x.schedule_id,
                                     a.id, 
@@ -147,7 +137,7 @@
                                 LEFT JOIN tbl_schedule a ON a.id = x.schedule_id
                                 LEFT JOIN tbl_subject b ON b.id = a.subject_id
                                 LEFT JOIN tbl_user c ON c.id = a.teacher_id
-                                WHERE student_id = '.$_GET['id'].' AND academic_year_id = '.$active['id'].' ';
+                                WHERE student_id = '.$_SESSION['id'].' ';
                               $exec = $conn->query($sql);
                               while ( $sub = $exec->fetch_assoc() ) {
                             ?>
@@ -168,10 +158,10 @@
                                 | <?php echo date('h:i A', strtotime($sub['teaching_time'])); ?> - <?php echo date('h:i A', strtotime($sub['teaching_time_to'])); ?></center></td>
                                 <td><center>
                                   <div class="btn-group">
-                                    <!-- <a href="edit_user.php?id=<?php echo $sub['id']; ?>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a> -->
-                                    <a href="../function_php/delete_student_schedule.php?id=<?php echo $sub['sched_id']; ?>&user_id=<?php echo $_GET['id']; ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                    <!-- <a href="edit_user.php?id=<?php echo $sub['id']; ?>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
+                                    <a href="../function_php/delete_schedule.php?id=<?php echo $sub['id']; ?>&user_id=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
 
-                                    <!-- <a href="view_teacher.php?id=<?php echo $sub['id']; ?>" class="btn btn-warning btn-sm text-white"><i class="fa fa-cog"></i></a> -->
+                                    <a href="view_teacher.php?id=<?php echo $sub['id']; ?>" class="btn btn-warning btn-sm text-white"><i class="fa fa-cog"></i></a> -->
                                   </div></center>
                                 </td>
                               </tr>
@@ -210,7 +200,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <!--             <input disabled="" type="text" class="form-control" name="subject_code" id="subject_code" placeholder="<?php echo $row['id_number']; ?> | <?php echo $row['firstname']; ?> <?php echo $row['lastname']; ?>">
+<!--             <input disabled="" type="text" class="form-control" name="subject_code" id="subject_code" placeholder="<?php echo $row['id_number']; ?> | <?php echo $row['firstname']; ?> <?php echo $row['lastname']; ?>">
             <label for="name-l" style="color: grey;">Subject</i></label>
             <input type="hidden" name="teacher_id" value="<?php echo $row['id']; ?>">
             <select class="form-control" name="subject_id" id="subject_id">
@@ -280,7 +270,7 @@
                     while ( $sub = $exec->fetch_assoc() ) {
                   ?>
                     <tr style="font-size: 14px;">
-                      <td><center><input type="checkbox" value="<?php echo $sub['id']; ?>" name="check_id[]"> <input type="hidden" value="<?php echo $active['id']; ?>" name="academic_year_id"></center></td>
+                      <td><center><input type="checkbox" value="<?php echo $sub['id']; ?>" name="check_id[]"></center></td>
                       <td><center><?php echo $sub['subject_code']; ?></center></td>
                       <td><center><?php echo $sub['subject_name']; ?></center></td>
                       <td><center><?php echo $sub['firstname']; ?> <?php echo $sub['lastname']; ?></center></td>
