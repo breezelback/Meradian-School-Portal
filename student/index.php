@@ -1,3 +1,9 @@
+<?php require('../function_php/conn.php'); 
+
+  $sql1 = ' SELECT `id`, `academic_year`, `status`, `date_created` FROM `tbl_academic_year` WHERE status = "Active" ';
+  $exec1 = $conn->query($sql1);
+  $active = $exec1->fetch_assoc();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,9 +51,9 @@
     <section class="content">
       <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
-        <div class="row">
+      <!--   <div class="row">
           <div class="col-lg-3 col-6">
-            <!-- small box -->
+            
             <div class="small-box bg-info">
               <div class="inner">
                 <h3>150</h3>
@@ -60,9 +66,9 @@
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
-          <!-- ./col -->
+          
           <div class="col-lg-3 col-6">
-            <!-- small box -->
+            
             <div class="small-box bg-success">
               <div class="inner">
                 <h3>53<sup style="font-size: 20px">%</sup></h3>
@@ -75,9 +81,9 @@
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
-          <!-- ./col -->
+          ./col
           <div class="col-lg-3 col-6">
-            <!-- small box -->
+            
             <div class="small-box bg-warning">
               <div class="inner">
                 <h3>44</h3>
@@ -90,9 +96,9 @@
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
-          <!-- ./col -->
+          
           <div class="col-lg-3 col-6">
-            <!-- small box -->
+            
             <div class="small-box bg-danger">
               <div class="inner">
                 <h3>65</h3>
@@ -105,7 +111,72 @@
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
-          <!-- ./col -->
+          
+        </div> -->
+        <div class="row">
+
+           <div class="col-lg-6 col-6">
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3><?php echo $active['academic_year']; ?></h3>
+                <p>Current Academic Year</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-bag"></i>
+              </div>
+            </div>
+          </div>
+
+           <div class="col-lg-6 col-6">
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3>
+                  <?php 
+                  $sql1 = 'SELECT `id`, `academic_year_id`, `student_id`, `status`, `date_created`, `date_drop` FROM `tbl_enrollment` WHERE academic_year_id = '.$active['id'].' AND student_id = '.$_SESSION['id'].' ';
+                  $exec1 = $conn->query($sql1);
+                  if ($exec1->num_rows > 0) 
+                  {
+                    $stud = $exec1->fetch_assoc();
+                    if ($stud['status'] == 'Drop') 
+                    {
+                      echo "Dropped";
+                    }
+                    else if ($stud['status'] == 'Enrolled')
+                    {
+                      echo "Enrolled";
+                    }
+                    else
+                    {
+                      echo "Pending Enrollment";
+                    } 
+                  }
+                  else
+                  {
+                    ?>
+                     Not Enrolled
+                     <button class="btn btn-warning btn-sm text-white" onclick="enroll_now(<?php echo $_SESSION['id']; ?>);">Enroll Now!</button>
+                    <?php
+                  }
+
+                  ?>
+                </h3>
+                <p>Academic Status</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-bag"></i>
+              </div>
+            </div>
+          </div>
+
+
+
+
+         <!--  <div class="col-lg-12 bg-danger">
+            Current Academic Year: <b><?php echo $active['academic_year']; ?></b>
+            <div class="float-right">
+              Status: <span style="background-color: green; padding: 1px;">Enrolled</span>
+            </div>
+          </div> -->
         </div>
         <!-- /.row -->
         <!-- Main row -->
@@ -280,7 +351,14 @@
     $('#my-barangay-dropdown').val('<?php echo $_SESSION['barangay']; ?>');
   }, delayInMilliseconds);
 
-
+  function enroll_now(id)
+  {
+    if (confirm('Are you sure you want to enroll for Academic Year'+ ' <?php echo $active['academic_year']; ?>?')) {
+      window.location.href = "../function_php/submit_enrollment.php?id="+id+"&academic_year_id="+"<?php echo $active['id']; ?>";
+    } else {
+      // Do nothing!
+    }
+  }
 </script>
 
 </body>

@@ -80,7 +80,8 @@
                     </thead>
                     <tbody>
                       <?php 
-                        $sql = " SELECT `id`, `academic_year_id`, `student_id`, `status`, `date_created` FROM `tbl_enrollment` WHERE academic_year_id = ".$active['id']." AND status = 'Enrolled' ";
+                        // $sql = " SELECT `id`, `academic_year_id`, `student_id`, `status`, `date_created` FROM `tbl_enrollment` WHERE academic_year_id = ".$active['id']." AND status = 'Enrolled' ";
+                        $sql = " SELECT `id`, `academic_year_id`, `student_id`, `status`, `date_created` FROM `tbl_enrollment` WHERE academic_year_id = ".$active['id']." ";
                         $exec = $conn->query($sql);
                         while($row = $exec->fetch_assoc()){
 
@@ -89,16 +90,32 @@
                         $student = $execStudent->fetch_assoc();
                        ?>
                        <tr>
-                         <td><center><?php echo $student['id_number']; ?></td></center>
-                         <td><center><?php echo $student['firstname']; ?></td></center>
-                         <td><center><?php echo $student['middlename']; ?></td></center>
-                         <td><center><?php echo $student['lastname']; ?></td></center>
-                         <td><center><?php echo $student['school_year']; ?></td></center>
-                         <td><center><?php echo $student['section']; ?></td></center>
-                         <td><center><?php echo $row['status']; ?></td></center>
+                         <td><center><?php echo $student['id_number']; ?></center></td>
+                         <td><center><?php echo $student['firstname']; ?></center></td>
+                         <td><center><?php echo $student['middlename']; ?></center></td>
+                         <td><center><?php echo $student['lastname']; ?></center></td>
+                         <td><center><?php echo $student['school_year']; ?></center></td>
+                         <td><center><?php echo $student['section']; ?></center></td>
+                         <td>
+                          <center>
+                            <?php if ($row['status'] == "Drop"): ?>
+                              <span style="padding: 4px; border-radius: 4px; background-color: #f5919a; color: white; font-size: 13px;">Dropped</span>
+                            <?php elseif ($row['status'] == "Enrolled"): ?>
+                              <span style="padding: 4px; border-radius: 4px; background-color: #60c989; color: white; font-size: 13px;">Enrolled</span>
+                            <?php elseif ($row['status'] == "Pending"): ?>
+                              <span style="padding: 4px; border-radius: 4px; background-color: #d5ca5a; color: white; font-size: 13px;">Pending Enrollment</span>
+                            <?php endif ?>
+                          </center>
+                         </td>
                          <td>
                             <center>
+                            <?php if ($row['status'] == "Drop"): ?>
+                              <button class="btn btn-warning btn-sm" onclick="re_enroll_student(<?php echo $row['id']; ?>);">Re-Enroll <i class="fa fa-info-circle"></i></button>
+                            <?php elseif ($row['status'] == "Enrolled"): ?>
                               <button class="btn btn-danger btn-sm" onclick="drop_student(<?php echo $row['id']; ?>);">Drop <i class="fa fa-times"></i></button>
+                            <?php elseif ($row['status'] == "Pending"): ?>
+                              <button class="btn btn-success btn-sm" onclick="accept_enrollment(<?php echo $row['id']; ?>);">Approve <i class="fa fa-check-circle"></i></button>
+                            <?php endif ?>
                             </center>
                          </td>
                        </tr>
@@ -222,6 +239,26 @@
       // Do nothing!
     }
   }
+
+  function re_enroll_student(id)
+  {
+    if (confirm('Are you sure you want to re-enroll this student?')) {
+      window.location.href = "../function_php/re_enroll_student.php?id="+id;
+    } else {
+      // Do nothing!
+    }
+  }
+
+  function accept_enrollment(id)
+  {
+    if (confirm('Are you sure you want to accept enrollment for this student?')) {
+      window.location.href = "../function_php/approve_enrollment.php?id="+id;
+    } else {
+      // Do nothing!
+    }
+  }
+
+
 
 </script>
 </body>

@@ -31,7 +31,7 @@ $active = $exec1->fetch_assoc();
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Students</li>
+              <li class="breadcrumb-item active">My Students</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->

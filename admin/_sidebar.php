@@ -58,7 +58,8 @@
                with font-awesome or any other icon font library -->
 
           <li class="nav-item">
-            <a href="/meradian%20school%20portal/admin/" class="nav-link active">
+            <!-- <a href="/meradian%20school%20portal/admin/" class="nav-link active"> -->
+            <a href="/meradian%20school%20portal/admin/" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>Dashboard</p>
             </a>
