@@ -9,7 +9,7 @@ $exec = $conn->query($sql);
 
 
 $_SESSION['toastr']['title'] = 'Success';
-$_SESSION['toastr']['message'] = 'User Add!';
+$_SESSION['toastr']['message'] = 'Academic Year Added!';
 $_SESSION['toastr']['color'] = 'green';
  
 header('location: ../admin/academic_year.php');

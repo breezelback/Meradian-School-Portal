@@ -63,7 +63,7 @@
                         <input type="file" class="mt-2" name="profile_picture">
                       </div>
                       <div class="col-md-4"></div>
-                      <div class="col-md-4">
+                      <!-- <div class="col-md-4">
                          <?php if ($_GET['usertype'] == "student"): ?>
                           <label for="name-f">Enrollment Status <span class="text-danger">*</span></label>
                           <select name="enrollment_status" id="enrollment_status" class="form-control">
@@ -71,7 +71,7 @@
                             <option value="Not Enrolled">Not Enrolled</option>
                           </select>
                         <?php endif ?>
-                      </div>
+                      </div> -->
                     </div>
                     <hr>
                     <div class="row">

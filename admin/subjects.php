@@ -84,7 +84,8 @@
                           <td><center>
                             <div class="btn-group">
                               <a href="edit_user.php?id=<?php echo $row['id']; ?>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
-                              <a href="../function_php/delete_subject.php?id=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                              <!-- <a href="../function_php/delete_subject.php?id=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a> -->
+                              <button onclick="delete_subject(<?php echo $row['id']; ?>);" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></butto>
                           </td>
                         </tr>
                       <?php } ?>
@@ -195,6 +196,16 @@
       "responsive": true,
     });
   });
+
+
+   function delete_subject(id)
+  {
+    if (confirm('Are you sure you want to delete this record?')) {
+      window.location.href = "../function_php/delete_subject.php?id="+id;
+    } else {
+      // Do nothing!
+    }
+  }
 </script>
 </body>
 </html>

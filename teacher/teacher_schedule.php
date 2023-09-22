@@ -12,6 +12,17 @@ $active = $exec1->fetch_assoc();
   <title>The Meradian School | Admin Portal</title>
 
   <?php include '_include_header.php'; ?>
+  <style>
+    .schedule_day
+    {
+      background-color: seagreen;
+      padding: 2.5px;
+      color: white;
+      border-radius: 5px;
+      margin: 3px;
+    }
+    
+  </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -26,12 +37,12 @@ $active = $exec1->fetch_assoc();
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">My Students</h1>
+            <h1 class="m-0">My Schedule</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">My Students</li>
+              <li class="breadcrumb-item active">My Schedule</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -64,18 +75,13 @@ $active = $exec1->fetch_assoc();
               </div><!-- /.card-header -->
               <div class="card-body">
                 <div class="tab-content p-0">
-                  <h3>Current Academic Year: <span style="color: darkred; font-weight: bold;"><?php if(!empty($active['academic_year'])) { echo $active['academic_year'];} else {echo "";}  ?></span></h3>
+                  <!-- <h3>Current Academic Year: <span style="color: darkred; font-weight: bold;"><?php if(!empty($active['academic_year'])) { echo $active['academic_year'];} else {echo "";}  ?></span></h3> -->
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                      <th><center>ID NUMBER</center></th>
-                      <th><center>NAME</center></th>
-                      <th><center>GENDER</center></th>
-                      <th><center>EMAIL</center></th>
-                      <th><center>CONTACT NUMBER</center></th>
-                      <th><center>BIRTHDATE</center></th>
-                      <th><center>ADDRESS</center></th>
-                      <th><center>YEAR & SECTION</center></th>
+                      <th><center>CODE</center></th>
+                      <th><center>SUBJECT NAME</center></th>
+                      <th><center>SCHEDULE</center></th>
                       <!-- <th><center>ACTION</center></th> -->
                     </tr>
                     </thead>
@@ -85,37 +91,29 @@ $active = $exec1->fetch_assoc();
 
                         $selectSched = ' SELECT `id`, `teacher_id`, `subject_id`, `teaching_day`, `teaching_time`, `schedule_code`, `status`, `date_created`, `teaching_time_to`, `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`, `school_year`, `section` FROM `tbl_schedule` WHERE teacher_id = '.$_SESSION['id'];
                         $execSched = $conn->query($selectSched);
-                        // while ( $sched = $execSched->fetch_assoc() ) {
-                        $sched = $execSched->fetch_assoc();
+                        while ( $sub = $execSched->fetch_assoc() ) {
 
-                          $selectStudSched = ' SELECT `id`, `student_id`, `schedule_id`, `date_created`, `academic_year_id` FROM `tbl_student_schedule` WHERE teacher_id = '.$_SESSION['id'].' AND academic_year_id = '.$active['id'];
-                          $execStudSched = $conn->query($selectStudSched);
-
-                          if ($execStudSched->num_rows > 0) {
-
-                            while ($stud = $execStudSched->fetch_assoc()) {
-
-                            $sql = ' SELECT `id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, DATE_FORMAT(birthdate, "%M %d, %Y") AS birthdate, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `username`, `password`, `user_type`, `status`, `date_created` FROM `tbl_user` WHERE id = '.$stud['student_id'];
-                            $exec = $conn->query($sql);
-                            $row = $exec->fetch_assoc();
+                          $selectSub = ' SELECT `id`, `subject_name`, `subject_code`, `date_created`, `school_year` FROM `tbl_subject` WHERE id = '.$sub['subject_id'];
+                          $execSub = $conn->query($selectSub);
+                          $subInfo = $execSub->fetch_assoc();
                            
                       ?>
                         <tr style="font-size: 14px;">
-                          <td><?php echo $row['id_number']; ?></td>
-                          <td><?php echo $row['firstname']; ?> <?php echo $row['lastname']; ?></td>
-                          <td><?php echo $row['gender']; ?></td>
-                          <td><?php echo $row['email']; ?></td>
-                          <td><?php echo $row['contact_number']; ?></td>
-                          <td><?php echo $row['birthdate']; ?></td>
-                          <td><?php echo $row['house_no']; ?> <?php echo $row['barangay']; ?> <?php echo $row['city']; ?> <?php echo $row['province']; ?></td>
-                          <td><?php echo $row['school_year']; ?> | <?php echo $row['section']; ?></td>
-                         <!--  <td>
-                            <div class="btn-group">
-                              <a href="view_student_academic.php?id=<?php echo $row['id']; ?>" class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-placement="bottom" title="View Grades"><i class="fa fa-cog"></i></a>
-                            </div>
-                          </td> -->
+                            <td><center><?php echo $subInfo['subject_code']; ?></center></td>
+                            <td><center><?php echo $subInfo['subject_name']; ?></center></td>
+                            <td><center>
+
+                                <?php echo ($sub['monday'] == true ? "<span class='schedule_day'>Monday</span>" : "" ); ?>
+                                <?php echo ($sub['tuesday'] == true ? "<span class='schedule_day'>Tuesday</span>" : "" ); ?> 
+                                <?php echo ($sub['wednesday'] == true ? "<span class='schedule_day'>Wednesday</span>" : "" ); ?> 
+                                <?php echo ($sub['thursday'] == true ? "<span class='schedule_day'>Thursday</span>" : "" ); ?> 
+                                <?php echo ($sub['friday'] == true ? "<span class='schedule_day'>Friday</span>" : "" ); ?> 
+                                <?php echo ($sub['saturday'] == true ? "<span class='schedule_day'>Saturday</span>" : "" ); ?> 
+                                <?php echo ($sub['sunday'] == true ? "<span class='schedule_day'>Sunday</span>" : "" ); ?> 
+
+                            | <?php echo date('h:i A', strtotime($sub['teaching_time'])); ?> - <?php echo date('h:i A', strtotime($sub['teaching_time_to'])); ?></center></td>
                         </tr>
-                      <?php  } } ?>
+                      <?php   } ?>
 
                     </tbody>  
 

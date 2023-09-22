@@ -87,12 +87,12 @@
                           <td><?php echo $row['email']; ?></td>
                           <td><?php echo $row['contact_number']; ?></td>
                           <td><?php echo $row['birthdate']; ?></td>
-                          <!-- <td><?php echo $row['house_no']; ?> <?php echo $row['barangay']; ?> <?php echo $row['city']; ?> <?php echo $row['province']; ?></td> -->
-                          <td>
+                          <td><?php echo $row['house_no']; ?> <?php echo $row['barangay']; ?> <?php echo $row['city']; ?> <?php echo $row['province']; ?></td>
+                         <!--  <td>
                             <select class="form-control" name="province" id="my-province-dropdown" style="background-color: #fff;"></select>
                             <select class="form-control" name="city" id="my-city-dropdown" style="background-color: #fff;"></select>
                             <select class="form-control" name="barangay" id="my-barangay-dropdown" style="background-color: #fff;"></select>
-                          </td>
+                          </td> -->
                           <td><?php echo $row['school_year']; ?> | <?php echo $row['section']; ?></td>
                           <td>
                             <div class="btn-group">

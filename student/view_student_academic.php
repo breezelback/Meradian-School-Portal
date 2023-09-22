@@ -15,6 +15,11 @@
   $row = $exec->fetch_assoc();
 
 
+  $sql1 = ' SELECT `id`, `academic_year`, `status`, `date_created` FROM `tbl_academic_year` WHERE status = "Active" ';
+  $exec1 = $conn->query($sql1);
+  $active = $exec1->fetch_assoc();
+
+
 ?>
   <style>
     .schedule_day
@@ -95,6 +100,7 @@
                     
                     <div class="row">
                       <div class="col-md-12">
+                        <h3>Current Academic Year: <span style="color: darkred; font-weight: bold;"><?php if(!empty($active['academic_year'])) { echo $active['academic_year'];} else {echo "";}  ?></span></h3>
                         <table id="example1" class="table table-bordered table-striped">
                           <thead>
                           <tr>
@@ -102,7 +108,7 @@
                             <th><center>SUBJECT NAME</center></th>
                             <th><center>PROFESSOR</center></th>
                             <th><center>SCHEDULE</center></th>
-                            <th><center>ACTION</center></th>
+                            <!-- <th><center>ACTION</center></th> -->
                           </tr>
                           </thead>
                           <tbody>
@@ -137,7 +143,7 @@
                                 LEFT JOIN tbl_schedule a ON a.id = x.schedule_id
                                 LEFT JOIN tbl_subject b ON b.id = a.subject_id
                                 LEFT JOIN tbl_user c ON c.id = a.teacher_id
-                                WHERE student_id = '.$_SESSION['id'].' ';
+                                WHERE student_id = '.$_SESSION['id'].' AND x.academic_year_id = '.$active['id'].' ';
                               $exec = $conn->query($sql);
                               while ( $sub = $exec->fetch_assoc() ) {
                             ?>
@@ -156,14 +162,7 @@
                                     <?php echo ($sub['sunday'] == true ? "<span class='schedule_day'>Sunday</span>" : "" ); ?> 
 
                                 | <?php echo date('h:i A', strtotime($sub['teaching_time'])); ?> - <?php echo date('h:i A', strtotime($sub['teaching_time_to'])); ?></center></td>
-                                <td><center>
-                                  <div class="btn-group">
-                                    <!-- <a href="edit_user.php?id=<?php echo $sub['id']; ?>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
-                                    <a href="../function_php/delete_schedule.php?id=<?php echo $sub['id']; ?>&user_id=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-
-                                    <a href="view_teacher.php?id=<?php echo $sub['id']; ?>" class="btn btn-warning btn-sm text-white"><i class="fa fa-cog"></i></a> -->
-                                  </div></center>
-                                </td>
+                                
                               </tr>
                             <?php } ?>
 

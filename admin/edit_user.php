@@ -52,7 +52,7 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">
-                  <a class="nav-link btn btn-warning text-white" href="students.php"><i class="fa fa-arrow-left"></i> Back</a>  
+                  <button class="nav-link btn btn-warning text-white" onclick="javascript:history.go(-1)"><i class="fa fa-arrow-left"></i> Back</button>  
                 </h3>
               </div><!-- /.card-header -->
               <div class="card-body">
@@ -113,7 +113,7 @@
                       </div>
                       <div class="col-sm-2 form-group">
                         <label for="email">Date of Birth</label>
-                        <input type="date" class="form-control" name="birthdate" value="<?php echo $row['birthdate']; ?>" id="birthdate">
+                        <input type="date" class="form-control" name="birthdate" value="<?php echo date('Y-m-d', strtotime($row['birthdate'])); ?>" id="birthdate">
                       </div>
                     </div>
                     <div class="row"><b class="text-primary">Home Address</b></div><hr>

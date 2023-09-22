@@ -74,6 +74,15 @@
           </li>
 
           <li class="nav-item">
+            <a href="view_grades.php" class="nav-link">
+              <i class="nav-icon fa fa-copy"></i>
+              <p>
+                My Grades
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="edit_user.php" class="nav-link">
               <i class="nav-icon fa fa-cog"></i>
               <p>

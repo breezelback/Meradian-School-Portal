@@ -11,7 +11,7 @@ $exec = $conn->query($sql);
 
 
 $_SESSION['toastr']['title'] = 'Success';
-$_SESSION['toastr']['message'] = 'User Add!';
+$_SESSION['toastr']['message'] = 'Subject Added!';
 $_SESSION['toastr']['color'] = 'green';
  
 header('location: ../admin/subjects.php');

@@ -1,4 +1,4 @@
-  
+<?php session_start(); ?>  
 
   <link rel="icon" href="../images/logo.jpg" type="image/gif">
   <!-- Google Font: Source Sans Pro -->

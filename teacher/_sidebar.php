@@ -74,10 +74,19 @@
           </li>
 
           <li class="nav-item">
-            <a href="view_student_academic.php" class="nav-link">
-              <i class="nav-icon fa fa-copy"></i>
+            <a href="teacher_schedule.php" class="nav-link">
+              <i class="nav-icon fas fa-calendar-week"></i>
               <p>
-                Enrolled Subjects
+                My Schedule
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="student_grading.php" class="nav-link">
+              <i class="nav-icon fas fa-user-graduate"></i>
+              <p>
+                Student Grading
               </p>
             </a>
           </li>

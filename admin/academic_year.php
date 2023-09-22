@@ -84,8 +84,10 @@
                           <td><center><?php echo $row['academic_year']; ?></center></td>
                           <td><center>
                             <div class="btn-group">
-                              <a href="../function_php/active_year.php?id=<?php echo $row['id']; ?>" class="btn btn-success btn-sm"><i class="fa fa-check"></i></a>
-                              <a href="../function_php/delete_year.php?id=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                              <!-- <a href="../function_php/active_year.php?id=<?php echo $row['id']; ?>" class="btn btn-success btn-sm"><i class="fa fa-check"></i></a> -->
+                              <button onclick="active_year(<?php echo $row['id']; ?>)" class="btn btn-success btn-sm"><i class="fa fa-check"></i></button>
+                              <!-- <a href="../function_php/delete_year.php?id=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a> -->
+                              <button onclick="delete_year(<?php echo $row['id']; ?>)" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                           </td>
                         </tr>
                       <?php } ?>
@@ -161,6 +163,26 @@
       "responsive": true,
     });
   });
+
+
+  function delete_year(id)
+  {
+    if (confirm('Are you sure you want to delete this record?')) {
+      window.location.href = "../function_php/delete_year.php?id="+id;
+    } else {
+      // Do nothing!
+    }
+  }
+
+
+  function active_year(id)
+  {
+    if (confirm('Are you sure you want to set this Academic Year?')) {
+      window.location.href = "../function_php/active_year.php?id="+id;
+    } else {
+      // Do nothing!
+    }
+  }
 </script>
 </body>
 </html>

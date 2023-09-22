@@ -1,4 +1,5 @@
 <?php 
+session_start();
 require('conn.php');
 
 
@@ -28,5 +29,11 @@ if ($exec) {
 	echo "Data Sucessfully Updated!";
 }
 
-header('location: ../admin/	students.php');
- 
+
+$_SESSION['toastr']['title'] = 'Success';
+$_SESSION['toastr']['message'] = 'User Updated!';
+$_SESSION['toastr']['color'] = 'green';
+
+
+//header('location: ../admin/students.php');
+echo "<script>javascript:history.go(-1)</script>";

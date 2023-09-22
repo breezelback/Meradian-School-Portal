@@ -9,7 +9,7 @@ $active = $exec1->fetch_assoc();
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>The Meradian School | Admin Portal</title>
+  <title>The Meradian School | Student Portal</title>
 
   <?php include '_include_header.php'; ?>
 </head>
@@ -26,12 +26,12 @@ $active = $exec1->fetch_assoc();
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">My Students</h1>
+            <h1 class="m-0">My Grades</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">My Students</li>
+              <li class="breadcrumb-item active">My Grades</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -68,14 +68,16 @@ $active = $exec1->fetch_assoc();
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                      <th><center>ID NUMBER</center></th>
+                      <!-- <th><center>ID NUMBER</center></th>
                       <th><center>NAME</center></th>
-                      <th><center>GENDER</center></th>
-                      <th><center>EMAIL</center></th>
-                      <th><center>CONTACT NUMBER</center></th>
-                      <th><center>BIRTHDATE</center></th>
-                      <th><center>ADDRESS</center></th>
-                      <th><center>YEAR & SECTION</center></th>
+                      <th><center>YEAR & SECTION</center></th> -->
+                      <th>CODE</th>
+                      <th>SUBJECT</th>
+                      <th>1ST</th>
+                      <th>2ND</th>
+                      <th>3RD</th>
+                      <th>4TH</th>
+                      <th>AVERAGE</th>
                       <!-- <th><center>ACTION</center></th> -->
                     </tr>
                     </thead>
@@ -83,17 +85,23 @@ $active = $exec1->fetch_assoc();
 
                       <?php   
 
-                        $selectSched = ' SELECT `id`, `teacher_id`, `subject_id`, `teaching_day`, `teaching_time`, `schedule_code`, `status`, `date_created`, `teaching_time_to`, `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`, `school_year`, `section` FROM `tbl_schedule` WHERE teacher_id = '.$_SESSION['id'];
-                        $execSched = $conn->query($selectSched);
-                        // while ( $sched = $execSched->fetch_assoc() ) {
-                        $sched = $execSched->fetch_assoc();
+                       
 
-                          $selectStudSched = ' SELECT `id`, `student_id`, `schedule_id`, `date_created`, `academic_year_id` FROM `tbl_student_schedule` WHERE teacher_id = '.$_SESSION['id'].' AND academic_year_id = '.$active['id'];
+                          $selectStudSched = ' SELECT `id`, `student_id`, `schedule_id`, `date_created`, `academic_year_id` FROM `tbl_student_schedule` WHERE student_id = '.$_SESSION['id'].' AND academic_year_id = '.$active['id'];
                           $execStudSched = $conn->query($selectStudSched);
+                          while ($stud = $execStudSched->fetch_assoc() ) {
 
-                          if ($execStudSched->num_rows > 0) {
+                            $selectSched = ' SELECT `id`, `teacher_id`, `subject_id`, `teaching_day`, `teaching_time`, `schedule_code`, `status`, `date_created`, `teaching_time_to`, `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`, `school_year`, `section` FROM `tbl_schedule` WHERE id = '.$stud['schedule_id'];
+                            $execSched = $conn->query($selectSched);
+                            $sched = $execSched->fetch_assoc();
 
-                            while ($stud = $execStudSched->fetch_assoc()) {
+                            $selectSub = ' SELECT `id`, `subject_name`, `subject_code`, `date_created`, `school_year` FROM `tbl_subject` WHERE id = '.$sched['subject_id'];
+                            $execSub = $conn->query($selectSub);
+                            $subject = $execSub->fetch_assoc();
+
+                            $selectSched = ' SELECT `id`, `stud_schedule_id`, `first`, `second`, `third`, `fourth`, `average`, `academic_year_id`, `date_created` FROM tbl_grades WHERE stud_schedule_id = '.$stud['id'];
+                            $execSched = $conn->query($selectSched);
+                            $rowGrade = $execSched->fetch_assoc();
 
                             $sql = ' SELECT `id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, DATE_FORMAT(birthdate, "%M %d, %Y") AS birthdate, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `username`, `password`, `user_type`, `status`, `date_created` FROM `tbl_user` WHERE id = '.$stud['student_id'];
                             $exec = $conn->query($sql);
@@ -101,21 +109,25 @@ $active = $exec1->fetch_assoc();
                            
                       ?>
                         <tr style="font-size: 14px;">
-                          <td><?php echo $row['id_number']; ?></td>
+                         <!--  <td><?php echo $row['id_number']; ?></td>
                           <td><?php echo $row['firstname']; ?> <?php echo $row['lastname']; ?></td>
-                          <td><?php echo $row['gender']; ?></td>
-                          <td><?php echo $row['email']; ?></td>
-                          <td><?php echo $row['contact_number']; ?></td>
-                          <td><?php echo $row['birthdate']; ?></td>
-                          <td><?php echo $row['house_no']; ?> <?php echo $row['barangay']; ?> <?php echo $row['city']; ?> <?php echo $row['province']; ?></td>
-                          <td><?php echo $row['school_year']; ?> | <?php echo $row['section']; ?></td>
-                         <!--  <td>
-                            <div class="btn-group">
-                              <a href="view_student_academic.php?id=<?php echo $row['id']; ?>" class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-placement="bottom" title="View Grades"><i class="fa fa-cog"></i></a>
-                            </div>
+                          <td><?php echo $row['school_year']; ?> | <?php echo $row['section']; ?></td> -->
+                          <td><?php echo $subject['subject_code']; ?></td>
+                          <td><?php echo $subject['subject_name']; ?></td>
+                          <td><?php echo (empty($rowGrade['first']) ? 0 : $rowGrade['first']); ?></td>
+                          <td><?php echo (empty($rowGrade['second']) ? 0 : $rowGrade['second']); ?></td>
+                          <td><?php echo (empty($rowGrade['third']) ? 0 : $rowGrade['third']); ?></td>
+                          <td><?php echo (empty($rowGrade['fourth']) ? 0 : $rowGrade['fourth']); ?></td>
+                          <td><b><?php echo ((empty($rowGrade['first']) ? 0 : $rowGrade['first']) + (empty($rowGrade['second']) ? 0 : $rowGrade['second']) + (empty($rowGrade['third']) ? 0 : $rowGrade['third']) + (empty($rowGrade['fourth']) ? 0 : $rowGrade['fourth'])) / 4; ?></b> </td>
+                          <!-- <td>
+                            <center>
+                              <div class="btn-group">
+                                <a href="view_student_grade.php?id=<?php echo $row['id']; ?>&sched_id=<?php echo $stud['id']; ?>" class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-placement="bottom" title="View Grades"><i class="fa fa-sync-alt"></i></a>
+                              </div>
+                            </center>
                           </td> -->
                         </tr>
-                      <?php  } } ?>
+                      <?php  }  ?>
 
                     </tbody>  
 

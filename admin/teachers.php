@@ -68,7 +68,7 @@
                       <th><center>EMAIL</center></th>
                       <th><center>CONTACT NUMBER</center></th>
                       <th><center>BIRTHDATE</center></th>
-                      <th><center>ADDRES</center></th>
+                      <th><center>ADDRESS</center></th>
                       <th><center>YEAR & SECTION</center></th>
                       <th><center>ACTION</center></th>
                     </tr>
@@ -92,7 +92,8 @@
                           <td>
                             <div class="btn-group">
                               <a href="edit_user.php?id=<?php echo $row['id']; ?>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
-                              <a href="../function_php/delete_user.php?id=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                              <!-- <a href="../function_php/delete_user.php?id=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a> -->
+                              <button onclick="delete_user(<?php echo $row['id']; ?>)" class="btn btn-danger btn-sm text-white"><i class="fa fa-trash"></i></button>
 
                               <a href="view_teacher.php?id=<?php echo $row['id']; ?>" class="btn btn-warning btn-sm text-white"><i class="fa fa-cog"></i></a>
                             </div>
@@ -147,6 +148,16 @@
       "responsive": true,
     });
   });
+
+
+   function delete_user(id)
+  {
+    if (confirm('Are you sure you want to delete this user?')) {
+      window.location.href = "../function_php/delete_user.php?id="+id;
+    } else {
+      // Do nothing!
+    }
+  }
 </script>
 </body>
 </html>
