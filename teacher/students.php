@@ -88,7 +88,8 @@ $active = $exec1->fetch_assoc();
                         // while ( $sched = $execSched->fetch_assoc() ) {
                         $sched = $execSched->fetch_assoc();
 
-                          $selectStudSched = ' SELECT `id`, `student_id`, `schedule_id`, `date_created`, `academic_year_id` FROM `tbl_student_schedule` WHERE teacher_id = '.$_SESSION['id'].' AND academic_year_id = '.$active['id'];
+                          // $selectStudSched = ' SELECT `id`, `student_id`, `schedule_id`, `date_created`, `academic_year_id` FROM `tbl_student_schedule` WHERE teacher_id = '.$_SESSION['id'].' AND academic_year_id = '.$active['id'];
+                          $selectStudSched = ' SELECT DISTINCT(`student_id`) FROM `tbl_student_schedule` WHERE teacher_id = '.$_SESSION['id'].' AND academic_year_id = '.$active['id'];
                           $execStudSched = $conn->query($selectStudSched);
 
                           if ($execStudSched->num_rows > 0) {
@@ -109,11 +110,6 @@ $active = $exec1->fetch_assoc();
                           <td><?php echo $row['birthdate']; ?></td>
                           <td><?php echo $row['house_no']; ?> <?php echo $row['barangay']; ?> <?php echo $row['city']; ?> <?php echo $row['province']; ?></td>
                           <td><?php echo $row['school_year']; ?> | <?php echo $row['section']; ?></td>
-                         <!--  <td>
-                            <div class="btn-group">
-                              <a href="view_student_academic.php?id=<?php echo $row['id']; ?>" class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-placement="bottom" title="View Grades"><i class="fa fa-cog"></i></a>
-                            </div>
-                          </td> -->
                         </tr>
                       <?php  } } ?>
 

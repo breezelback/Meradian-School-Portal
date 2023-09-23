@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>The Meradian School | Student Portal</title>
+  <title>The Meradian School | Teacher Portal</title>
 
   <?php include '_include_header.php';
 
@@ -12,6 +12,10 @@
   $sql = ' SELECT `id`, `title`, `announcement`, `status`, `created_by`, DATE_FORMAT(`date_created`, "%M %d, %Y") AS date_created FROM `tbl_announcement` ';
   $exec = $conn->query($sql);
 
+
+  $sql1 = ' SELECT `id`, `academic_year`, `status`, `date_created` FROM `tbl_academic_year` WHERE status = "Active" ';
+  $exec1 = $conn->query($sql1);
+  $active = $exec1->fetch_assoc();
 
   ?>
 </head>
@@ -45,68 +49,42 @@
     <section class="content">
       <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
-        <div class="row">
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3>150</h3>
+         <div class="row">
 
-                <p>New Orders</p>
+           <div class="col-lg-6 col-6">
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3><?php echo $active['academic_year']; ?></h3>
+                <p>Current Academic Year</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
+
+           <div class="col-lg-6 col-6">
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-                <p>Bounce Rate</p>
+                <h3>
+                  <?php 
+                  $sql2 = 'SELECT COUNT(DISTINCT student_id) AS my_student FROM `tbl_student_schedule` WHERE academic_year_id = '.$active['id'].' AND teacher_id = '.$_SESSION['id'].' ';
+                  $exec2 = $conn->query($sql2);
+                  $stud = $exec2->fetch_assoc();
+                   
+                  echo $stud['my_student'];
+                  ?>
+                </h3>
+                <p>My Students</p>
               </div>
               <div class="icon">
-                <i class="ion ion-stats-bars"></i>
+                <i class="ion ion-bag"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-warning">
-              <div class="inner">
-                <h3>44</h3>
 
-                <p>User Registrations</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-person-add"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-danger">
-              <div class="inner">
-                <h3>65</h3>
-
-                <p>Unique Visitors</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
         </div>
+        <!-- /.row -->
         <!-- /.row -->
         <!-- Main row -->
         <div class="row"><div class="col-md-12"><h4>Announcements!</h4></div></div>
