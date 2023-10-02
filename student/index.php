@@ -18,6 +18,8 @@
   $sql = ' SELECT `id`, `title`, `announcement`, `status`, `created_by`, DATE_FORMAT(`date_created`, "%M %d, %Y") AS date_created FROM `tbl_announcement` ';
   $exec = $conn->query($sql);
 
+  $studLia = ' SELECT `id`, `student_id`, `academic_year_id`, `amount`, `status`, `date_created` FROM `tbl_liabilities` WHERE student_id = '.$_SESSION['id'].' AND academic_year_id = '.$active['id'].' ';
+  $execLia = $conn->query($studLia);
 
   ?>
 </head>
@@ -154,7 +156,11 @@
                   {
                     ?>
                      Not Enrolled
-                     <button class="btn btn-warning btn-sm text-white" onclick="enroll_now(<?php echo $_SESSION['id']; ?>);">Enroll Now!</button>
+                     <?php if ($execLia->num_rows > 0): ?>
+                      <button class="btn btn-warning btn-sm text-white" disabled="" onclick="enroll_now(<?php echo $_SESSION['id']; ?>);">Enroll Now!</button>
+                     <?php else: ?>
+                      <button class="btn btn-warning btn-sm text-white" onclick="enroll_now(<?php echo $_SESSION['id']; ?>);">Enroll Now!</button>
+                     <?php endif ?>
                     <?php
                   }
 
@@ -168,15 +174,6 @@
             </div>
           </div>
 
-
-
-
-         <!--  <div class="col-lg-12 bg-danger">
-            Current Academic Year: <b><?php echo $active['academic_year']; ?></b>
-            <div class="float-right">
-              Status: <span style="background-color: green; padding: 1px;">Enrolled</span>
-            </div>
-          </div> -->
         </div>
         <!-- /.row -->
         <!-- Main row -->

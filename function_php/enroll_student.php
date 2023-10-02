@@ -11,7 +11,7 @@ if(empty($check_id))
 
 
 	$_SESSION['toastr']['title'] = 'Error';
-	$_SESSION['toastr']['message'] = 'Please add subject!';
+	$_SESSION['toastr']['message'] = 'Please select student!';
 	$_SESSION['toastr']['color'] = 'red';
 }
 else

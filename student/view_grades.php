@@ -3,6 +3,7 @@
 $sql1 = ' SELECT `id`, `academic_year`, `status`, `date_created` FROM `tbl_academic_year` WHERE status = "Active" ';
 $exec1 = $conn->query($sql1);
 $active = $exec1->fetch_assoc();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +13,11 @@ $active = $exec1->fetch_assoc();
   <title>The Meradian School | Student Portal</title>
 
   <?php include '_include_header.php'; ?>
+  <?php
+
+    $studLia = ' SELECT `id`, `student_id`, `academic_year_id`, `amount`, `status`, `date_created` FROM `tbl_liabilities` WHERE student_id = '.$_SESSION['id'].' AND academic_year_id = '.$active['id'].' ';
+    $execLia = $conn->query($studLia);
+   ?>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -180,7 +186,9 @@ $active = $exec1->fetch_assoc();
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
       // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      <?php if ($execLia->num_rows < 1){ ?>
       "buttons": ["copy", "csv", "excel", "pdf", "print"]
+      <?php } ?>
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
       "paging": true,
