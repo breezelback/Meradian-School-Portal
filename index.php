@@ -55,9 +55,20 @@ session_start();
                Errors in password during form validation, also add .is-invalid class to the input fields
             </div> -->
           </div>
+
+          <div class="form-group small clearfix">
+              <label class="checkbox-inline">CAPTCHA</label>
+              &nbsp;&nbsp;<img src="captcha.php" > &nbsp;&nbsp; <a href=""><i class="fa fa-sync"></i></a>
+          </div> 
+          <div class="form-group">
+            <center>
+              <input type="text" name="captcha_code" class="form-control form-control-sm" placeholder="CAPTCHA Code" required="required" style="font-size: 13px; width: 60%;">
+            </center>
+          </div>
+
           <button class="btn btn-block btn-primary mt-4" type="submit">
-                        Login <i class="fa fa-arrow-right"></i>
-               </button>
+            Login <i class="fa fa-arrow-right"></i>
+          </button>
           <a href="#" class="float-right mt-2">Forgot Password? </a>
         </form>
       </div>

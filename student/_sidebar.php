@@ -1,4 +1,9 @@
 
+  <?php
+
+    $studLia = ' SELECT `id`, `student_id`, `academic_year_id`, `amount`, `status`, `date_created` FROM `tbl_liabilities` WHERE student_id = '.$_SESSION['id'].' AND academic_year_id = '.$active['id'].' ';
+    $execLia = $conn->query($studLia);
+   ?>
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
@@ -73,14 +78,36 @@
             </a>
           </li>
 
+          <?php if ($execLia->num_rows < 1): ?>
           <li class="nav-item">
             <a href="view_grades.php" class="nav-link">
-              <i class="nav-icon fa fa-copy"></i>
+              <i class="nav-icon fa fa-list-ol"></i>
               <p>
                 My Grades
               </p>
             </a>
           </li>
+          <?php else: ?>
+          <li class="nav-item">
+            <a href="#" class="nav-link" style="cursor: not-allowed;" data-toggle="tooltip" data-placement="bottom" title="Please clear your pending liabilites!">
+              <i class="nav-icon fa fa-list-ol"></i>
+              <p>
+                My Grades
+              </p>
+            </a>
+          </li>
+          <?php endif; ?>
+
+
+          <li class="nav-item">
+            <a href="student_liabilities.php" class="nav-link">
+              <i class="nav-icon fa fa-exclamation-circle"></i>
+              <p>
+                My Liabilities
+              </p>
+            </a>
+          </li>
+
 
           <li class="nav-item">
             <a href="edit_user.php" class="nav-link">

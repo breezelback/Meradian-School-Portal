@@ -186,9 +186,7 @@ $active = $exec1->fetch_assoc();
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
       // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-      <?php if ($execLia->num_rows < 1){ ?>
       "buttons": ["copy", "csv", "excel", "pdf", "print"]
-      <?php } ?>
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
       "paging": true,
