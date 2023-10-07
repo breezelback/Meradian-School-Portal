@@ -81,7 +81,7 @@
                     <tbody>
                       <?php 
                         // $sql = " SELECT `id`, `academic_year_id`, `student_id`, `status`, `date_created` FROM `tbl_enrollment` WHERE academic_year_id = ".$active['id']." AND status = 'Enrolled' ";
-                        $sql = " SELECT `id`, `student_id`, `academic_year_id`, `amount`, `status`, `date_created` FROM `tbl_liabilities` WHERE academic_year_id = ".$active['id']." ";
+                        $sql = " SELECT `id`, `student_id`, `academic_year_id`, `amount`, `status`, `date_created`, `title` FROM `tbl_liabilities` WHERE academic_year_id = ".$active['id']." ";
                         $exec = $conn->query($sql);
                         while($row = $exec->fetch_assoc()){
 
@@ -96,7 +96,12 @@
                          <td><center><?php echo $student['lastname']; ?></center></td>
                          <td><center><?php echo $student['school_year']; ?></center></td>
                          <td><center><?php echo $student['section']; ?></center></td>
-                         <td><center>₱<?php echo number_format($row['amount']); ?></center></td>
+                         <td>
+                            <center>
+                            <p>₱<?php echo number_format($row['amount']); ?></p>
+                            <p><?php echo $row['title']; ?></p>
+                            </center>
+                         </td>
                          <td>
                             <center>
                               <button class="btn btn-danger btn-sm" onclick="delete_liability(<?php echo $row['id']; ?>);">Clear <i class="fa fa-trash"></i></button>
@@ -149,6 +154,7 @@
                   <th><center>YEAR</center></th>
                   <th><center>SECTION</center></th>
                   <th><center>LIABILITY</center></th>
+                  <th><center>TITLE</center></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -166,6 +172,7 @@
                       <td><center><?php echo $sub['school_year']; ?></center></td>
                       <td><center><?php echo $sub['section']; ?></center></td>
                       <td><center><input type="text" class="form-control" name="liability[]"></center></td>
+                      <td><center><input type="text" class="form-control" name="title[]"></center></td>
                     </tr>
                   <?php } ?>
 

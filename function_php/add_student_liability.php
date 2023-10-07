@@ -19,7 +19,7 @@ else
 	for ($i=0; $i < count($check_id); $i++) { 
 
 		
-		$sql = ' INSERT INTO `tbl_liabilities`(`student_id`, `academic_year_id`, `amount`, `date_created`)  VALUES ( '.$check_id[$i].', '.$year_id.', '.$_POST['liability'][$i].', NOW() ) ';
+		$sql = ' INSERT INTO `tbl_liabilities`(`student_id`, `academic_year_id`, `amount`, `date_created`, `title`)  VALUES ( '.$check_id[$i].', '.$year_id.', '.$_POST['liability'][$i].', NOW(), "'.$_POST['title'][$i].'" ) ';
 		$exec = $conn->query($sql);
 
 

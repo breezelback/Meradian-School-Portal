@@ -84,17 +84,19 @@
                           <thead>
                           <tr>
                             <th><center>AMOUNT</center></th>
+                            <th><center>TITLE</center></th>
                             <th><center>DATE CREATED</center></th>
                             <!-- <th><center>ACTION</center></th> -->
                           </tr>
                           </thead>
                           <tbody>
                             <?php 
-                              $sql = ' SELECT `id`, `student_id`, `academic_year_id`, `amount`, `status`, DATE_FORMAT(`date_created`, "%M %d, %Y") as date_created FROM `tbl_liabilities` WHERE student_id = '.$_SESSION['id'].' AND academic_year_id = '.$active['id'].' ';
+                              $sql = ' SELECT `id`, `student_id`, `academic_year_id`, `amount`, `status`, DATE_FORMAT(`date_created`, "%M %d, %Y") as date_created, `title` FROM `tbl_liabilities` WHERE student_id = '.$_SESSION['id'].' AND academic_year_id = '.$active['id'].' ';
                               $exec = $conn->query($sql);
                               while ( $row = $exec->fetch_assoc() ) {
                             ?>
                               <tr style="font-size: 14px;">
+                                <td><center><?php echo $row['title']; ?></center></td>
                                 <td><center>₱<?php echo number_format($row['amount']); ?></center></td>
                                 <td><center><?php echo $row['date_created']; ?></center></td>
                             <?php } ?>
