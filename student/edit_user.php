@@ -14,6 +14,11 @@
   $sql = ' SELECT `id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, `birthdate`, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `username`, `password`, `user_type`, `status`, `date_created` FROM `tbl_user` WHERE id = '.$_SESSION['id'].' ';
   $exec = $conn->query($sql);
   $row = $exec->fetch_assoc();
+
+  $sql1 = ' SELECT `id`, `academic_year`, `status`, `date_created` FROM `tbl_academic_year` WHERE status = "Active" ';
+  $exec1 = $conn->query($sql1);
+  $active = $exec1->fetch_assoc();
+
 ?>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">

@@ -61,11 +61,11 @@ $active = $exec1->fetch_assoc();
                   Student Information
                 </h3>
                 <div class="card-tools">
-                 <!--  <ul class="nav nav-pills ml-auto">
+                  <ul class="nav nav-pills ml-auto">
                     <li class="nav-item">
-                      <a class="nav-link btn-success text-white" href="add_user.php?usertype=student">Add New Student &nbsp;<i class="fa fa-user-plus"></i></a>
+                      <a class="nav-link btn-warning text-white" target="_blank" href="student_print_grades.php?academic_year_id=<?php echo $active['id']; ?>&student_id=<?php echo $_SESSION['id']; ?>">Print Grade Report &nbsp;<i class="fa fa-print"></i></a>
                     </li>
-                  </ul> -->
+                  </ul>
                 </div>
               </div><!-- /.card-header -->
               <div class="card-body">
@@ -186,7 +186,7 @@ $active = $exec1->fetch_assoc();
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
       // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-      "buttons": ["copy", "csv", "excel", "pdf", "print"]
+      "buttons": ["copy", "csv", "excel"]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
       "paging": true,

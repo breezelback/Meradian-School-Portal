@@ -146,6 +146,7 @@
                     else if ($stud['status'] == 'Enrolled')
                     {
                       echo "Enrolled";
+                      echo '&nbsp;<a href="certificateofenrollment.php" target="_blank" class="btn btn-warning text-white">Print Certificate of Enrollment <i class="fa fa-print"></i></a>';
                     }
                     else
                     {
