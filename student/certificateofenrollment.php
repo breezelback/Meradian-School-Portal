@@ -23,9 +23,14 @@
       body {
         background-image: url('../images/print_bg.jpg');
         background-repeat: no-repeat;
-        background-attachment: fixed;
+        /*background-attachment: fixed;*/
         background-size: 50% 100%;
         background-position: center;
+      }
+      @media print {
+      body {
+          background-size: 70% 50%;
+        }
       }
     </style>
 </head>

@@ -27,6 +27,11 @@ $student = $exec->fetch_assoc();
         background-size: 50% 100%;
         background-position: center;
       }
+      @media print {
+      body {
+          background-size: 70% 50%;
+        }
+      }
     </style>
 </head>
 <body>

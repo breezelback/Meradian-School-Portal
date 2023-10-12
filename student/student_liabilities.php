@@ -86,6 +86,7 @@
                             <th><center>AMOUNT</center></th>
                             <th><center>TITLE</center></th>
                             <th><center>DATE CREATED</center></th>
+                            <th><center>PAY</center></th>
                             <!-- <th><center>ACTION</center></th> -->
                           </tr>
                           </thead>
@@ -99,6 +100,7 @@
                                 <td><center><?php echo $row['title']; ?></center></td>
                                 <td><center>₱<?php echo number_format($row['amount']); ?></center></td>
                                 <td><center><?php echo $row['date_created']; ?></center></td>
+                                <td><center><a class="btn btn-primary" href="pay_liabilities.php?amount=<?php echo $row['amount']; ?>">Pay Now!</a></center></td>
                             <?php } ?>
 
                           </tbody>  
