@@ -117,10 +117,10 @@ $(function () {
   // $('#revenue-chart').get(0).getContext('2d');
 
   var salesChartData = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
     datasets: [
       {
-        label: 'Digital Goods',
+        label: 'Enrolled Students',
         backgroundColor: 'rgba(60,141,188,0.9)',
         borderColor: 'rgba(60,141,188,0.8)',
         pointRadius: false,
@@ -128,19 +128,19 @@ $(function () {
         pointStrokeColor: 'rgba(60,141,188,1)',
         pointHighlightFill: '#fff',
         pointHighlightStroke: 'rgba(60,141,188,1)',
-        data: [28, 48, 40, 19, 86, 27, 90]
-      },
-      {
-        label: 'Electronics',
-        backgroundColor: 'rgba(210, 214, 222, 1)',
-        borderColor: 'rgba(210, 214, 222, 1)',
-        pointRadius: false,
-        pointColor: 'rgba(210, 214, 222, 1)',
-        pointStrokeColor: '#c1c7d1',
-        pointHighlightFill: '#fff',
-        pointHighlightStroke: 'rgba(220,220,220,1)',
-        data: [65, 59, 80, 81, 56, 55, 40]
+        data: [100, 48, 40, 19, 86, 27, 90, 121, 90, 34, 57, 23]
       }
+      // {
+      //   label: 'Electronics',
+      //   backgroundColor: 'rgba(210, 214, 222, 1)',
+      //   borderColor: 'rgba(210, 214, 222, 1)',
+      //   pointRadius: false,
+      //   pointColor: 'rgba(210, 214, 222, 1)',
+      //   pointStrokeColor: '#c1c7d1',
+      //   pointHighlightFill: '#fff',
+      //   pointHighlightStroke: 'rgba(220,220,220,1)',
+      //   data: [65, 59, 80, 81, 56, 55, 40]
+      // }
     ]
   }
 
@@ -167,7 +167,7 @@ $(function () {
   // This will get the first returned node in the jQuery collection.
   // eslint-disable-next-line no-unused-vars
   var salesChart = new Chart(salesChartCanvas, { // lgtm[js/unused-local-variable]
-    type: 'line',
+    type: 'bar',
     data: salesChartData,
     options: salesChartOptions
   })

@@ -75,13 +75,14 @@
                       <th><center>YEAR</center></th>
                       <th><center>SECTION</center></th>
                       <th><center>LIABILITIES</center></th>
-                      <th><center>ACTION</center></th>
+                      <th><center>STATUS</center></th>
+                      <th width="100"><center>ACTION</center></th>
                     </tr>
                     </thead>
                     <tbody>
                       <?php 
                         // $sql = " SELECT `id`, `academic_year_id`, `student_id`, `status`, `date_created` FROM `tbl_enrollment` WHERE academic_year_id = ".$active['id']." AND status = 'Enrolled' ";
-                        $sql = " SELECT `id`, `student_id`, `academic_year_id`, `amount`, `status`, `date_created`, `title` FROM `tbl_liabilities` WHERE academic_year_id = ".$active['id']." ";
+                        $sql = " SELECT `id`, `student_id`, `academic_year_id`, `amount`, `status`, `date_created`, `title`, `pay_date` FROM `tbl_liabilities` WHERE academic_year_id = ".$active['id']." ";
                         $exec = $conn->query($sql);
                         while($row = $exec->fetch_assoc()){
 
@@ -102,9 +103,14 @@
                             <p><?php echo $row['title']; ?></p>
                             </center>
                          </td>
+                         <td><center><?php if ($row['status'] == 0) {echo 'Unpaid';} else {echo 'Paid';} ?></center></td>
                          <td>
                             <center>
-                              <button class="btn btn-danger btn-sm" onclick="delete_liability(<?php echo $row['id']; ?>);">Clear <i class="fa fa-trash"></i></button>
+                              <?php if ($row['status'] == 0): ?>
+                                <button class="btn btn-danger btn-sm" onclick="delete_liability(<?php echo $row['id']; ?>);">Clear <i class="fa fa-trash"></i></button>
+                              <?php else: ?>
+                                <p style="font-size: 12px;">Paid on <span class="bg bg-primary" style="padding: 3px; border-radius: 5px;"><?php echo $row['pay_date']; ?></p></span>
+                              <?php endif ?>
                             </center>
                          </td>
                        </tr>
@@ -159,7 +165,7 @@
                 </thead>
                 <tbody>
                   <?php 
-                    $sql = ' SELECT `id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, DATE_FORMAT(birthdate, "%M %d, %Y") AS birthdate, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `username`, `password`, `user_type`, `status`, `date_created` FROM `tbl_user` WHERE user_type = "student" AND id NOT IN (SELECT student_id FROM tbl_liabilities WHERE academic_year_id = '.$active['id'].') ';
+                    $sql = ' SELECT `id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, DATE_FORMAT(birthdate, "%M %d, %Y") AS birthdate, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `username`, `password`, `user_type`, `status`, `date_created` FROM `tbl_user` WHERE user_type = "student" AND id NOT IN (SELECT student_id FROM tbl_liabilities WHERE academic_year_id = '.$active['id'].' AND status = 0) ';
                     $exec = $conn->query($sql);
                     while ( $sub = $exec->fetch_assoc() ) {
                   ?>

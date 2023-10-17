@@ -12,7 +12,7 @@
   require('../function_php/conn.php'); 
   $sql = ' SELECT `id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, `birthdate`, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `username`, `password`, `user_type`, `status`, `date_created` FROM `tbl_user` WHERE id = '.$_SESSION['id'].' ';
   $exec = $conn->query($sql);
-  $row = $exec->fetch_assoc();
+  $student = $exec->fetch_assoc();
 
 
   $sql1 = ' SELECT `id`, `academic_year`, `status`, `date_created` FROM `tbl_academic_year` WHERE status = "Active" ';
@@ -94,19 +94,23 @@
                                               <tr>
                                                   <th>Name</th>
                                                   <th class="text-center">Price</th>
-                                                  <th class="text-center">Total</th>
                                               </tr>
                                           </thead>
                                           <tbody>
+                                            <?php 
+                                            $sql = ' SELECT `id`, `student_id`, `academic_year_id`, `amount`, `status`, DATE_FORMAT(`date_created`, "%M %d, %Y") as date_created, `title` FROM `tbl_liabilities` WHERE id = '.$_GET['pay_id'].' ';
+                                            $exec = $conn->query($sql);
+                                            $row = $exec->fetch_assoc(); ?>
                                               <tr>
-                                                  <td class="col-md-9"><em>Baked Tart with Thyme and Garlic</em></h4></td>
-                                                  <td class="col-md-1" style="text-align: center"> 3 </td>
-                                                  <td class="col-md-1 text-center"><input class="form-control" type="text" name="amount" value="20.00" readonly="" /></td>
+                                                  <td class="col-md-9"><em><?php echo $row['title']; ?></em></h4></td>
+                                                  <td class="col-md-1 text-center"><input class="form-control" type="text" name="amount" value="<?php echo $row['amount']; ?>" readonly="" /></td>
+                                                  <input type="hidden" value="<?php echo $_GET['pay_id']; ?>" name="pay_id">
+                                                  <input type="hidden" value="<?php echo $student['id']; ?>" name="student_id">
+                                                  <input type="hidden" value="<?php echo $active['id']; ?>" name="academic_year_id">
                                               </tr>
                                               <tr>
-                                                  <td>   </td>
                                                   <td class="text-right"><h4><strong>Total: </strong></h4></td>
-                                                  <td class="text-center text-danger"><h4><strong>₱20.00</strong></h4></td>
+                                                  <td class="text-center text-danger"><h4><strong>₱<?php echo number_format($row['amount']); ?></strong></h4></td>
                                               </tr>
                                           </tbody>
                                       </table>

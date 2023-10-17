@@ -61,7 +61,7 @@
 	
 	<?php include'_include_footer.php'; ?>
 	<script>
-		// window.print();
+		window.print();
 	</script>
 </body>
 </html>

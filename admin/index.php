@@ -51,7 +51,7 @@
           <div class="col-sm-4">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v1</li>
+              <li class="breadcrumb-item active">Dashboard</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -135,17 +135,17 @@
               <div class="card-header">
                 <h3 class="card-title">
                   <i class="fas fa-chart-pie mr-1"></i>
-                  User Registration
+                  User Monthly Registration
                 </h3>
                 <div class="card-tools">
-                  <ul class="nav nav-pills ml-auto">
+                  <!-- <ul class="nav nav-pills ml-auto">
                     <li class="nav-item">
                       <a class="nav-link active" href="#revenue-chart" data-toggle="tab">Area</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="#sales-chart" data-toggle="tab">Donut</a>
                     </li>
-                  </ul>
+                  </ul> -->
                 </div>
               </div><!-- /.card-header -->
               <div class="card-body">
@@ -167,52 +167,163 @@
           </section>
           <!-- /.Left col -->
           <!-- right col (We are only adding the ID to make the widgets sortable)-->
-          <section class="col-lg-5 connectedSortable">
+          <section class="col-lg-6 connectedSortable">
 
-            <!-- Map card -->
-            <div class="card bg-gradient-primary">
-              <div class="card-header border-0">
-                <h3 class="card-title">
-                  <i class="fas fa-map-marker-alt mr-1"></i>
-                  Visitors
-                </h3>
-                <!-- card tools -->
-             <!--    <div class="card-tools">
-                  <button type="button" class="btn btn-primary btn-sm daterange" title="Date range">
-                    <i class="far fa-calendar-alt"></i>
-                  </button>
-                  <button type="button" class="btn btn-primary btn-sm" data-card-widget="collapse" title="Collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                </div> -->
-                <!-- /.card-tools -->
-              </div>
-              <div class="card-body">
-                <!-- <div id="world-map" style="height: 250px; width: 100%;"></div> -->
-              </div>
-              <!-- /.card-body-->
-              <div class="card-footer bg-transparent">
-                <div class="row">
-                  <div class="col-4 text-center">
-                    <div id="sparkline-1"></div>
-                    <div class="text-white">All</div>
-                  </div>
-                  <!-- ./col -->
-                  <div class="col-4 text-center">
-                    <div id="sparkline-2"></div>
-                    <div class="text-white">New</div>
-                  </div>
-                  <!-- ./col -->
-                  <div class="col-4 text-center">
-                    <div id="sparkline-3"></div>
-                    <div class="text-white">Transferee</div>
-                  </div>
-                  <!-- ./col -->
+
+             <!-- Map card -->
+              <div class="card">
+                <div class="card-header border-0">
+                  <h3 class="card-title">
+                    <i class="fas fa-chart mr-1"></i>
+                    Newly Enrolled Students
+                  </h3>
                 </div>
-                <!-- /.row -->
+                <div class="card-body">
+                    <table class="table table-bordered">
+                      <thead>
+                        <th>Name</th>
+                        <th>Section</th>
+                        <th>Address</th>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>John Doe</td>
+                          <td>1A</td>
+                          <td>Lipa</td>
+                        </tr>
+                        <tr>
+                          <td>Blake Griffin</td>
+                          <td>1B</td>
+                          <td>Lipa</td>
+                        </tr>
+                        <tr>
+                          <td>Portgas Ace</td>
+                          <td>1A</td>
+                          <td>Lipa</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body-->
               </div>
-            </div>
-            <!-- /.card -->
+              <!-- /.card -->
+        
+
+
+              <!-- Map card -->
+              <div class="card bg-gradient-primary" style="display: none;">
+                <div class="card-header border-0">
+                  <h3 class="card-title">
+                    <i class="fas fa-chart mr-1"></i>
+                    Student Analytics
+                  </h3>
+                </div>
+                <div class="card-body">
+                  <!-- <div id="world-map" style="height: 250px; width: 100%;"></div> -->
+                </div>
+                <!-- /.card-body-->
+                <div class="card-footer bg-transparent">
+                  <div class="row">
+                    <div class="col-4 text-center">
+                      <div id="sparkline-1"></div>
+                      <div class="text-white">All</div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-4 text-center">
+                      <div id="sparkline-2"></div>
+                      <div class="text-white">New</div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-4 text-center">
+                      <div id="sparkline-3"></div>
+                      <div class="text-white">Transferee</div>
+                    </div>
+                    <!-- ./col -->
+                  </div>
+                  <!-- /.row -->
+                </div>
+              </div>
+              <!-- /.card -->
+
+
+          </section>
+          <section class="col-lg-6 connectedSortable">
+
+
+             <!-- Map card -->
+              <div class="card">
+                <div class="card-header border-0">
+                  <h3 class="card-title">
+                    <i class="fas fa-chart mr-1"></i>
+                    Newly Registered Teachers
+                  </h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                      <thead>
+                        <th>Name</th>
+                        <th>Section</th>
+                        <th>Address</th>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>John Doe</td>
+                          <td>1A</td>
+                          <td>Lipa</td>
+                        </tr>
+                        <tr>
+                          <td>Blake Griffin</td>
+                          <td>1B</td>
+                          <td>Lipa</td>
+                        </tr>
+                        <tr>
+                          <td>Portgas Ace</td>
+                          <td>1A</td>
+                          <td>Lipa</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body-->
+              </div>
+              <!-- /.card -->
+        
+
+
+              <!-- Map card -->
+              <div class="card bg-gradient-primary" style="display: none;">
+                <div class="card-header border-0">
+                  <h3 class="card-title">
+                    <i class="fas fa-chart mr-1"></i>
+                    Student Analytics
+                  </h3>
+                </div>
+                <div class="card-body">
+                  <!-- <div id="world-map" style="height: 250px; width: 100%;"></div> -->
+                </div>
+                <!-- /.card-body-->
+                <div class="card-footer bg-transparent">
+                  <div class="row">
+                    <div class="col-4 text-center">
+                      <div id="sparkline-1"></div>
+                      <div class="text-white">All</div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-4 text-center">
+                      <div id="sparkline-2"></div>
+                      <div class="text-white">New</div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-4 text-center">
+                      <div id="sparkline-3"></div>
+                      <div class="text-white">Transferee</div>
+                    </div>
+                    <!-- ./col -->
+                  </div>
+                  <!-- /.row -->
+                </div>
+              </div>
+              <!-- /.card -->
 
 
           </section>
@@ -224,6 +335,9 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
+  <?php $datax = 100; ?>
+
 
   <?php include'_footer.php'; ?>
   <!-- Control Sidebar -->

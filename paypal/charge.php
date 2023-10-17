@@ -7,6 +7,9 @@ if (isset($_POST['submit'])) {
         $response = $gateway->purchase(array(
             // 'amount' => $_POST['amount'],
             'amount' => $_POST['amount'],
+            'pay_id' => $_POST['pay_id'],
+            'student_id' => $_POST['student_id'],
+            'academic_year_id' => $_POST['academic_year_id'],
             'currency' => PAYPAL_CURRENCY,
             'returnUrl' => PAYPAL_RETURN_URL,
             'cancelUrl' => PAYPAL_CANCEL_URL,

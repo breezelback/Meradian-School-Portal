@@ -1,7 +1,7 @@
 
   <?php
 
-    $studLia = ' SELECT `id`, `student_id`, `academic_year_id`, `amount`, `status`, `date_created` FROM `tbl_liabilities` WHERE student_id = '.$_SESSION['id'].' AND academic_year_id = '.$active['id'].' ';
+    $studLia = ' SELECT `id`, `student_id`, `academic_year_id`, `amount`, `status`, `date_created` FROM `tbl_liabilities` WHERE student_id = '.$_SESSION['id'].' AND academic_year_id = '.$active['id'].' AND status = 0 ';
     $execLia = $conn->query($studLia);
    ?>
   <!-- Navbar -->

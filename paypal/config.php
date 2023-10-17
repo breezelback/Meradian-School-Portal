@@ -3,21 +3,20 @@ require_once "vendor/autoload.php";
 
 use Omnipay\Omnipay;
 
-define('CLIENT_ID', 'AWhjxdN8zynTWANOWE-QJtLKq_BMdjnlbg51iOZ2CUaApEOFa8fg2kyxBp3YpUuFdFrGFB_061Vc39C2');
-define('CLIENT_SECRET', 'EOODRAF5TZFkzsbrWaEOK2nYgXlyDKLL3EKSSJIYjDAnir_MekdROEI5FuXPUswBUrLyUrRL8Cs4LgcV');
+define('CLIENT_ID', 'AXcYCPkTzbQ0Xzuy6_19T4bmFBdLVMW4BWG3Dv2m5mrEt4WRjTHQjeG43fxkwSwrvK0MvIjf-sf-TAYV');
 
-define('PAYPAL_RETURN_URL', 'http://localhost/paypal/success.php');
-define('PAYPAL_CANCEL_URL', 'http://localhost/paypal/cancel.php');
+define('PAYPAL_RETURN_URL', 'http://localhost/Meradian%20School%20Portal/paypal/success.php?pay_id='.$_POST['pay_id'].'&student_id='.$_POST['student_id'].'&academic_year_id='.$_POST['academic_year_id']);
+define('PAYPAL_CANCEL_URL', 'http://localhost/Meradian%20School%20Portal/paypal/cancel.php');
 define('PAYPAL_CURRENCY', 'PHP'); // set your currency here
 
 // Connect with the database
-$db = new mysqli('localhost', 'root', '', 'paypal'); 
+$db = new mysqli('localhost', 'root', '', 'db_meradian'); 
 
 if ($db->connect_errno) {
     die("Connect failed: ". $db->connect_error);
 }
 
 $gateway = Omnipay::create('PayPal_Rest');
-$gateway->setClientId(CLIENT_ID);
-$gateway->setSecret(CLIENT_SECRET);
+$gateway->setClientId('AXcYCPkTzbQ0Xzuy6_19T4bmFBdLVMW4BWG3Dv2m5mrEt4WRjTHQjeG43fxkwSwrvK0MvIjf-sf-TAYV');
+$gateway->setSecret('EHxINdYMelPJ0Anjqe_jw3QdxqsWvwwsYSbr8Jp0IJ1Tg770Ydv4Fxx5KJSF13mNloUdiLQeFVXOyKqT');
 $gateway->setTestMode(true); //set it to 'false' when go live
