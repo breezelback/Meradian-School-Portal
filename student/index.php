@@ -256,7 +256,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon1">House # / Purok:</span>
                         </div>
-                          <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" value="<?php echo $_SESSION['house_no']; ?>" readonly="" style="background-color: #fff;">
+                          <input type="text" class="form-control" placeholder="House No." aria-describedby="basic-addon1" value="<?php echo $_SESSION['house_no']; ?>" readonly="" style="background-color: #fff;">
                       </div>
 
                       <div class="input-group my-2">
