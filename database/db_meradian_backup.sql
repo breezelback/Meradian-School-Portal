@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 23, 2023 at 08:41 AM
+-- Generation Time: Oct 17, 2023 at 05:12 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -20,6 +20,36 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_meradian`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payments`
+--
+
+CREATE TABLE `payments` (
+  `id` int(11) NOT NULL,
+  `payment_id` varchar(255) NOT NULL,
+  `payer_id` varchar(255) NOT NULL,
+  `payer_email` varchar(255) NOT NULL,
+  `amount` float(10,2) NOT NULL,
+  `currency` varchar(255) NOT NULL,
+  `payment_status` varchar(255) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `academic_year_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `payments`
+--
+
+INSERT INTO `payments` (`id`, `payment_id`, `payer_id`, `payer_email`, `amount`, `currency`, `payment_status`, `student_id`, `academic_year_id`) VALUES
+(1, 'PAYID-MUXJQ2Q41J85178W1026654P', 'BMXDSSZ5JSSJJ', 'sb-d2zwj27748241@personal.example.com', 1000.00, 'PHP', 'approved', 0, 0),
+(2, 'PAYID-MUXJQ2Q41J85178W1026654P', 'BMXDSSZ5JSSJJ', 'sb-d2zwj27748241@personal.example.com', 1000.00, 'PHP', 'approved', 0, 0),
+(3, 'PAYID-MUXJQ2Q41J85178W1026654P', 'BMXDSSZ5JSSJJ', 'sb-d2zwj27748241@personal.example.com', 1000.00, 'PHP', 'approved', 1, 4),
+(4, 'PAYID-MUXJVIQ7TB26458RP940221T', 'BMXDSSZ5JSSJJ', 'sb-d2zwj27748241@personal.example.com', 1000.00, 'PHP', 'approved', 1, 4),
+(5, 'PAYID-MUXJVSQ97L66468EV157201H', 'BMXDSSZ5JSSJJ', 'sb-d2zwj27748241@personal.example.com', 1000.00, 'PHP', 'approved', 1, 4),
+(6, 'PAYID-MUXJXWQ4YL399232L9804844', 'BMXDSSZ5JSSJJ', 'sb-d2zwj27748241@personal.example.com', 1000.00, 'PHP', 'approved', 1, 4);
 
 -- --------------------------------------------------------
 
@@ -86,9 +116,7 @@ CREATE TABLE `tbl_enrollment` (
 --
 
 INSERT INTO `tbl_enrollment` (`id`, `academic_year_id`, `student_id`, `status`, `date_created`, `date_drop`) VALUES
-(3, 4, 3, 'Enrolled', '2023-09-22 21:49:19', '2023-09-22 21:49:11'),
-(4, 3, 1, 'Enrolled', '2023-09-23 14:14:57', '2023-09-23 14:14:44'),
-(5, 4, 1, 'Enrolled', '2023-09-23 14:19:23', '0000-00-00 00:00:00');
+(3, 4, 3, 'Enrolled', '2023-09-22 21:49:19', '2023-09-22 21:49:11');
 
 -- --------------------------------------------------------
 
@@ -120,6 +148,31 @@ INSERT INTO `tbl_grades` (`id`, `stud_schedule_id`, `first`, `second`, `third`, 
 (8, 13, 83, 82, 84, 88, 0, 0, '2023-09-23 13:25:41'),
 (9, 14, 0, 0, 0, 0, 0, 0, '2023-09-23 13:25:41'),
 (10, 15, 85, 88, 87, 90, 0, 0, '2023-09-23 14:23:13');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_liabilities`
+--
+
+CREATE TABLE `tbl_liabilities` (
+  `id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `academic_year_id` int(11) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `status` int(11) NOT NULL,
+  `date_created` datetime NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `pay_date` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `tbl_liabilities`
+--
+
+INSERT INTO `tbl_liabilities` (`id`, `student_id`, `academic_year_id`, `amount`, `status`, `date_created`, `title`, `pay_date`) VALUES
+(9, 1, 4, 1000, 1, '2023-10-12 22:02:16', 'Misc. Fee', '2023-10-17'),
+(10, 1, 4, 5000, 0, '2023-10-17 22:47:33', 'Tuition', NULL);
 
 -- --------------------------------------------------------
 
@@ -256,6 +309,12 @@ INSERT INTO `tbl_user` (`id`, `id_number`, `firstname`, `middlename`, `lastname`
 --
 
 --
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tbl_academic_year`
 --
 ALTER TABLE `tbl_academic_year`
@@ -277,6 +336,12 @@ ALTER TABLE `tbl_enrollment`
 -- Indexes for table `tbl_grades`
 --
 ALTER TABLE `tbl_grades`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_liabilities`
+--
+ALTER TABLE `tbl_liabilities`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -308,6 +373,12 @@ ALTER TABLE `tbl_user`
 --
 
 --
+-- AUTO_INCREMENT for table `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `tbl_academic_year`
 --
 ALTER TABLE `tbl_academic_year`
@@ -323,12 +394,18 @@ ALTER TABLE `tbl_announcement`
 -- AUTO_INCREMENT for table `tbl_enrollment`
 --
 ALTER TABLE `tbl_enrollment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_grades`
 --
 ALTER TABLE `tbl_grades`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `tbl_liabilities`
+--
+ALTER TABLE `tbl_liabilities`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --

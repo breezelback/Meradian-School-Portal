@@ -104,11 +104,7 @@
                          </td>
                          <td>
                             <center>
-                              <?php if ($row['status'] == 0): ?>
-                                <button class="btn btn-danger btn-sm" onclick="delete_liability(<?php echo $row['id']; ?>);">Clear <i class="fa fa-trash"></i></button>
-                              <?php else: ?>
-                                <p style="font-size: 12px;">Paid on <span class="bg bg-primary" style="padding: 3px; border-radius: 5px;"><?php echo $row['pay_date']; ?></p></span>
-                              <?php endif ?>
+                                <button class="btn btn-danger btn-sm" onclick="delete_scholarship(<?php echo $row['id']; ?>);">Remove <i class="fa fa-trash"></i></button>
                             </center>
                          </td>
                        </tr>
@@ -140,7 +136,7 @@
       <div class="modal-dialog modal-xl">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Enroll Student </h5>
+            <h5 class="modal-title" id="exampleModalLabel">Add Student Voucher</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -228,10 +224,10 @@
     });
   });
 
-  function delete_liability(id)
+  function delete_scholarship(id)
   {
-    if (confirm('Are you sure you want to clear liability?')) {
-      window.location.href = "../function_php/delete_liability.php?id="+id;
+    if (confirm('Are you sure you want to remove voucher?')) {
+      window.location.href = "../function_php/delete_scholarship.php?id="+id;
     } else {
       // Do nothing!
     }

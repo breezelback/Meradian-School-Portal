@@ -25,11 +25,58 @@
   $execEnrolled = $conn->query($sqlEnrolled);
   $enrolled = $execEnrolled->fetch_assoc();
 
-  $sqlDropped = ' SELECT COUNT(id) AS total_dropped FROM tbl_enrollment WHERE academic_year_id = '.$active['id'].' AND status = "Dropped" ';
+  $sqlDropped = ' SELECT COUNT(id) AS total_dropped FROM tbl_enrollment WHERE academic_year_id = '.$active['id'].' AND status = "Drop" ';
   $execDropped = $conn->query($sqlDropped);
   $dropped = $execDropped->fetch_assoc();
 
 
+  $sqlStudentCount1 = ' SELECT COUNT(id) AS total_count FROM tbl_user WHERE user_type = "student" AND MONTH(date_created) = 1';
+  $execStudent1 = $conn->query($sqlStudentCount1);
+  $jan = $execStudent1->fetch_assoc();
+
+  $sqlStudentCount2 = ' SELECT COUNT(id) AS total_count FROM tbl_user WHERE user_type = "student" AND MONTH(date_created) = 2';
+  $execStudent2 = $conn->query($sqlStudentCount2);
+  $feb = $execStudent2->fetch_assoc();
+
+  $sqlStudentCount3 = ' SELECT COUNT(id) AS total_count FROM tbl_user WHERE user_type = "student" AND MONTH(date_created) = 3';
+  $execStudent3 = $conn->query($sqlStudentCount3);
+  $mar = $execStudent3->fetch_assoc();
+
+  $sqlStudentCount4 = ' SELECT COUNT(id) AS total_count FROM tbl_user WHERE user_type = "student" AND MONTH(date_created) = 4';
+  $execStudent4 = $conn->query($sqlStudentCount4);
+  $apr = $execStudent4->fetch_assoc();
+
+  $sqlStudentCount5 = ' SELECT COUNT(id) AS total_count FROM tbl_user WHERE user_type = "student" AND MONTH(date_created) = 5';
+  $execStudent5 = $conn->query($sqlStudentCount5);
+  $may = $execStudent5->fetch_assoc();
+
+  $sqlStudentCount6 = ' SELECT COUNT(id) AS total_count FROM tbl_user WHERE user_type = "student" AND MONTH(date_created) = 6';
+  $execStudent6 = $conn->query($sqlStudentCount6);
+  $jun = $execStudent6->fetch_assoc();
+
+  $sqlStudentCount7 = ' SELECT COUNT(id) AS total_count FROM tbl_user WHERE user_type = "student" AND MONTH(date_created) = 7';
+  $execStudent7 = $conn->query($sqlStudentCount7);
+  $jul = $execStudent7->fetch_assoc();
+
+  $sqlStudentCount8 = ' SELECT COUNT(id) AS total_count FROM tbl_user WHERE user_type = "student" AND MONTH(date_created) = 8';
+  $execStudent8 = $conn->query($sqlStudentCount8);
+  $aug = $execStudent8->fetch_assoc();
+
+  $sqlStudentCount9 = ' SELECT COUNT(id) AS total_count FROM tbl_user WHERE user_type = "student" AND MONTH(date_created) = 9';
+  $execStudent9 = $conn->query($sqlStudentCount9);
+  $sep = $execStudent9->fetch_assoc();
+
+  $sqlStudentCount10 = ' SELECT COUNT(id) AS total_count FROM tbl_user WHERE user_type = "student" AND MONTH(date_created) = 10';
+  $execStudent10 = $conn->query($sqlStudentCount10);
+  $oct = $execStudent10->fetch_assoc();
+
+  $sqlStudentCount11 = ' SELECT COUNT(id) AS total_count FROM tbl_user WHERE user_type = "student" AND MONTH(date_created) = 11';
+  $execStudent11 = $conn->query($sqlStudentCount11);
+  $nov = $execStudent11->fetch_assoc();
+
+  $sqlStudentCount12 = ' SELECT COUNT(id) AS total_count FROM tbl_user WHERE user_type = "student" AND MONTH(date_created) = 12';
+  $execStudent12 = $conn->query($sqlStudentCount12);
+  $dec = $execStudent12->fetch_assoc();
 
   ?>
 </head>
@@ -175,32 +222,32 @@
                 <div class="card-header border-0">
                   <h3 class="card-title">
                     <i class="fas fa-chart mr-1"></i>
-                    Newly Enrolled Students
+                    Newly Registered Students
                   </h3>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered">
                       <thead>
+                        <th>ID Number</th>
                         <th>Name</th>
-                        <th>Section</th>
-                        <th>Address</th>
+                        <th>Year & Section</th>
+                        <th>Status</th>
                       </thead>
                       <tbody>
+                        <?php 
+                        $selectStudents = ' SELECT `id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, `birthdate`, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `username`, `password`, `user_type`, `status`, `date_created`, `student_status`, `enrollment_status` FROM `tbl_user` WHERE user_type = "student" ORDER BY id DESC LIMIT 5 ';
+                        $execStudents = $conn->query($selectStudents);
+                        while ($students = $execStudents->fetch_assoc()){
+
+                         ?>
                         <tr>
-                          <td>John Doe</td>
-                          <td>1A</td>
-                          <td>Lipa</td>
+                          <td><?php echo $students['id_number']; ?></td>
+                          <td><?php echo $students['firstname']; ?> <?php echo $students['lastname']; ?></td>
+                          <td><?php echo $students['school_year']; ?> | <?php echo $students['section']; ?></td>
+                          <td><?php echo $students['student_status']; ?></td>
                         </tr>
-                        <tr>
-                          <td>Blake Griffin</td>
-                          <td>1B</td>
-                          <td>Lipa</td>
-                        </tr>
-                        <tr>
-                          <td>Portgas Ace</td>
-                          <td>1A</td>
-                          <td>Lipa</td>
-                        </tr>
+
+                      <?php } ?>
                       </tbody>
                     </table>
                 </div>
@@ -261,26 +308,26 @@
                 <div class="card-body">
                     <table class="table table-bordered">
                       <thead>
+                        <th>ID Number</th>
                         <th>Name</th>
-                        <th>Section</th>
-                        <th>Address</th>
+                        <th>Contact Number</th>
+                        <th>Email</th>
                       </thead>
                       <tbody>
+                        <?php 
+                        $selectStudents = ' SELECT `id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, `birthdate`, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `username`, `password`, `user_type`, `status`, `date_created`, `student_status`, `enrollment_status` FROM `tbl_user` WHERE user_type = "teacher" ORDER BY id DESC LIMIT 5 ';
+                        $execStudents = $conn->query($selectStudents);
+                        while ($students = $execStudents->fetch_assoc()){
+
+                         ?>
                         <tr>
-                          <td>John Doe</td>
-                          <td>1A</td>
-                          <td>Lipa</td>
+                          <td><?php echo $students['id_number']; ?></td>
+                          <td><?php echo $students['firstname']; ?> <?php echo $students['lastname']; ?></td>
+                          <td><?php echo $students['contact_number']; ?></td>
+                          <td><?php echo $students['email']; ?></td>
                         </tr>
-                        <tr>
-                          <td>Blake Griffin</td>
-                          <td>1B</td>
-                          <td>Lipa</td>
-                        </tr>
-                        <tr>
-                          <td>Portgas Ace</td>
-                          <td>1A</td>
-                          <td>Lipa</td>
-                        </tr>
+
+                      <?php } ?>
                       </tbody>
                     </table>
                 </div>
@@ -347,6 +394,42 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+
+<script>
+   /* Chart.js Charts */
+  // Sales chart
+  var salesChartCanvas = document.getElementById('revenue-chart-canvas').getContext('2d')
+  // $('#revenue-chart').get(0).getContext('2d');
+
+  var salesChartData = {
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    datasets: [
+      {
+        label: 'Enrolled Students',
+        // backgroundColor: 'rgba(60,141,188,0.9)',
+        backgroundColor: ['#ffc107','#28a745','#20c997','#6c757d','#dc3545','#6f42c1','#ffc107','#28a745','#20c997','#6c757d','#dc3545','#6f42c1'],
+        borderColor: 'rgba(60,141,188,0.8)',
+        pointRadius: false,
+        pointColor: '#3b8bba',
+        pointStrokeColor: 'rgba(60,141,188,1)',
+        pointHighlightFill: '#fff',
+        pointHighlightStroke: 'rgba(60,141,188,1)',
+        data: [<?php echo $jan['total_count']; ?>, <?php echo $feb['total_count']; ?>, <?php echo $mar['total_count']; ?>, <?php echo $apr['total_count']; ?>, <?php echo $may['total_count']; ?>, <?php echo $jun['total_count']; ?>, <?php echo $jul['total_count']; ?>, <?php echo $aug['total_count']; ?>, <?php echo $sep['total_count']; ?>, <?php echo $oct['total_count']; ?>, <?php echo $nov['total_count']; ?>, <?php echo $dec['total_count']; ?>]
+      }
+      // {
+      //   label: 'Electronics',
+      //   backgroundColor: 'rgba(210, 214, 222, 1)',
+      //   borderColor: 'rgba(210, 214, 222, 1)',
+      //   pointRadius: false,
+      //   pointColor: 'rgba(210, 214, 222, 1)',
+      //   pointStrokeColor: '#c1c7d1',
+      //   pointHighlightFill: '#fff',
+      //   pointHighlightStroke: 'rgba(220,220,220,1)',
+      //   data: [65, 59, 80, 81, 56, 55, 40]
+      // }
+    ]
+  }
+</script>
 
 
 <?php include'_include_footer.php'; ?>

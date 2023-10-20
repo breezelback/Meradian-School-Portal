@@ -114,6 +114,16 @@
 
 
           <li class="nav-item">
+            <a href="student_vouchers.php" class="nav-link">
+              <i class="nav-icon fa fa-tags"></i>
+              <p>
+                My Vouchers
+              </p>
+            </a>
+          </li>
+
+
+          <li class="nav-item">
             <a href="edit_user.php" class="nav-link">
               <i class="nav-icon fa fa-cog"></i>
               <p>

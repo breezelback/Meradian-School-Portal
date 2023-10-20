@@ -46,12 +46,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">My Liabilities</h1>
+            <h1 class="m-0">My Vouchers</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">My Liabilities</li>
+              <li class="breadcrumb-item active">My Vouchers</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -84,29 +84,29 @@
                           <thead>
                           <tr>
                             <th><center>AMOUNT</center></th>
-                            <th><center>TITLE</center></th>
+                            <th><center>VOUCHER NAME</center></th>
                             <th><center>DATE CREATED</center></th>
-                            <th><center>STATUS</center></th>
-                            <th><center>PAY</center></th>
+                            <!-- <th><center>STATUS</center></th> -->
+                            <!-- <th><center>PAY</center></th> -->
                             <!-- <th><center>ACTION</center></th> -->
                           </tr>
                           </thead>
                           <tbody>
                             <?php 
-                              $sql = ' SELECT `id`, `student_id`, `academic_year_id`, `amount`, `status`, DATE_FORMAT(`date_created`, "%M %d, %Y") as date_created, `title`, `pay_date` FROM `tbl_liabilities` WHERE student_id = '.$_SESSION['id'].' AND academic_year_id = '.$active['id'].' ';
+                              $sql = ' SELECT `id`, `student_id`, `academic_year_id`, `amount`, `status`, DATE_FORMAT(`date_created`, "%M %d, %Y") as date_created, `title` FROM `tbl_scholarship` WHERE student_id = '.$_SESSION['id'].' AND academic_year_id = '.$active['id'].' ';
                               $exec = $conn->query($sql);
                               while ( $row = $exec->fetch_assoc() ) {
                             ?>
                               <tr style="font-size: 14px;">
-                                <td><center><?php echo $row['title']; ?></center></td>
                                 <td><center>₱<?php echo number_format($row['amount']); ?></center></td>
+                                <td><center><?php echo $row['title']; ?></center></td>
                                 <td><center><?php echo $row['date_created']; ?></center></td>
-                                <td><center><?php if ($row['status'] == 0) {echo 'Unpaid';} else {echo 'Paid';} ?></center></td>
-                                <?php if ($row['status'] == 0): ?>
+                               <!--  <td><center><?php if ($row['status'] == 0) {echo 'Unpaid';} else {echo 'Paid';} ?></center></td> -->
+                                <!-- <?php if ($row['status'] == 0): ?>
                                   <td><center><a class="btn btn-primary" href="pay_liabilities.php?pay_id=<?php echo $row['id']; ?>">Pay</a></center></td>
                                 <?php else: ?>
                                   <td><center><span class="bg bg-success" style="padding: 3px; border-radius: 5px;">Paid on <?php echo $row['pay_date']; ?></span></center></td>
-                                <?php endif ?>
+                                <?php endif ?> -->
                             <?php } ?>
 
                           </tbody>  

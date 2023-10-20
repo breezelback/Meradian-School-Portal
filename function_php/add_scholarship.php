@@ -7,7 +7,7 @@ $check_id = $_POST['check_id'];
 
 if(empty($check_id))
 {
-	header('location: ../admin/student_liabilities.php');
+	header('location: ../admin/scholarship.php');
 
 
 	$_SESSION['toastr']['title'] = 'Error';
@@ -19,17 +19,17 @@ else
 	for ($i=0; $i < count($check_id); $i++) { 
 
 		
-		$sql = ' INSERT INTO `tbl_liabilities`(`student_id`, `academic_year_id`, `amount`, `date_created`, `title`)  VALUES ( '.$check_id[$i].', '.$year_id.', '.$_POST['liability'][$i].', NOW(), "'.$_POST['title'][$i].'" ) ';
+		$sql = ' INSERT INTO `tbl_scholarship`(`student_id`, `academic_year_id`, `amount`, `title`, `date_created`)  VALUES ( '.$check_id[$i].', '.$year_id.', '.$_POST['amount'][$i].', "'.$_POST['title'][$i].'", NOW() ) ';
 		$exec = $conn->query($sql);
 
 
 	}
 
-	header('location: ../admin/student_liabilities.php');
+	header('location: ../admin/scholarship.php');
 
 
 	$_SESSION['toastr']['title'] = 'Success';
-	$_SESSION['toastr']['message'] = 'User Liablities Added!';
+	$_SESSION['toastr']['message'] = 'User Voucher Added!';
 	$_SESSION['toastr']['color'] = 'green';
 }
 

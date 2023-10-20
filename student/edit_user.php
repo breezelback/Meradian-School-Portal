@@ -159,24 +159,24 @@
                     <div class="row">
                       <div class="col-sm-3 form-group">
                         <label for="email">Year</label>
-                        <select class="form-control" name="school_year" value="<?php echo $row['school_year']; ?>">
-                          <option value="Kinder">Kinder</option>
-                          <option value="Grade 1">Grade 1</option>
-                          <option value="Grade 2">Grade 2</option>
-                          <option value="Grade 3">Grade 3</option>
-                          <option value="Grade 4">Grade 4</option>
-                          <option value="Grade 5">Grade 5</option>
-                          <option value="Grade 6">Grade 6</option>
-                          <option value="Grade 7">Grade 7</option>
-                          <option value="Grade 8">Grade 8</option>
-                          <option value="Grade 9">Grade 9</option>
-                          <option value="Grade 10">Grade 10</option>
-                          <option value="Grade 11">Grade 11</option>
-                          <option value="Grade 12">Grade 12</option>
-                          <option value="First Year">First Year</option>
-                          <option value="Second Year">Second Year</option>
-                          <option value="Third Year">Third Year</option>
-                          <option value="Fourth Year">Fourth Year</option>
+                        <select class="form-control" name="school_year">
+                          <option value="Kinder" <?php if($row['school_year'] == "Kinder") {echo 'selected';} ?>>Kinder</option>
+                          <option value="Grade 1" <?php if($row['school_year'] == "Grade 1") {echo 'selected';} ?>>Grade 1</option>
+                          <option value="Grade 2" <?php if($row['school_year'] == "Grade 2") {echo 'selected';} ?>>Grade 2</option>
+                          <option value="Grade 3" <?php if($row['school_year'] == "Grade 3") {echo 'selected';} ?>>Grade 3</option>
+                          <option value="Grade 4" <?php if($row['school_year'] == "Grade 4") {echo 'selected';} ?>>Grade 4</option>
+                          <option value="Grade 5" <?php if($row['school_year'] == "Grade 5") {echo 'selected';} ?>>Grade 5</option>
+                          <option value="Grade 6" <?php if($row['school_year'] == "Grade 6") {echo 'selected';} ?>>Grade 6</option>
+                          <option value="Grade 7" <?php if($row['school_year'] == "Grade 7") {echo 'selected';} ?>>Grade 7</option>
+                          <option value="Grade 8" <?php if($row['school_year'] == "Grade 8") {echo 'selected';} ?>>Grade 8</option>
+                          <option value="Grade 9" <?php if($row['school_year'] == "Grade 9") {echo 'selected';} ?>>Grade 9</option>
+                          <option value="Grade 10" <?php if($row['school_year'] == "Grade 10") {echo 'selected';} ?>>Grade 10</option>
+                          <option value="Grade 11" <?php if($row['school_year'] == "Grade 11") {echo 'selected';} ?>>Grade 11</option>
+                          <option value="Grade 12" <?php if($row['school_year'] == "Grade 12") {echo 'selected';} ?>>Grade 12</option>
+                          <option value="First Year" <?php if($row['school_year'] == "First Year") {echo 'selected';} ?>>First Year</option>
+                          <option value="Second Year" <?php if($row['school_year'] == "Second Year") {echo 'selected';} ?>>Second Year</option>
+                          <option value="Third Year" <?php if($row['school_year'] == "Third Year") {echo 'selected';} ?>>Third Year</option>
+                          <option value="Fourth Year" <?php if($row['school_year'] == "Fourth Year") {echo 'selected';} ?>>Fourth Year</option>
                         </select>
                       </div>
                       <div class="col-sm-3 form-group">
