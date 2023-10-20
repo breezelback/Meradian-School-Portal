@@ -79,6 +79,19 @@
                         $sql = ' SELECT `id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, DATE_FORMAT(birthdate, "%M %d, %Y") AS birthdate, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `username`, `password`, `user_type`, `status`, `date_created` FROM `tbl_user` WHERE user_type = "teacher" ';
                         $exec = $conn->query($sql);
                         while ( $row = $exec->fetch_assoc() ) {
+
+
+                        $selectProvince = ' SELECT provDesc FROM refprovince WHERE provCode = "'.$row['province'].'" ';
+                        $execProvince = $conn->query($selectProvince);
+                        $province = $execProvince->fetch_assoc();
+                        
+                        $selectCityMun = ' SELECT citymunDesc FROM refcitymun WHERE citymunCode = "'.$row['city'].'" ';
+                        $execCityMun = $conn->query($selectCityMun);
+                        $citymun = $execCityMun->fetch_assoc();
+
+                        $selectBarangay = ' SELECT brgyDesc FROM refbrgy WHERE brgyCode = "'.$row['barangay'].'" ';
+                        $execBarangay = $conn->query($selectBarangay);
+                        $barangay = $execBarangay->fetch_assoc();
                       ?>
                         <tr style="font-size: 14px;">
                           <td><?php echo $row['id_number']; ?></td>
@@ -87,7 +100,7 @@
                           <td><?php echo $row['email']; ?></td>
                           <td><?php echo $row['contact_number']; ?></td>
                           <td><?php echo $row['birthdate']; ?></td>
-                          <td><?php echo $row['house_no']; ?> <?php echo $row['barangay']; ?> <?php echo $row['city']; ?> <?php echo $row['province']; ?></td>
+                          <td><?php echo $row['house_no']; ?> <?php echo $barangay['brgyDesc']; ?> <?php echo $citymun['citymunDesc']; ?> <?php echo $province['provDesc']; ?></td>
                           <td><?php echo $row['school_year']; ?> | <?php echo $row['section']; ?></td>
                           <td>
                             <div class="btn-group">

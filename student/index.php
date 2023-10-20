@@ -21,6 +21,25 @@
   $studLia = ' SELECT `id`, `student_id`, `academic_year_id`, `amount`, `status`, `date_created` FROM `tbl_liabilities` WHERE student_id = '.$_SESSION['id'].' AND academic_year_id = '.$active['id'].' ';
   $execLia = $conn->query($studLia);
 
+
+  require('../function_php/conn.php'); 
+  $sqlX = ' SELECT `id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, `birthdate`, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `username`, `password`, `user_type`, `status`, `date_created` FROM `tbl_user` WHERE id = '.$_SESSION['id'].' ';
+  $execX = $conn->query($sqlX);
+  $rowX = $execX->fetch_assoc();
+
+
+  $selectProvince = ' SELECT provDesc FROM refprovince WHERE provCode = "'.$rowX['province'].'" ';
+  $execProvince = $conn->query($selectProvince);
+  $province = $execProvince->fetch_assoc();
+
+  $selectCityMun = ' SELECT citymunDesc FROM refcitymun WHERE citymunCode = "'.$rowX['city'].'" ';
+  $execCityMun = $conn->query($selectCityMun);
+  $citymun = $execCityMun->fetch_assoc();
+
+  $selectBarangay = ' SELECT brgyDesc FROM refbrgy WHERE brgyCode = "'.$rowX['barangay'].'" ';
+  $execBarangay = $conn->query($selectBarangay);
+  $barangay = $execBarangay->fetch_assoc();
+
   ?>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -224,7 +243,11 @@
                 <div class="row">
                   <div class="col sm-12">
                     <center>
+                    <?php if ($_SESSION['profile_picture'] == ""): ?>
                       <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" width="100">
+                    <?php else: ?>
+                      <img src="../images/user/<?php echo $_SESSION['profile_picture']; ?>" class="img-circle elevation-2" alt="User Image" width="100">
+                    <?php endif ?>
                       <div class="input-group my-2">
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon1">Name:</span>
@@ -235,22 +258,19 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon1">Province:</span>
                         </div>
-                        <select class="form-control" name="province" id="my-province-dropdown" disabled="" style="background-color: #fff;">
-                        </select>
+                          <input type="text" class="form-control" placeholder="House No." aria-describedby="basic-addon1" value="<?php echo $province['provDesc']; ?>" readonly="" style="background-color: #fff;">
                       </div>
                       <div class="input-group my-2">
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon1">City:</span>
                         </div>
-                        <select class="form-control" name="city" id="my-city-dropdown" disabled="" style="background-color: #fff;">
-                        </select>
+                          <input type="text" class="form-control" placeholder="House No." aria-describedby="basic-addon1" value="<?php echo $citymun['citymunDesc']; ?>" readonly="" style="background-color: #fff;">
                       </div>
                       <div class="input-group my-2">
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon1">Barangay:</span>
                         </div>
-                        <select class="form-control" name="barangay" id="my-barangay-dropdown" disabled="" style="background-color: #fff;">
-                        </select>
+                          <input type="text" class="form-control" placeholder="House No." aria-describedby="basic-addon1" value="<?php echo $barangay['brgyDesc']; ?>" readonly="" style="background-color: #fff;">
                       </div>
                       <div class="input-group my-2">
                         <div class="input-group-prepend">
@@ -332,22 +352,22 @@
 <script src="https://f001.backblazeb2.com/file/buonzz-assets/jquery.ph-locations-v1.0.0.js"></script>
 <script>
   
-  var delayInMilliseconds = 2000; //1 second
+  // var delayInMilliseconds = 2000; //1 second
 
 
-  $('#my-province-dropdown').ph_locations({'location_type': 'provinces'});
-  $('#my-province-dropdown').ph_locations( 'fetch_list');
-  $('#my-city-dropdown').ph_locations({'location_type': 'cities'});
-  $('#my-city-dropdown').ph_locations( 'fetch_list', [{"province_code": '<?php echo $_SESSION['province']; ?>'}]);
+  // $('#my-province-dropdown').ph_locations({'location_type': 'provinces'});
+  // $('#my-province-dropdown').ph_locations( 'fetch_list');
+  // $('#my-city-dropdown').ph_locations({'location_type': 'cities'});
+  // $('#my-city-dropdown').ph_locations( 'fetch_list', [{"province_code": '<?php echo $_SESSION['province']; ?>'}]);
 
-  $('#my-barangay-dropdown').ph_locations({'location_type': 'barangays'});
-  $('#my-barangay-dropdown').ph_locations( 'fetch_list', [{"city_code": '<?php echo $_SESSION['city']; ?>'}]);
+  // $('#my-barangay-dropdown').ph_locations({'location_type': 'barangays'});
+  // $('#my-barangay-dropdown').ph_locations( 'fetch_list', [{"city_code": '<?php echo $_SESSION['city']; ?>'}]);
 
-  setTimeout(function() {
-    $('#my-province-dropdown').val('<?php echo $_SESSION['province']; ?>');
-    $('#my-city-dropdown').val('<?php echo $_SESSION['city']; ?>');
-    $('#my-barangay-dropdown').val('<?php echo $_SESSION['barangay']; ?>');
-  }, delayInMilliseconds);
+  // setTimeout(function() {
+  //   $('#my-province-dropdown').val('<?php echo $_SESSION['province']; ?>');
+  //   $('#my-city-dropdown').val('<?php echo $_SESSION['city']; ?>');
+  //   $('#my-barangay-dropdown').val('<?php echo $_SESSION['barangay']; ?>');
+  // }, delayInMilliseconds);
 
   function enroll_now(id)
   {

@@ -60,12 +60,16 @@
               <div class="card-body">
                 <div class="tab-content p-0">
                   
-                  <form action="../function_php/update_data.php?id=<?php echo $row['id']; ?>" method="POST">
+                  <form action="../function_php/update_data.php?id=<?php echo $row['id']; ?>" method="POST" enctype="multipart/form-data">
                     <div class="row">
                       <div class="col-md-4">
                         Profile Picture
-                        <img src="../images/user_image.jpg" alt="" width="100">
-                        <input type="file" class="mt-2" name="profile_picture" value="<?php echo $row['profile_picture']; ?>">
+                        <?php if ($row['profile_picture'] == ""): ?>
+                          <img src="../images/user_image.jpg" alt="" width="100">
+                        <?php else: ?>
+                          <img src="../images/user/<?php echo $row['profile_picture']; ?>" alt="" width="100">
+                        <?php endif ?>
+                        <input type="file" class="mt-2" name="profile_picture" id="profile_picture" value="<?php echo $row['profile_picture']; ?>">
                       </div>
                     </div>
                     <hr>
@@ -104,9 +108,9 @@
                     <div class="row">
                       <div class="col-sm-2 form-group">
                         <label for="email">Gender</label>
-                        <select name="gender" value="<?php echo $row['gender']; ?>" id="gender" class="form-control">
-                          <option value="Male">Male</option>
-                          <option value="Female">Female</option>
+                        <select name="gender" id="gender" class="form-control">
+                          <option value="Male" <?php if($row['gender'] == "Male") {echo 'selected';} ?>>Male</option>
+                          <option value="Female" <?php if($row['gender'] == "Female") {echo 'selected';} ?>>Female</option>
                         </select>
                       </div>
                       <div class="col-sm-3 form-group">
@@ -123,7 +127,7 @@
                       </div>
                       <div class="col-sm-2 form-group">
                         <label for="email">Date of Birth</label>
-                        <input type="date" class="form-control" name="birthdate" value="<?php echo $row['birthdate']; ?>" id="birthdate">
+                        <input type="date" class="form-control" name="birthdate" value="<?php echo date("Y-m-d", strtotime($row['birthdate'])); ?>" id="birthdate">
                       </div>
                     </div>
                     <div class="row"><b class="text-primary">Home Address</b></div><hr>
@@ -213,6 +217,27 @@
 
 <script src="https://f001.backblazeb2.com/file/buonzz-assets/jquery.ph-locations-v1.0.0.js"></script>
 <script>
+  
+  var delayInMilliseconds = 2000; //1 second
+
+
+  $('#my-province-dropdown').ph_locations({'location_type': 'provinces'});
+  $('#my-province-dropdown').ph_locations( 'fetch_list');
+  $('#my-city-dropdown').ph_locations({'location_type': 'cities'});
+  $('#my-city-dropdown').ph_locations( 'fetch_list', [{"province_code": '<?php echo $row['province']; ?>'}]);
+
+  $('#my-barangay-dropdown').ph_locations({'location_type': 'barangays'});
+  $('#my-barangay-dropdown').ph_locations( 'fetch_list', [{"city_code": '<?php echo $row['city']; ?>'}]);
+
+  setTimeout(function() {
+    $('#my-province-dropdown').val('<?php echo $row['province']; ?>');
+    $('#my-city-dropdown').val('<?php echo $row['city']; ?>');
+    $('#my-barangay-dropdown').val('<?php echo $row['barangay']; ?>');
+  }, delayInMilliseconds);
+
+
+
+  //-------------------------
   $('#my-province-dropdown').ph_locations({'location_type': 'provinces'});
   $('#my-province-dropdown').ph_locations( 'fetch_list');
 

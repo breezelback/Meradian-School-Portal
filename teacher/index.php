@@ -17,6 +17,25 @@
   $exec1 = $conn->query($sql1);
   $active = $exec1->fetch_assoc();
 
+
+  require('../function_php/conn.php'); 
+  $sqlX = ' SELECT `id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, `birthdate`, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `username`, `password`, `user_type`, `status`, `date_created` FROM `tbl_user` WHERE id = '.$_SESSION['id'].' ';
+  $execX = $conn->query($sqlX);
+  $rowX = $execX->fetch_assoc();
+
+
+  $selectProvince = ' SELECT provDesc FROM refprovince WHERE provCode = "'.$rowX['province'].'" ';
+  $execProvince = $conn->query($selectProvince);
+  $province = $execProvince->fetch_assoc();
+
+  $selectCityMun = ' SELECT citymunDesc FROM refcitymun WHERE citymunCode = "'.$rowX['city'].'" ';
+  $execCityMun = $conn->query($selectCityMun);
+  $citymun = $execCityMun->fetch_assoc();
+
+  $selectBarangay = ' SELECT brgyDesc FROM refbrgy WHERE brgyCode = "'.$rowX['barangay'].'" ';
+  $execBarangay = $conn->query($selectBarangay);
+  $barangay = $execBarangay->fetch_assoc();
+
   ?>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -133,7 +152,11 @@
                 <div class="row">
                   <div class="col sm-12">
                     <center>
-                      <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" width="100">
+                      <?php if ($_SESSION['profile_picture'] == ""): ?>
+                        <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" width="100">
+                      <?php else: ?>
+                        <img src="../images/user/<?php echo $_SESSION['profile_picture']; ?>" class="img-circle elevation-2" alt="User Image" width="100">
+                      <?php endif ?>
                       <div class="input-group my-2">
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon1">Name:</span>
@@ -144,28 +167,25 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon1">Province:</span>
                         </div>
-                        <select class="form-control" name="province" id="my-province-dropdown" disabled="" style="background-color: #fff;">
-                        </select>
+                          <input type="text" class="form-control" placeholder="House No." aria-describedby="basic-addon1" value="<?php echo $province['provDesc']; ?>" readonly="" style="background-color: #fff;">
                       </div>
                       <div class="input-group my-2">
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon1">City:</span>
                         </div>
-                        <select class="form-control" name="city" id="my-city-dropdown" disabled="" style="background-color: #fff;">
-                        </select>
+                          <input type="text" class="form-control" placeholder="House No." aria-describedby="basic-addon1" value="<?php echo $citymun['citymunDesc']; ?>" readonly="" style="background-color: #fff;">
                       </div>
                       <div class="input-group my-2">
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon1">Barangay:</span>
                         </div>
-                        <select class="form-control" name="barangay" id="my-barangay-dropdown" disabled="" style="background-color: #fff;">
-                        </select>
+                          <input type="text" class="form-control" placeholder="House No." aria-describedby="basic-addon1" value="<?php echo $barangay['brgyDesc']; ?>" readonly="" style="background-color: #fff;">
                       </div>
                       <div class="input-group my-2">
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon1">House # / Purok:</span>
                         </div>
-                          <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" value="<?php echo $_SESSION['house_no']; ?>" readonly="" style="background-color: #fff;">
+                          <input type="text" class="form-control" placeholder="House No." aria-describedby="basic-addon1" value="<?php echo $_SESSION['house_no']; ?>" readonly="" style="background-color: #fff;">
                       </div>
 
                       <div class="input-group my-2">
