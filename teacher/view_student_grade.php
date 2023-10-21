@@ -91,7 +91,8 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">
-                  <a class="nav-link btn btn-warning text-white" href="student_grading.php"><i class="fa fa-arrow-left"></i> Back</a>  
+                  <!-- <a class="nav-link btn btn-warning text-white" href="student_grading.php"><i class="fa fa-arrow-left"></i> Back</a>   -->
+                  <a class="nav-link btn btn-warning text-white" onclick="javascript:history.go(-1);"><i class="fa fa-arrow-left"></i> Back</a>  
                 </h3>
               </div><!-- /.card-header -->
               <div class="card-body">

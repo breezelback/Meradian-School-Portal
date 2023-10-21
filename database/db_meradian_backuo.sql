@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 21, 2023 at 09:36 AM
+-- Generation Time: Oct 20, 2023 at 08:09 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -51,9 +51,7 @@ INSERT INTO `payments` (`id`, `payment_id`, `payer_id`, `payer_email`, `amount`,
 (5, 'PAYID-MUXJVSQ97L66468EV157201H', 'BMXDSSZ5JSSJJ', 'sb-d2zwj27748241@personal.example.com', 1000.00, 'PHP', 'approved', 1, 4),
 (6, 'PAYID-MUXJXWQ4YL399232L9804844', 'BMXDSSZ5JSSJJ', 'sb-d2zwj27748241@personal.example.com', 1000.00, 'PHP', 'approved', 1, 4),
 (7, 'PAYID-MUYTSVI16J18577RK900660L', 'BMXDSSZ5JSSJJ', 'sb-d2zwj27748241@personal.example.com', 5000.00, 'PHP', 'approved', 1, 4),
-(8, 'PAYID-MUZLH3Q2HL10491XC375413S', 'BMXDSSZ5JSSJJ', 'sb-d2zwj27748241@personal.example.com', 2000.00, 'PHP', 'approved', 1, 4),
-(9, 'PAYID-MUZXSSI1EJ985923M524993B', 'BMXDSSZ5JSSJJ', 'sb-d2zwj27748241@personal.example.com', 5000.00, 'PHP', 'approved', 1, 4),
-(10, 'PAYID-MUZX2YA17215968VL362453N', 'BMXDSSZ5JSSJJ', 'sb-d2zwj27748241@personal.example.com', 200.00, 'PHP', 'approved', 1, 4);
+(8, 'PAYID-MUZLH3Q2HL10491XC375413S', 'BMXDSSZ5JSSJJ', 'sb-d2zwj27748241@personal.example.com', 2000.00, 'PHP', 'approved', 1, 4);
 
 -- --------------------------------------------------------
 
@@ -43984,8 +43982,8 @@ CREATE TABLE `tbl_academic_year` (
 --
 
 INSERT INTO `tbl_academic_year` (`id`, `academic_year`, `status`, `date_created`) VALUES
-(3, '2022-2023', 'Active', '2023-09-06 22:07:33'),
-(4, '2023-2024', 'Inactive', '2023-09-06 22:09:00');
+(3, '2022-2023', 'Inactive', '2023-09-06 22:07:33'),
+(4, '2023-2024', 'Active', '2023-09-06 22:09:00');
 
 -- --------------------------------------------------------
 
@@ -44063,7 +44061,7 @@ INSERT INTO `tbl_grades` (`id`, `stud_schedule_id`, `first`, `second`, `third`, 
 (6, 11, 79, 78, 77, 79, 0, 0, '2023-09-23 01:21:16'),
 (7, 12, 87, 85, 82, 82, 0, 0, '2023-09-23 01:21:16'),
 (8, 13, 83, 82, 84, 88, 0, 0, '2023-09-23 13:25:41'),
-(9, 14, 78, 78, 78, 79, 0, 0, '2023-09-23 13:25:41'),
+(9, 14, 0, 0, 0, 0, 0, 0, '2023-09-23 13:25:41'),
 (10, 15, 85, 88, 87, 90, 0, 0, '2023-09-23 14:23:13');
 
 -- --------------------------------------------------------
@@ -44090,9 +44088,7 @@ CREATE TABLE `tbl_liabilities` (
 INSERT INTO `tbl_liabilities` (`id`, `student_id`, `academic_year_id`, `amount`, `status`, `date_created`, `title`, `pay_date`) VALUES
 (9, 1, 4, 1000, 1, '2023-10-12 22:02:16', 'Misc. Fee', '2023-10-17'),
 (10, 1, 4, 5000, 1, '2023-10-17 22:47:33', 'Tuition', '2023-10-19'),
-(11, 1, 4, 2000, 1, '2023-10-21 01:07:23', 'Misc. Fee', '2023-10-21'),
-(12, 1, 4, 5000, 1, '2023-10-21 13:40:44', 'Tuition', '2023-10-21'),
-(13, 1, 4, 200, 1, '2023-10-21 15:27:10', 'Misc. Fee', '2023-10-21');
+(11, 1, 4, 2000, 1, '2023-10-21 01:07:23', 'Misc. Fee', '2023-10-21');
 
 -- --------------------------------------------------------
 
@@ -44243,12 +44239,12 @@ CREATE TABLE `tbl_user` (
 --
 
 INSERT INTO `tbl_user` (`id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, `birthdate`, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `username`, `password`, `user_type`, `status`, `date_created`, `student_status`, `enrollment_status`) VALUES
-(1, 'STDNT001', 'John1', 'D1', 'Doe1', '1', 'Female', 'breezelback@gmail.com', '091234567891', '1', '2023-10-19 00:00:00', '1013', '101313', '101313002', '111', 'Kinder', '1B', '1697869805.jpg', '', '12345', 'student', 0, '2023-09-22 21:19:56', 'New', 'Not Enrolled'),
-(2, 'TCHR001', 'BlakeX', 'RX', 'GriffinX', 'X', 'Female', 'breezelback@gmail.com', '09123456789', '222', '2023-10-20 00:00:00', '0712', '071214', '071214013', '1231', 'Kinder', '1A', '1697818195.png', '', '1234', 'teacher', 0, '2023-09-22 21:20:38', '', ''),
+(1, 'STDNT001', 'John1', 'D1', 'Doe1', '1', 'Female', 'a@gmail.com1', '091234567891', '1', '2023-10-19 00:00:00', '0410', '041014', '041014022', '111', 'Kinder', '1A', '1697727684.png', '', '1234', 'student', 0, '2023-09-22 21:19:56', 'New', 'Not Enrolled'),
+(2, 'TCHR001', 'BlakeX', 'RX', 'GriffinX', 'X', 'Male', 'abc@gmail.comx', '09123456789', '222', '2023-10-20 00:00:00', '0712', '071214', '071214013', '1231', 'Kinder', '1A', '1697818195.png', '', '1234', 'teacher', 0, '2023-09-22 21:20:38', '', ''),
 (3, 'STDNT002', 'Portgas', 'D', 'Ace', '', 'Male', 'ace@gmail.com', '09123456789', '', '2023-09-29 00:00:00', '1013', '101316', '101316017', '', 'Kinder', '1', '', '', '1234', 'student', 0, '2023-09-22 21:36:38', 'Transferee', 'Not Enrolled'),
 (9, 'STDNT003', 'Monkey', 'D', 'Luffy', '', 'Male', 'a@gmail.com', '09123456789', '111', '2023-10-21 00:00:00', '1013', '101314', '101314015', '212', 'Third Year', '1123', '', '', '1234', 'student', 0, '2023-08-02 01:53:22', 'Transferee', 'Not Enrolled'),
 (10, 'STDNT004', 'Roronoa', '', 'Zorro', '', 'Male', 'a@gmail.com', '09123456789', '1', '2023-10-19 00:00:00', '1013', '101315', '101315016', '222', 'Grade 12', '21', '', '', '1234', 'student', 0, '2023-07-11 01:55:42', 'New', 'Not Enrolled'),
-(11, 'STDNT005', 'Cyborg', 'D', 'Franky', '', 'Male', 'a@gmail.com', '09123456789', '111', '2023-10-19 00:00:00', '0516', '051605', '051605011', '2121', 'Grade 10', '12', '', '', '1234', 'student', 0, '2023-10-21 01:57:18', 'New', 'Not Enrolled');
+(11, 'STDNT001', 'Cyborg', 'D', 'Franky', '', 'Male', 'a@gmail.com', '09123456789', '111', '2023-10-19 00:00:00', '0516', '051605', '051605011', '2121', 'Grade 10', '12', '', '', '1234', 'student', 0, '2023-10-21 01:57:18', 'New', 'Not Enrolled');
 
 --
 -- Indexes for dumped tables
@@ -44352,7 +44348,7 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `refbrgy`
@@ -44406,7 +44402,7 @@ ALTER TABLE `tbl_grades`
 -- AUTO_INCREMENT for table `tbl_liabilities`
 --
 ALTER TABLE `tbl_liabilities`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tbl_schedule`

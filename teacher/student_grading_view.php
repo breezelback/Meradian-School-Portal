@@ -26,12 +26,12 @@ $active = $exec1->fetch_assoc();
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">My Students</h1>
+            <h1 class="m-0">Student Grading</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">My Students</li>
+              <li class="breadcrumb-item active">Student Grading</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -70,61 +70,76 @@ $active = $exec1->fetch_assoc();
                     <tr>
                       <th><center>ID NUMBER</center></th>
                       <th><center>NAME</center></th>
-                      <th><center>GENDER</center></th>
-                      <th><center>EMAIL</center></th>
-                      <th><center>CONTACT NUMBER</center></th>
-                      <th><center>BIRTHDATE</center></th>
-                      <th><center>ADDRESS</center></th>
                       <th><center>YEAR & SECTION</center></th>
-                      <th><center>GRADING</center></th>
+                      <th><center>SUBJECT</center></th>
+                      <th><center>1ST</center></th>
+                      <th><center>2ND</center></th>
+                      <th><center>3RD</center></th>
+                      <th><center>4TH</center></th>
+                      <th><center>AVERAGE</center></th>
+                      <th><center>ACTION</center></th>
                     </tr>
                     </thead>
                     <tbody>
 
                       <?php   
 
-                        $selectSched = ' SELECT `id`, `teacher_id`, `subject_id`, `teaching_day`, `teaching_time`, `schedule_code`, `status`, `date_created`, `teaching_time_to`, `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`, `school_year`, `section` FROM `tbl_schedule` WHERE teacher_id = '.$_SESSION['id'];
-                        $execSched = $conn->query($selectSched);
-                        // while ( $sched = $execSched->fetch_assoc() ) {
-                        $sched = $execSched->fetch_assoc();
 
-                          // $selectStudSched = ' SELECT `id`, `student_id`, `schedule_id`, `date_created`, `academic_year_id` FROM `tbl_student_schedule` WHERE teacher_id = '.$_SESSION['id'].' AND academic_year_id = '.$active['id'];
-                          $selectStudSched = ' SELECT DISTINCT(`student_id`) FROM `tbl_student_schedule` WHERE teacher_id = '.$_SESSION['id'].' AND academic_year_id = '.$active['id'];
+                          // $selectStudSched = ' SELECT `id`, `student_id`, `schedule_id`, `date_created`, `academic_year_id`, `teacher_id` FROM `tbl_student_schedule` WHERE teacher_id = '.$_SESSION['id'].' AND academic_year_id = '.$active['id'];
+                          $selectStudSched = ' SELECT `id`, `student_id`, `schedule_id`, `date_created`, `academic_year_id`, `teacher_id` FROM `tbl_student_schedule` WHERE student_id = '.$_GET['id'].' AND academic_year_id = '.$active['id'];
                           $execStudSched = $conn->query($selectStudSched);
 
                           if ($execStudSched->num_rows > 0) {
 
-                            while ($stud = $execStudSched->fetch_assoc()) {
+                            while ($stud = $execStudSched->fetch_assoc() ) {
+
+                          $selectSched = ' SELECT `id`, `teacher_id`, `subject_id`, `teaching_day`, `teaching_time`, `schedule_code`, `status`, `date_created`, `teaching_time_to`, `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`, `school_year`, `section` FROM `tbl_schedule` WHERE id = '.$stud['schedule_id'];
+                          $execSched = $conn->query($selectSched);
+                          $sched = $execSched->fetch_assoc();
+
+                            $selectSub = ' SELECT `id`, `subject_name`, `subject_code`, `date_created`, `school_year` FROM `tbl_subject` WHERE id = '.$sched['subject_id'];
+                            $execSub = $conn->query($selectSub);
+                            $subject = $execSub->fetch_assoc();
+
+                            $selectSched = ' SELECT `id`, `stud_schedule_id`, `first`, `second`, `third`, `fourth`, `average`, `academic_year_id`, `date_created` FROM tbl_grades WHERE stud_schedule_id = '.$stud['id'];
+                            $execSched = $conn->query($selectSched);
+                            $rowGrade = $execSched->fetch_assoc();
 
                             $sql = ' SELECT `id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, DATE_FORMAT(birthdate, "%M %d, %Y") AS birthdate, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `username`, `password`, `user_type`, `status`, `date_created` FROM `tbl_user` WHERE id = '.$stud['student_id'];
                             $exec = $conn->query($sql);
                             $row = $exec->fetch_assoc();
-
-
-                            $selectProvince = ' SELECT provDesc FROM refprovince WHERE provCode = "'.$row['province'].'" ';
-                            $execProvince = $conn->query($selectProvince);
-                            $province = $execProvince->fetch_assoc();
-
-                            $selectCityMun = ' SELECT citymunDesc FROM refcitymun WHERE citymunCode = "'.$row['city'].'" ';
-                            $execCityMun = $conn->query($selectCityMun);
-                            $citymun = $execCityMun->fetch_assoc();
-
-                            $selectBarangay = ' SELECT brgyDesc FROM refbrgy WHERE brgyCode = "'.$row['barangay'].'" ';
-                            $execBarangay = $conn->query($selectBarangay);
-                            $barangay = $execBarangay->fetch_assoc();
                            
+                           //////////////
+                            $selectSched = ' SELECT `id`, `stud_schedule_id`, `first`, `second`, `third`, `fourth`, `average`, `academic_year_id`, `date_created` FROM tbl_grades WHERE stud_schedule_id = '.$stud['id'];
+                            $execSched = $conn->query($selectSched);
+
+                            if ($execSched->num_rows > 0) 
+                            {
+                              $rowSched = $execSched->fetch_assoc();
+                            }
+                            else
+                            {
+                              $insertSched = ' INSERT INTO tbl_grades (stud_schedule_id, date_created) VALUES ('.$stud['id'].', NOW()) ';
+                              $execInsertSched = $conn->query($insertSched);
+                            }
+                            ///////////////////////
                       ?>
                         <tr style="font-size: 14px;">
                           <td><?php echo $row['id_number']; ?></td>
                           <td><?php echo $row['firstname']; ?> <?php echo $row['lastname']; ?></td>
-                          <td><?php echo $row['gender']; ?></td>
-                          <td><?php echo $row['email']; ?></td>
-                          <td><?php echo $row['contact_number']; ?></td>
-                          <td><?php echo $row['birthdate']; ?></td>
-                          <td><?php echo $row['house_no']; ?> <?php echo $barangay['brgyDesc']; ?> <?php echo $citymun['citymunDesc']; ?> <?php echo $province['provDesc']; ?></td>
                           <td><?php echo $row['school_year']; ?> | <?php echo $row['section']; ?></td>
+                          <td><?php echo $subject['subject_name']; ?></td>
+                          <td><?php echo (empty($rowGrade['first']) ? 0 : $rowGrade['first']); ?></td>
+                          <td><?php echo (empty($rowGrade['second']) ? 0 : $rowGrade['second']); ?></td>
+                          <td><?php echo (empty($rowGrade['third']) ? 0 : $rowGrade['third']); ?></td>
+                          <td><?php echo (empty($rowGrade['fourth']) ? 0 : $rowGrade['fourth']); ?></td>
+                          <td><b><?php echo ((empty($rowGrade['first']) ? 0 : $rowGrade['first']) + (empty($rowGrade['second']) ? 0 : $rowGrade['second']) + (empty($rowGrade['third']) ? 0 : $rowGrade['third']) + (empty($rowGrade['fourth']) ? 0 : $rowGrade['fourth'])) / 4; ?></b> </td>
                           <td>
-                            <a href="student_grading_view.php?id=<?php echo $row['id']; ?>" class="btn btn-primary">Grading</a>
+                            <center>
+                              <div class="btn-group">
+                                <a href="view_student_grade.php?id=<?php echo $row['id']; ?>&sched_id=<?php echo $stud['id']; ?>" class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-placement="bottom" title="View Grades"><i class="fa fa-sync-alt"></i></a>
+                              </div>
+                            </center>
                           </td>
                         </tr>
                       <?php  } } ?>

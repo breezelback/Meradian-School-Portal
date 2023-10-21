@@ -79,7 +79,7 @@
                         <input type="text" class="form-control" name="id_number" value="<?php echo $row['id_number']; ?>" id="id_number" placeholder="Enter ID Number" readonly>
                       </div>
                       <div class="col-sm-4 form-group">
-                        <label for="name-f">Password</label>
+                        <label for="name-f">Password</label> &nbsp; <input type="checkbox" id="show_password" onclick="showPass()"> Show Password
                         <input type="password" class="form-control" name="password" value="<?php echo $row['password']; ?>" id="password">
                       </div>
                       <div class="col-sm-4 form-group">
@@ -217,6 +217,21 @@
 
 <script src="https://f001.backblazeb2.com/file/buonzz-assets/jquery.ph-locations-v1.0.0.js"></script>
 <script>
+
+  function showPass() {
+    var x = document.getElementById("password");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+    var y = document.getElementById("confirm_password");
+    if (y.type === "password") {
+      y.type = "text";
+    } else {
+      y.type = "password";
+    }
+  }
   
   var delayInMilliseconds = 2000; //1 second
 

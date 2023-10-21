@@ -56,7 +56,14 @@ session_start();
             </div> -->
           </div>
 
-          <div class="form-group small clearfix">
+          <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="show_password" onclick="showPass()">
+              <label class="form-check-label" for="show_password">
+              Show Password
+              </label>
+          </div>
+
+          <div class="form-group small clearfix mt-4">
               <label class="checkbox-inline">CAPTCHA</label>
               &nbsp;&nbsp;<img src="captcha.php" > &nbsp;&nbsp; <a href=""><i class="fa fa-sync"></i></a>
           </div> 
@@ -69,7 +76,8 @@ session_start();
           <button class="btn btn-block btn-primary mt-4" type="submit">
             Login <i class="fa fa-arrow-right"></i>
           </button>
-          <a href="#" class="float-right mt-2">Forgot Password? </a>
+          <a  data-toggle="modal" data-target="#modal_add_subject" class="float-right mt-2" style="cursor: pointer;">Forgot Password? </a>
+          <!-- <button class="nav-link btn-success text-white"  data-toggle="modal" data-target="#modal_add_subject">Add New Subject &nbsp;<i class="fa fa-plus"></i></button> -->
         </form>
       </div>
       <!-- <a href="#" class="text-center d-block mt-2">Create an account? </a> -->
@@ -77,6 +85,32 @@ session_start();
   </div>
 </div>
 <!-- ./main -->
+
+ <!-- Modal -->
+<form action="function_php/reset_password.php" method="POST">
+  <div class="modal fade" id="modal_add_subject" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Forgot Password</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <label for="name-l" style="color: grey;">Enter your ID Number</i></label>
+          <input type="text" required="" class="form-control" name="id_number" id="id_number" placeholder="">
+          <label for="name-l" style="color: grey;">Email Address</i></label>
+          <input type="email" required="" class="form-control" name="email" id="email" placeholder="">
+        </div>
+        <div class="modal-footer">  
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
 
 <footer class="bg-white">
     <!-- Copyrights -->
@@ -126,6 +160,16 @@ session_start();
 <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js" ></script>
 
 <script>
+
+  function showPass() {
+    var x = document.getElementById("password");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
+  
   <?php 
     if (isset($_SESSION['toastr'])) 
     {

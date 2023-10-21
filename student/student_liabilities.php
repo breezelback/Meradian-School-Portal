@@ -103,7 +103,7 @@
                                 <td><center><?php echo $row['date_created']; ?></center></td>
                                 <td><center><?php if ($row['status'] == 0) {echo 'Unpaid';} else {echo 'Paid';} ?></center></td>
                                 <?php if ($row['status'] == 0): ?>
-                                  <td><center><a class="btn btn-primary" href="pay_liabilities.php?pay_id=<?php echo $row['id']; ?>">Pay</a></center></td>
+                                  <td><center><a class="btn btn-primary" href="pay_liabilities.php?pay_id=<?php echo $row['id']; ?>">Pay <i class="fab fa-paypal"></i></a></center></td>
                                 <?php else: ?>
                                   <td><center><span class="bg bg-success" style="padding: 3px; border-radius: 5px;">Paid on <?php echo $row['pay_date']; ?></span></center></td>
                                 <?php endif ?>
