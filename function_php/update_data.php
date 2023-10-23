@@ -24,6 +24,7 @@ $section = $_POST['section'];
 $password = $_POST['password'];
 $confirm_password = $_POST['confirm_password'];
 
+
 if ($password != $confirm_password) 
 {
 	
@@ -33,6 +34,28 @@ if ($password != $confirm_password)
 }//end password
 else
 {
+	//---------password encryption-------
+	$simple_string = $password;
+	 
+	$ciphering = "AES-128-CTR";
+	$iv_length = openssl_cipher_iv_length($ciphering);
+	$options = 0;
+	$encryption_iv = '1234567891011121';
+	$encryption_key = "GeeksforGeeks";
+	$encryption = openssl_encrypt($simple_string, $ciphering,
+	$encryption_key, $options, $encryption_iv);
+	// Display the encrypted string
+	// echo "Encrypted String: " . $encryption;
+	$password = $encryption;
+	$decryption_iv = '1234567891011121';
+	$decryption_key = "GeeksforGeeks";
+	$decryption=openssl_decrypt ($encryption, $ciphering, 
+	$decryption_key, $options, $decryption_iv);
+	// Display the decrypted string
+	// echo "Decrypted String: " . $decryption;
+
+	//---------password encryption-------
+
 
 	$error_message = "";
 	//initialize image upload

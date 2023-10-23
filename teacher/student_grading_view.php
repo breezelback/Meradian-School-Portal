@@ -86,7 +86,7 @@ $active = $exec1->fetch_assoc();
 
 
                           // $selectStudSched = ' SELECT `id`, `student_id`, `schedule_id`, `date_created`, `academic_year_id`, `teacher_id` FROM `tbl_student_schedule` WHERE teacher_id = '.$_SESSION['id'].' AND academic_year_id = '.$active['id'];
-                          $selectStudSched = ' SELECT `id`, `student_id`, `schedule_id`, `date_created`, `academic_year_id`, `teacher_id` FROM `tbl_student_schedule` WHERE student_id = '.$_GET['id'].' AND academic_year_id = '.$active['id'];
+                          $selectStudSched = ' SELECT `id`, `student_id`, `schedule_id`, `date_created`, `academic_year_id`, `teacher_id` FROM `tbl_student_schedule` WHERE student_id = '.$_GET['id'].' AND academic_year_id = '.$active['id'].' AND teacher_id = '.$_SESSION['id'];
                           $execStudSched = $conn->query($selectStudSched);
 
                           if ($execStudSched->num_rows > 0) {

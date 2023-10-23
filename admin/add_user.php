@@ -55,12 +55,12 @@
               <div class="card-body">
                 <div class="tab-content p-0">
                   
-                  <form action="../function_php/insert_user_data.php?usertype=<?php echo $_GET['usertype']; ?>" method="POST">
+                  <form action="../function_php/insert_user_data.php?usertype=<?php echo $_GET['usertype']; ?>" method="POST" enctype="multipart/form-data">
                     <div class="row">
                       <div class="col-md-4">
                         Profile Picture
                         <img src="../images/user_image.jpg" alt="" width="100">
-                        <input type="file" class="mt-2" name="profile_picture">
+                        <input type="file" class="mt-2" name="profile_picture" id="profile_picture">
                       </div>
                       <div class="col-md-4"></div>
                       <!-- <div class="col-md-4">
@@ -100,15 +100,15 @@
                     <div class="row">
                       <div class="col-sm-4 form-group">
                         <label for="name-f">First Name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Enter first name.">
+                        <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Enter first name." required="">
                       </div>
                       <div class="col-sm-3 form-group">
-                        <label for="name-l">Middle Name <span class="text-danger">*</span></label>
+                        <label for="name-l">Middle Name</label>
                         <input type="text" class="form-control" name="middlename" id="middlename" placeholder="Enter middle name.">
                       </div>
                       <div class="col-sm-3 form-group">
                         <label for="name-l">Last name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Enter last name.">
+                        <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Enter last name." required="">
                       </div>
                       <div class="col-sm-2 form-group">
                         <label for="name-l" style="color: grey;">Suffix <i>(ex. Jr. Sr. II.)</i></label>
@@ -124,23 +124,23 @@
                         </select>
                       </div>
                       <div class="col-sm-3 form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" name="email" id="email" placeholder="Enter email.">
+                        <label for="email">Email <span class="text-danger">*</span></label>
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Enter email." required="">
                       </div>
                       <div class="col-sm-3 form-group">
-                        <label for="email">Contact Number</label>
-                        <input type="number" class="form-control" name="contact_number" id="contact_number" placeholder="Enter Contact Number.">
+                        <label for="email">Contact Number <span class="text-danger">*</span></label>
+                        <input type="number" class="form-control" name="contact_number" id="contact_number" placeholder="Enter Contact Number." required="">
                       </div>
                       <div class="col-sm-2 form-group">
                         <label for="email">Telephone Number</label>
                         <input type="number" class="form-control" name="telephone" id="telephone" placeholder="Enter Telephone Number.">
                       </div>
                       <div class="col-sm-2 form-group">
-                        <label for="email">Date of Birth</label>
-                        <input type="date" class="form-control" name="birthdate" id="birthdate">
+                        <label for="email">Date of Birth <span class="text-danger">*</span></label>
+                        <input type="date" class="form-control" name="birthdate" id="birthdate" required="">
                       </div>
                     </div>
-                    <div class="row"><b class="text-primary">Home Address</b></div><hr>
+                    <div class="row"><b class="text-primary">Home Address <span class="text-danger">*</span></b></div><hr>
                     <div class="row">
                       <div class="col-sm-3 form-group">
                         <label for="email">Province</label>
@@ -148,15 +148,15 @@
                       </div>
                       <div class="col-sm-3 form-group">
                         <label for="email">City</label>
-                        <select class="form-control" name="city" id="my-city-dropdown"></select>
+                        <select class="form-control" name="city" id="my-city-dropdown" required=""></select>
                       </div>
                       <div class="col-sm-3 form-group">
                         <label for="email">Barangay</label>
-                        <select class="form-control" name="barangay" id="my-barangay-dropdown"></select>
+                        <select class="form-control" name="barangay" id="my-barangay-dropdown" required=""></select>
                       </div>
                       <div class="col-sm-3 form-group">
                         <label for="email">Purok/House No./Sub</label>
-                        <input type="text" class="form-control" name="house_no" id="house_no">
+                        <input type="text" class="form-control" name="house_no" id="house_no" required="">
                       </div>
                     </div>
 

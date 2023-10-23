@@ -163,6 +163,15 @@
             </a>
           </li>
 
+          <li class="nav-item">
+            <a href="update_password.php" class="nav-link">
+              <i class="nav-icon fa fa-cog"></i>
+              <p>
+                Update Password
+              </p>
+            </a>
+          </li>
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

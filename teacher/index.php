@@ -153,7 +153,7 @@
                   <div class="col sm-12">
                     <center>
                       <?php if ($_SESSION['profile_picture'] == ""): ?>
-                        <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" width="100">
+                        <img src="../images/user_image.jpg" class="img-circle elevation-2" alt="User Image" width="100">
                       <?php else: ?>
                         <img src="../images/user/<?php echo $_SESSION['profile_picture']; ?>" class="img-circle elevation-2" alt="User Image" width="100">
                       <?php endif ?>

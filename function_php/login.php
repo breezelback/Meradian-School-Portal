@@ -7,6 +7,29 @@ $id_number = $_POST['id_number'];
 $password = $_POST['password'];
 $captcha_code = $_POST['captcha_code'];
 
+//---------password encryption-------
+$simple_string = $password;
+ 
+$ciphering = "AES-128-CTR";
+$iv_length = openssl_cipher_iv_length($ciphering);
+$options = 0;
+$encryption_iv = '1234567891011121';
+$encryption_key = "GeeksforGeeks";
+$encryption = openssl_encrypt($simple_string, $ciphering,
+$encryption_key, $options, $encryption_iv);
+// Display the encrypted string
+// echo "Encrypted String: " . $encryption;
+
+$decryption_iv = '1234567891011121';
+$decryption_key = "GeeksforGeeks";
+$decryption=openssl_decrypt ($encryption, $ciphering, 
+$decryption_key, $options, $decryption_iv);
+// Display the decrypted string
+// echo "Decrypted String: " . $decryption;
+$password = $encryption;
+//---------password encryption-------
+
+
 if ($captcha_code == $_SESSION['captcha']) {
 
 
@@ -50,9 +73,15 @@ if ($captcha_code == $_SESSION['captcha']) {
 			$_SESSION['toastr']['color'] = 'green';
 			header('location: ../teacher/');
 		}
+		else if ($row['user_type'] == 'admin') {
+			$_SESSION['toastr']['title'] = 'Looks Good!';
+			$_SESSION['toastr']['message'] = 'Successfully Login as Administrator';
+			$_SESSION['toastr']['color'] = 'green';
+			header('location: ../admin/');
+		}
 		else
 		{
-			header('location: ../admin/');	
+			header('location: ../student/');	
 		}
 
 		// $_SESSION['toastr']['title'] = 'Looks Good!';

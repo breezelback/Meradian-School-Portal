@@ -76,6 +76,14 @@
                         <label for="name-f">ID Number <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" name="id_number" value="<?php echo $row['id_number']; ?>" id="id_number" placeholder="Enter ID Number">
                       </div>
+                      <div class="col-sm-4 form-group">
+                        <label for="name-f">Password</label> &nbsp; <input type="checkbox" id="show_password" onclick="showPass()"> Show Password
+                        <input type="password" class="form-control" name="password" value="<?php echo $row['password']; ?>" id="password">
+                      </div>
+                      <div class="col-sm-4 form-group">
+                        <label for="name-f">Confirm Password</label>
+                        <input type="password" class="form-control" name="confirm_password" value="<?php echo $row['password']; ?>" id="confirm_password">
+                      </div>
                     </div>
                     <div class="row">
                       <div class="col-sm-4 form-group">

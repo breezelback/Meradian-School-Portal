@@ -63,7 +63,7 @@
                     <thead>
                     <tr>
                       <th><center>ID NUMBER</center></th>
-                      <th><center>NAME</center></th>
+                      <th width="140"><center>NAME</center></th>
                       <th><center>GENDER</center></th>
                       <th><center>EMAIL</center></th>
                       <th><center>CONTACT NUMBER</center></th>
@@ -95,6 +95,7 @@
                       ?>
                         <tr style="font-size: 14px;">
                           <td><?php echo $row['id_number']; ?></td>
+                          <!-- <td><img src="../images/user/<?php echo $row['profile_picture']; ?>" width="30" height="30" style="border-radius: 50px; border: 1px solid grey;">  &nbsp;<?php echo $row['firstname']; ?> <?php echo $row['lastname']; ?></td> -->
                           <td><?php echo $row['firstname']; ?> <?php echo $row['lastname']; ?></td>
                           <td><?php echo $row['gender']; ?></td>
                           <td><?php echo $row['email']; ?></td>

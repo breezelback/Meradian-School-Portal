@@ -50,7 +50,7 @@
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
           <?php if ($_SESSION['profile_picture'] == ""): ?>
-            <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+            <img src="../images/user_image.jpg" class="img-circle elevation-2" alt="User Image">
           <?php else: ?>
             <img src="../images/user/<?php echo $_SESSION['profile_picture']; ?>" class="img-circle elevation-2" alt="User Image">
           <?php endif ?>
