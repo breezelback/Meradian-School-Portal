@@ -214,7 +214,7 @@
    <!-- Modal -->
   <form action="../function_php/add_student_schedule.php" method="POST">
     <div class="modal fade" id="modal_add_schedule" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
+      <div class="modal-dialog modal-xl">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Add New Subject Schedule </h5>
@@ -257,6 +257,7 @@
                   <th><center>SUBJECT NAME</center></th>
                   <th><center>PROFESSOR</center></th>
                   <th><center>SCHEDULE</center></th>
+                  <th><center>YEAR & SECTION</center></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -278,6 +279,8 @@
                           a.friday,
                           a.saturday,
                           a.sunday,
+                          a.school_year,
+                          a.section,
                           b.subject_name,
                           b.subject_code,
                           c.id_number,
@@ -309,6 +312,7 @@
                           <?php echo ($sub['sunday'] == true ? "<span class='schedule_day'>Sunday</span>" : "" ); ?> 
 
                       | <?php echo date('h:i A', strtotime($sub['teaching_time'])); ?> - <?php echo date('h:i A', strtotime($sub['teaching_time_to'])); ?></center></td>
+                      <td><center><?php echo $sub['school_year']; ?> | <?php echo $sub['section']; ?></center></td>
                     </tr>
                   <?php } ?>
 

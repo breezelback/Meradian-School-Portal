@@ -12,6 +12,17 @@ $active = $exec1->fetch_assoc();
   <title>The Meradian School | Admin Portal</title>
 
   <?php include '_include_header.php'; ?>
+  <style>
+    .schedule_day
+    {
+      background-color: seagreen;
+      padding: 2.5px;
+      color: white;
+      border-radius: 5px;
+      margin: 3px;
+    }
+    
+  </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -78,29 +89,89 @@ $active = $exec1->fetch_assoc();
                     </thead>
                     <tbody>
 
-                      <?php   
-
-                       
-
-                          echo $selectStudSched = ' SELECT `id`, `student_id`, `schedule_id`, `date_created` FROM tbl_student_schedule WHERE teacher_id = '.$_SESSION['id'].' AND academic_year_id = '.$active['id'];
+                      <?php  
+                          $selectStudSched = ' SELECT `id`, `teacher_id`, `subject_id`, `teaching_day`, `teaching_time`, `schedule_code`, `status`, `date_created`, `teaching_time_to`, `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`, `school_year`, `section` FROM `tbl_schedule` WHERE teacher_id = '.$_SESSION['id'].' AND id IN (SELECT schedule_id FROM tbl_student_schedule WHERE academic_year_id = '.$active['id'].') GROUP BY school_year, section ';
                           $execStudSched = $conn->query($selectStudSched);
 
                           if ($execStudSched->num_rows > 0) {
 
                             while ($schedule = $execStudSched->fetch_assoc()) {
-
-                             $selectSched = ' SELECT `id`, `teacher_id`, `subject_id`, `teaching_day`, `teaching_time`, `schedule_code`, `status`, `date_created`, `teaching_time_to`, `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`, `school_year`, `section` FROM `tbl_schedule` WHERE id = '.$schedule['schedule_id'];
-                            $execSched = $conn->query($selectSched);
-                            $sched = $execSched->fetch_assoc();
-
-                            $sql = ' SELECT `id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, DATE_FORMAT(birthdate, "%M %d, %Y") AS birthdate, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `username`, `password`, `user_type`, `status`, `date_created` FROM `tbl_user` WHERE id = '.$schedule['student_id'];
-                            $exec = $conn->query($sql);
-                            $student = $exec->fetch_assoc();
                            
                       ?>
                         <tr style="font-size: 14px;">
-                          <td><?php echo $sched['school_year']; ?></td>
-                          <td><?php echo $sched['section']; ?></td>
+                          <td><?php echo $schedule['school_year']; ?></td>
+                          <td><?php echo $schedule['section']; ?></td>
+                          <td>
+                            <center>
+                              <?php echo ($schedule['monday'] == true ? "<span class='schedule_day'>Monday</span>" : "" ); ?>
+                              <?php echo ($schedule['tuesday'] == true ? "<span class='schedule_day'>Tuesday</span>" : "" ); ?> 
+                              <?php echo ($schedule['wednesday'] == true ? "<span class='schedule_day'>Wednesday</span>" : "" ); ?> 
+                              <?php echo ($schedule['thursday'] == true ? "<span class='schedule_day'>Thursday</span>" : "" ); ?> 
+                              <?php echo ($schedule['friday'] == true ? "<span class='schedule_day'>Friday</span>" : "" ); ?> 
+                              <?php echo ($schedule['saturday'] == true ? "<span class='schedule_day'>Saturday</span>" : "" ); ?> 
+                              <?php echo ($schedule['sunday'] == true ? "<span class='schedule_day'>Sunday</span>" : "" ); ?> 
+                            </center>
+                          </td>
+                          <td>
+                            <center>
+                              <?php echo date('h:i A', strtotime($schedule['teaching_time'])); ?> - <?php echo date('h:i A', strtotime($schedule['teaching_time_to'])); ?>
+                            </center>
+                          </td>
+                          <td>
+                            <center>
+
+ <!-- TIMEONLY -->
+                              <?php 
+                              date_default_timezone_set('Asia/Manila');
+                              $date_today = date("Y-m-d");
+                              $button_value = "Time in";
+                              $button_timeout_value = "Time out";
+                              $button_stat = "";
+                              $button_timeout = "";
+
+                             $selectDtr = ' SELECT `id`, `schedule_id`, `teacher_id`, DATE_FORMAT(`time_in`,"%r") AS time_in, DATE_FORMAT(`time_out`,"%r") AS time_out, `status`, `academic_year_id` FROM `tbl_dtr` WHERE schedule_id = '.$schedule['id'].' AND academic_year_id = '.$active['id'].' AND time_in LIKE "'.$date_today.'%" ';
+                              $execDtr = $conn->query($selectDtr);
+                              if ($execDtr->num_rows > 0) 
+                              {
+                                $dtr = $execDtr->fetch_assoc();
+                                if ($dtr['time_out'] != "12:00:00 AM") 
+                                {
+                                  $button_timeout_value = $dtr['time_out'];
+                                  $button_timeout = 'style="pointer-events: none; cursor: not-allowed;"';
+                                }
+                                $button_value = $dtr['time_in'];
+                                $button_stat = 'style="pointer-events: none; cursor: not-allowed;"';
+                              }
+
+                               ?>
+
+
+                              <?php if ($schedule['monday'] == true AND strtolower(date('l')) == "monday"): ?>
+                                <a href="../function_php/add_dtr.php?schedule_id=<?php echo $schedule['id']; ?>&academic_year_id=<?php echo $active['id']; ?>" class="btn btn-success btn-sm" <?php echo $button_stat; ?>><?php echo $button_value; ?> <i class="fa fa-hourglass-start"></i></a>
+                              <?php elseif($schedule['tuesday'] == true AND strtolower(date('l')) == "tuesday"): ?>
+                                <a href="../function_php/add_dtr.php?schedule_id=<?php echo $schedule['id']; ?>&academic_year_id=<?php echo $active['id']; ?>" class="btn btn-success btn-sm" <?php echo $button_stat; ?>><?php echo $button_value; ?> <i class="fa fa-hourglass-start"></i></a>
+                              <?php elseif($schedule['wednesday'] == true AND strtolower(date('l')) == "wednesday"): ?>
+                                <a href="../function_php/add_dtr.php?schedule_id=<?php echo $schedule['id']; ?>&academic_year_id=<?php echo $active['id']; ?>" class="btn btn-success btn-sm" <?php echo $button_stat; ?>><?php echo $button_value; ?> <i class="fa fa-hourglass-start"></i></a>
+                              <?php elseif($schedule['thursday'] == true AND strtolower(date('l')) == "thursday"): ?>
+                                <a href="../function_php/add_dtr.php?schedule_id=<?php echo $schedule['id']; ?>&academic_year_id=<?php echo $active['id']; ?>" class="btn btn-success btn-sm" <?php echo $button_stat; ?>><?php echo $button_value; ?> <i class="fa fa-hourglass-start"></i></a>
+                              <?php elseif($schedule['friday'] == true AND strtolower(date('l')) == "friday"): ?>
+                                <a href="../function_php/add_dtr.php?schedule_id=<?php echo $schedule['id']; ?>&academic_year_id=<?php echo $active['id']; ?>" class="btn btn-success btn-sm" <?php echo $button_stat; ?>><?php echo $button_value; ?> <i class="fa fa-hourglass-start"></i></a>
+                              <?php elseif($schedule['saturday'] == true AND strtolower(date('l')) == "saturday"): ?>
+                                <a href="../function_php/add_dtr.php?schedule_id=<?php echo $schedule['id']; ?>&academic_year_id=<?php echo $active['id']; ?>" class="btn btn-success btn-sm" <?php echo $button_stat; ?>><?php echo $button_value; ?> <i class="fa fa-hourglass-start"></i></a>
+                              <?php elseif($schedule['sunday'] == true AND strtolower(date('l')) == "sunday"): ?>
+                                <a href="../function_php/add_dtr.php?schedule_id=<?php echo $schedule['id']; ?>&academic_year_id=<?php echo $active['id']; ?>" class="btn btn-success btn-sm" <?php echo $button_stat; ?>><?php echo $button_value; ?> <i class="fa fa-hourglass-start"></i></a>
+                              <?php else: ?>
+                                <button class="btn btn-success btn-sm" disabled=""><?php echo $button_value; ?> <i class="fa fa-hourglass-start"></i></button>
+                              <?php endif ?>
+
+                            </center>
+                          </td>
+                          <td>
+                            <center>
+                              <!-- <button class="btn btn-danger btn-sm" <?php echo $button_timeout; ?>>Time out <i class="fa fa-hourglass-end"></i></button> -->
+                              <a href="../function_php/add_dtr_out.php?schedule_id=<?php echo $schedule['id']; ?>&academic_year_id=<?php echo $active['id']; ?>" class="btn btn-danger btn-sm" <?php echo $button_timeout; ?>><?php echo $button_timeout_value; ?> <i class="fa fa-hourglass-end"></i></a>
+                            </center>
+                          </td>
                         </tr>
                       <?php  } } ?>
 

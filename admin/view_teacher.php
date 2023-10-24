@@ -251,7 +251,7 @@
             <label for="name-l" style="color: grey;">Section</i></label>
             <select class="form-control" name="section" id="section">
               <?php 
-                $sql = ' SELECT DISTINCT(section) AS section FROM `tbl_user` ';
+                $sql = ' SELECT DISTINCT(section) AS section FROM `tbl_user` WHERE user_type = "student" ';
                 $exec = $conn->query($sql);
                 while ($section = $exec->fetch_assoc()) {
                ?>
