@@ -87,6 +87,15 @@
           </li>
 
           <li class="nav-item">
+            <a href="teacher_dtr.php" class="nav-link">
+              <i class="nav-icon fas fa-user-clock"></i>
+              <p>
+                Daily Time Record
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="student_grading.php" class="nav-link">
               <i class="nav-icon fas fa-user-graduate"></i>
               <p>

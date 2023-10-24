@@ -5,6 +5,24 @@
   $row = $exec->fetch_assoc();
 
 
+
+  $selectProvince = ' SELECT provDesc FROM refprovince WHERE provCode = "'.$row['province'].'" ';
+  $execProvince = $conn->query($selectProvince);
+  $province = $execProvince->fetch_assoc();
+
+  $selectCityMun = ' SELECT citymunDesc FROM refcitymun WHERE citymunCode = "'.$row['city'].'" ';
+  $execCityMun = $conn->query($selectCityMun);
+  $citymun = $execCityMun->fetch_assoc();
+
+  $selectBarangay = ' SELECT brgyDesc FROM refbrgy WHERE brgyCode = "'.$row['barangay'].'" ';
+  $execBarangay = $conn->query($selectBarangay);
+  $barangay = $execBarangay->fetch_assoc();
+
+  $sql1 = ' SELECT `id`, `academic_year`, `status`, `date_created` FROM `tbl_academic_year` WHERE status = "Active" ';
+  $exec1 = $conn->query($sql1);
+  $active = $exec1->fetch_assoc();
+
+
 ?>
 
 <!DOCTYPE html>
@@ -77,7 +95,7 @@
                       <div class="col-sm-3 form-group">
                         ID Number: <label for="name-f"><?php echo $row['id_number']; ?></label><br>
                         Name:<label for="name-f"> <?php echo $row['firstname'].' '.$row['lastname']; ?></label><br>
-                        Address:<label for="name-f"> <?php echo $row['house_no'].' '.$row['barangay'].' '.$row['city'].' '.$row['province']; ?></label>
+                        Address:<label for="name-f"> <?php echo $row['house_no'].' '.$barangay['brgyDesc'].' '.$citymun['citymunDesc'].' '.$province['provDesc']; ?></label>
                       </div>
                       <div class="col-sm-3 form-group">
                         Contact Number:<label for="name-f"> <?php echo $row['contact_number']; ?></label><br>
