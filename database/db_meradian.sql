@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2023 at 06:15 PM
+-- Generation Time: Oct 28, 2023 at 09:35 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -44033,9 +44033,10 @@ CREATE TABLE `tbl_dtr` (
 --
 
 INSERT INTO `tbl_dtr` (`id`, `schedule_id`, `teacher_id`, `time_in`, `time_out`, `status`, `academic_year_id`) VALUES
-(1, 11, 2, '2023-10-24 23:26:35', '2023-10-24 23:53:52', 0, 4),
-(2, 9, 2, '2023-10-24 23:26:57', '2000-10-25 00:02:57', 0, 4),
-(7, 6, 2, '2023-10-25 00:12:59', '2023-10-25 00:13:02', 0, 4);
+(8, 13, 2, '2023-10-29 01:32:36', '2023-10-29 01:33:43', 0, 4),
+(9, 13, 2, '2023-10-28 01:25:36', '2023-10-28 01:55:43', 0, 4),
+(10, 13, 2, '2023-10-22 01:25:36', '0000-00-00 00:00:00', 0, 4),
+(11, 14, 2, '2023-10-29 03:23:12', '0000-00-00 00:00:00', 0, 4);
 
 -- --------------------------------------------------------
 
@@ -44093,7 +44094,12 @@ INSERT INTO `tbl_grades` (`id`, `stud_schedule_id`, `first`, `second`, `third`, 
 (10, 15, 85, 88, 87, 90, 0, 0, '2023-09-23 14:23:13'),
 (11, 21, 78, 0, 0, 0, 0, 0, '2023-10-23 23:52:17'),
 (12, 22, 68, 0, 0, 0, 0, 0, '2023-10-23 23:52:17'),
-(13, 23, 0, 0, 0, 0, 0, 0, '2023-10-23 23:53:18');
+(13, 23, 0, 0, 0, 0, 0, 0, '2023-10-23 23:53:18'),
+(14, 28, 0, 0, 0, 0, 0, 0, '2023-10-29 03:13:46'),
+(15, 29, 0, 0, 0, 0, 0, 0, '2023-10-29 03:13:46'),
+(16, 35, 0, 0, 0, 0, 0, 0, '2023-10-29 03:13:46'),
+(17, 30, 0, 0, 0, 0, 0, 0, '2023-10-29 03:15:25'),
+(18, 36, 0, 0, 0, 0, 0, 0, '2023-10-29 03:15:25');
 
 -- --------------------------------------------------------
 
@@ -44162,7 +44168,9 @@ INSERT INTO `tbl_schedule` (`id`, `teacher_id`, `subject_id`, `teaching_day`, `t
 (9, 2, 20, '', '09:42:00', '', 0, '2023-10-24 21:42:16', '10:42:00', 1, 1, 1, 1, 1, 0, 0, 'Third Year', '301'),
 (10, 2, 19, '', '13:00:00', '', 0, '2023-10-24 21:43:17', '16:00:00', 1, 1, 1, 1, 1, 0, 0, 'Third Year', '301'),
 (11, 2, 19, '', '08:00:00', '', 0, '2023-10-24 21:44:07', '10:00:00', 1, 1, 1, 1, 1, 0, 0, 'Grade 10', 'Santan'),
-(12, 18, 20, '', '09:46:00', '', 0, '2023-10-24 21:46:23', '10:46:00', 1, 1, 1, 1, 1, 0, 0, 'Grade 10', 'Santan');
+(12, 18, 20, '', '09:46:00', '', 0, '2023-10-24 21:46:23', '10:46:00', 1, 1, 1, 1, 1, 0, 0, 'Grade 10', 'Santan'),
+(13, 2, 19, '', '01:30:00', '', 0, '2023-10-29 01:30:56', '02:30:00', 0, 0, 0, 0, 0, 1, 1, 'Kinder', 'K1'),
+(14, 2, 21, '', '03:11:00', '', 0, '2023-10-29 03:11:12', '04:11:00', 1, 0, 0, 0, 0, 1, 1, 'Kinder', 'K1');
 
 -- --------------------------------------------------------
 
@@ -44214,7 +44222,10 @@ INSERT INTO `tbl_student_schedule` (`id`, `student_id`, `schedule_id`, `date_cre
 (28, 11, 6, '2023-10-24 22:17:08', 4, 2),
 (29, 11, 7, '2023-10-24 22:17:08', 4, 2),
 (30, 14, 11, '2023-10-24 22:17:20', 4, 2),
-(31, 14, 12, '2023-10-24 22:17:20', 4, 18);
+(31, 14, 12, '2023-10-24 22:17:20', 4, 18),
+(34, 9, 13, '2023-10-29 01:32:23', 4, 2),
+(36, 14, 14, '2023-10-29 03:14:42', 4, 2),
+(37, 13, 6, '2023-10-29 03:24:22', 4, 2);
 
 -- --------------------------------------------------------
 
@@ -44443,7 +44454,7 @@ ALTER TABLE `tbl_announcement`
 -- AUTO_INCREMENT for table `tbl_dtr`
 --
 ALTER TABLE `tbl_dtr`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tbl_enrollment`
@@ -44455,7 +44466,7 @@ ALTER TABLE `tbl_enrollment`
 -- AUTO_INCREMENT for table `tbl_grades`
 --
 ALTER TABLE `tbl_grades`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `tbl_liabilities`
@@ -44467,7 +44478,7 @@ ALTER TABLE `tbl_liabilities`
 -- AUTO_INCREMENT for table `tbl_schedule`
 --
 ALTER TABLE `tbl_schedule`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tbl_scholarship`
@@ -44479,7 +44490,7 @@ ALTER TABLE `tbl_scholarship`
 -- AUTO_INCREMENT for table `tbl_student_schedule`
 --
 ALTER TABLE `tbl_student_schedule`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `tbl_subject`

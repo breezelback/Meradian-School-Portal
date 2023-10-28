@@ -16,10 +16,11 @@ $active = $exec1->fetch_assoc();
     .schedule_day
     {
       background-color: seagreen;
-      padding: 2.5px;
+      padding: 2px;
       color: white;
       border-radius: 5px;
-      margin: 3px;
+      margin: 1px;
+      font-size: 12px;
     }
     
   </style>
@@ -81,6 +82,7 @@ $active = $exec1->fetch_assoc();
                     <tr>
                       <th><center>YEAR</center></th>
                       <th><center>SECTION</center></th>
+                      <th><center>SUBJECT</center></th>
                       <th><center>DAY</center></th>
                       <th><center>TIME</center></th>
                       <th><center>TIME IN</center></th>
@@ -90,17 +92,23 @@ $active = $exec1->fetch_assoc();
                     <tbody>
 
                       <?php  
-                          $selectStudSched = ' SELECT `id`, `teacher_id`, `subject_id`, `teaching_day`, `teaching_time`, `schedule_code`, `status`, `date_created`, `teaching_time_to`, `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`, `school_year`, `section` FROM `tbl_schedule` WHERE teacher_id = '.$_SESSION['id'].' AND id IN (SELECT schedule_id FROM tbl_student_schedule WHERE academic_year_id = '.$active['id'].') GROUP BY school_year, section ';
+                          // $selectStudSched = ' SELECT `id`, `teacher_id`, `subject_id`, `teaching_day`, `teaching_time`, `schedule_code`, `status`, `date_created`, `teaching_time_to`, `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`, `school_year`, `section` FROM `tbl_schedule` WHERE teacher_id = '.$_SESSION['id'].' AND id IN (SELECT schedule_id FROM tbl_student_schedule WHERE academic_year_id = '.$active['id'].') GROUP BY school_year, section ';
+                          $selectStudSched = ' SELECT `id`, `teacher_id`, `subject_id`, `teaching_day`, `teaching_time`, `schedule_code`, `status`, `date_created`, `teaching_time_to`, `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`, `school_year`, `section` FROM `tbl_schedule` WHERE teacher_id = '.$_SESSION['id'].' AND id IN (SELECT schedule_id FROM tbl_student_schedule WHERE academic_year_id = '.$active['id'].') ';
                           $execStudSched = $conn->query($selectStudSched);
 
                           if ($execStudSched->num_rows > 0) {
 
                             while ($schedule = $execStudSched->fetch_assoc()) {
+
+                            $getSubject = ' SELECT `id`, `subject_name`, `subject_code`, `date_created`, `school_year` FROM `tbl_subject` WHERE id = '.$schedule['subject_id'].' ';
+                            $execSubject = $conn->query($getSubject);
+                            $subject = $execSubject->fetch_assoc();
                            
                       ?>
                         <tr style="font-size: 14px;">
                           <td><?php echo $schedule['school_year']; ?></td>
                           <td><?php echo $schedule['section']; ?></td>
+                          <td><?php echo $subject['subject_name']; ?></td>
                           <td>
                             <center>
                               <?php echo ($schedule['monday'] == true ? "<span class='schedule_day'>Monday</span>" : "" ); ?>
@@ -120,7 +128,7 @@ $active = $exec1->fetch_assoc();
                           <td>
                             <center>
 
- <!-- TIMEONLY -->
+                            <!-- TIMEONLY -->
                               <?php 
                               date_default_timezone_set('Asia/Manila');
                               $date_today = date("Y-m-d");
@@ -142,7 +150,6 @@ $active = $exec1->fetch_assoc();
                                 $button_value = $dtr['time_in'];
                                 $button_stat = 'style="pointer-events: none; cursor: not-allowed;"';
                               }
-
                                ?>
 
 

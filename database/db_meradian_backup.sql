@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 21, 2023 at 09:36 AM
+-- Generation Time: Oct 24, 2023 at 06:15 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -53,7 +53,8 @@ INSERT INTO `payments` (`id`, `payment_id`, `payer_id`, `payer_email`, `amount`,
 (7, 'PAYID-MUYTSVI16J18577RK900660L', 'BMXDSSZ5JSSJJ', 'sb-d2zwj27748241@personal.example.com', 5000.00, 'PHP', 'approved', 1, 4),
 (8, 'PAYID-MUZLH3Q2HL10491XC375413S', 'BMXDSSZ5JSSJJ', 'sb-d2zwj27748241@personal.example.com', 2000.00, 'PHP', 'approved', 1, 4),
 (9, 'PAYID-MUZXSSI1EJ985923M524993B', 'BMXDSSZ5JSSJJ', 'sb-d2zwj27748241@personal.example.com', 5000.00, 'PHP', 'approved', 1, 4),
-(10, 'PAYID-MUZX2YA17215968VL362453N', 'BMXDSSZ5JSSJJ', 'sb-d2zwj27748241@personal.example.com', 200.00, 'PHP', 'approved', 1, 4);
+(10, 'PAYID-MUZX2YA17215968VL362453N', 'BMXDSSZ5JSSJJ', 'sb-d2zwj27748241@personal.example.com', 200.00, 'PHP', 'approved', 1, 4),
+(11, 'PAYID-MU2SNNQ4VJ11963V2556712F', 'BMXDSSZ5JSSJJ', 'sb-d2zwj27748241@personal.example.com', 1000.00, 'PHP', 'approved', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -43984,8 +43985,8 @@ CREATE TABLE `tbl_academic_year` (
 --
 
 INSERT INTO `tbl_academic_year` (`id`, `academic_year`, `status`, `date_created`) VALUES
-(3, '2022-2023', 'Active', '2023-09-06 22:07:33'),
-(4, '2023-2024', 'Inactive', '2023-09-06 22:09:00');
+(3, '2022-2023', 'Inactive', '2023-09-06 22:07:33'),
+(4, '2023-2024', 'Active', '2023-09-06 22:09:00');
 
 -- --------------------------------------------------------
 
@@ -44014,6 +44015,31 @@ INSERT INTO `tbl_announcement` (`id`, `title`, `announcement`, `status`, `create
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_dtr`
+--
+
+CREATE TABLE `tbl_dtr` (
+  `id` int(11) NOT NULL,
+  `schedule_id` int(11) NOT NULL,
+  `teacher_id` int(11) NOT NULL,
+  `time_in` datetime NOT NULL,
+  `time_out` datetime NOT NULL,
+  `status` int(11) NOT NULL,
+  `academic_year_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `tbl_dtr`
+--
+
+INSERT INTO `tbl_dtr` (`id`, `schedule_id`, `teacher_id`, `time_in`, `time_out`, `status`, `academic_year_id`) VALUES
+(1, 11, 2, '2023-10-24 23:26:35', '2023-10-24 23:53:52', 0, 4),
+(2, 9, 2, '2023-10-24 23:26:57', '2000-10-25 00:02:57', 0, 4),
+(7, 6, 2, '2023-10-25 00:12:59', '2023-10-25 00:13:02', 0, 4);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_enrollment`
 --
 
@@ -44031,9 +44057,9 @@ CREATE TABLE `tbl_enrollment` (
 --
 
 INSERT INTO `tbl_enrollment` (`id`, `academic_year_id`, `student_id`, `status`, `date_created`, `date_drop`) VALUES
-(3, 4, 3, 'Enrolled', '2023-09-22 21:49:19', '2023-09-22 21:49:11'),
 (7, 4, 9, 'Enrolled', '2023-10-21 02:06:37', '0000-00-00 00:00:00'),
-(8, 4, 10, 'Drop', '2023-10-21 02:06:37', '2023-10-21 02:06:45');
+(8, 4, 10, 'Drop', '2023-10-21 02:06:37', '2023-10-21 02:06:45'),
+(10, 3, 1, 'Enrolled', '2023-10-22 21:45:41', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -44064,7 +44090,10 @@ INSERT INTO `tbl_grades` (`id`, `stud_schedule_id`, `first`, `second`, `third`, 
 (7, 12, 87, 85, 82, 82, 0, 0, '2023-09-23 01:21:16'),
 (8, 13, 83, 82, 84, 88, 0, 0, '2023-09-23 13:25:41'),
 (9, 14, 78, 78, 78, 79, 0, 0, '2023-09-23 13:25:41'),
-(10, 15, 85, 88, 87, 90, 0, 0, '2023-09-23 14:23:13');
+(10, 15, 85, 88, 87, 90, 0, 0, '2023-09-23 14:23:13'),
+(11, 21, 78, 0, 0, 0, 0, 0, '2023-10-23 23:52:17'),
+(12, 22, 68, 0, 0, 0, 0, 0, '2023-10-23 23:52:17'),
+(13, 23, 0, 0, 0, 0, 0, 0, '2023-10-23 23:53:18');
 
 -- --------------------------------------------------------
 
@@ -44092,7 +44121,8 @@ INSERT INTO `tbl_liabilities` (`id`, `student_id`, `academic_year_id`, `amount`,
 (10, 1, 4, 5000, 1, '2023-10-17 22:47:33', 'Tuition', '2023-10-19'),
 (11, 1, 4, 2000, 1, '2023-10-21 01:07:23', 'Misc. Fee', '2023-10-21'),
 (12, 1, 4, 5000, 1, '2023-10-21 13:40:44', 'Tuition', '2023-10-21'),
-(13, 1, 4, 200, 1, '2023-10-21 15:27:10', 'Misc. Fee', '2023-10-21');
+(13, 1, 4, 200, 1, '2023-10-21 15:27:10', 'Misc. Fee', '2023-10-21'),
+(14, 1, 3, 1000, 1, '2023-10-22 21:41:11', 'Misc. Fee', '2023-10-22');
 
 -- --------------------------------------------------------
 
@@ -44126,9 +44156,13 @@ CREATE TABLE `tbl_schedule` (
 --
 
 INSERT INTO `tbl_schedule` (`id`, `teacher_id`, `subject_id`, `teaching_day`, `teaching_time`, `schedule_code`, `status`, `date_created`, `teaching_time_to`, `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`, `school_year`, `section`) VALUES
-(1, 2, 13, '', '22:13:00', '', 0, '2023-09-22 22:13:25', '23:13:00', 1, 0, 1, 0, 1, 0, 0, 'Kinder', '1A'),
-(2, 2, 5, '', '22:13:00', '', 0, '2023-09-22 22:13:39', '23:13:00', 0, 1, 1, 1, 0, 0, 0, 'Second Year', '1A'),
-(3, 2, 14, '', '14:09:00', '', 0, '2023-09-23 14:10:14', '15:10:00', 1, 0, 1, 0, 1, 0, 0, 'Kinder', '1A');
+(6, 2, 19, '', '09:00:00', '', 0, '2023-10-24 21:40:34', '11:00:00', 1, 0, 1, 1, 0, 0, 0, 'Grade 10', 'Gumamela'),
+(7, 2, 21, '', '10:00:00', '', 0, '2023-10-24 21:41:16', '11:00:00', 1, 0, 1, 0, 1, 0, 0, 'Grade 10', 'Gumamela'),
+(8, 2, 21, '', '09:41:00', '', 0, '2023-10-24 21:41:40', '11:41:00', 1, 1, 1, 1, 1, 0, 0, 'Kinder', 'K1'),
+(9, 2, 20, '', '09:42:00', '', 0, '2023-10-24 21:42:16', '10:42:00', 1, 1, 1, 1, 1, 0, 0, 'Third Year', '301'),
+(10, 2, 19, '', '13:00:00', '', 0, '2023-10-24 21:43:17', '16:00:00', 1, 1, 1, 1, 1, 0, 0, 'Third Year', '301'),
+(11, 2, 19, '', '08:00:00', '', 0, '2023-10-24 21:44:07', '10:00:00', 1, 1, 1, 1, 1, 0, 0, 'Grade 10', 'Santan'),
+(12, 18, 20, '', '09:46:00', '', 0, '2023-10-24 21:46:23', '10:46:00', 1, 1, 1, 1, 1, 0, 0, 'Grade 10', 'Santan');
 
 -- --------------------------------------------------------
 
@@ -44173,13 +44207,14 @@ CREATE TABLE `tbl_student_schedule` (
 --
 
 INSERT INTO `tbl_student_schedule` (`id`, `student_id`, `schedule_id`, `date_created`, `academic_year_id`, `teacher_id`) VALUES
-(9, 1, 1, '2023-09-23 01:14:46', 4, 2),
-(10, 1, 2, '2023-09-23 01:14:46', 4, 2),
-(11, 3, 1, '2023-09-23 01:15:08', 4, 2),
-(12, 3, 2, '2023-09-23 01:15:08', 4, 2),
-(13, 1, 1, '2023-09-23 13:18:55', 3, 2),
-(14, 1, 2, '2023-09-23 13:18:55', 3, 2),
-(15, 1, 3, '2023-09-23 14:20:18', 4, 2);
+(24, 9, 9, '2023-10-24 22:15:58', 4, 2),
+(25, 9, 10, '2023-10-24 22:15:58', 4, 2),
+(26, 10, 9, '2023-10-24 22:16:44', 4, 2),
+(27, 10, 10, '2023-10-24 22:16:44', 4, 2),
+(28, 11, 6, '2023-10-24 22:17:08', 4, 2),
+(29, 11, 7, '2023-10-24 22:17:08', 4, 2),
+(30, 14, 11, '2023-10-24 22:17:20', 4, 2),
+(31, 14, 12, '2023-10-24 22:17:20', 4, 18);
 
 -- --------------------------------------------------------
 
@@ -44200,9 +44235,11 @@ CREATE TABLE `tbl_subject` (
 --
 
 INSERT INTO `tbl_subject` (`id`, `subject_name`, `subject_code`, `date_created`, `school_year`) VALUES
-(5, 'Filipino 101', 'FIL101', '2023-07-22 22:53:58', ''),
-(13, 'Mathematics 101', 'Math101', '2023-07-26 21:02:30', 'Grade 1'),
-(14, 'Mathematics 200', 'Math102', '2023-07-26 21:03:58', 'Grade 2');
+(18, 'Filipino 101', 'FIL101', '2023-10-24 21:34:56', ''),
+(19, 'Filipino 102', 'FIL102', '2023-10-24 21:35:08', ''),
+(20, 'Psychology 200', 'PSY200', '2023-10-24 21:35:20', ''),
+(21, 'Science 100', 'SCI100', '2023-10-24 21:35:49', ''),
+(22, 'Science 102', 'SCI102', '2023-10-24 21:36:07', '');
 
 -- --------------------------------------------------------
 
@@ -44243,12 +44280,18 @@ CREATE TABLE `tbl_user` (
 --
 
 INSERT INTO `tbl_user` (`id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, `birthdate`, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `username`, `password`, `user_type`, `status`, `date_created`, `student_status`, `enrollment_status`) VALUES
-(1, 'STDNT001', 'John1', 'D1', 'Doe1', '1', 'Female', 'breezelback@gmail.com', '091234567891', '1', '2023-10-19 00:00:00', '1013', '101313', '101313002', '111', 'Kinder', '1B', '1697869805.jpg', '', '12345', 'student', 0, '2023-09-22 21:19:56', 'New', 'Not Enrolled'),
-(2, 'TCHR001', 'BlakeX', 'RX', 'GriffinX', 'X', 'Female', 'breezelback@gmail.com', '09123456789', '222', '2023-10-20 00:00:00', '0712', '071214', '071214013', '1231', 'Kinder', '1A', '1697818195.png', '', '1234', 'teacher', 0, '2023-09-22 21:20:38', '', ''),
-(3, 'STDNT002', 'Portgas', 'D', 'Ace', '', 'Male', 'ace@gmail.com', '09123456789', '', '2023-09-29 00:00:00', '1013', '101316', '101316017', '', 'Kinder', '1', '', '', '1234', 'student', 0, '2023-09-22 21:36:38', 'Transferee', 'Not Enrolled'),
-(9, 'STDNT003', 'Monkey', 'D', 'Luffy', '', 'Male', 'a@gmail.com', '09123456789', '111', '2023-10-21 00:00:00', '1013', '101314', '101314015', '212', 'Third Year', '1123', '', '', '1234', 'student', 0, '2023-08-02 01:53:22', 'Transferee', 'Not Enrolled'),
-(10, 'STDNT004', 'Roronoa', '', 'Zorro', '', 'Male', 'a@gmail.com', '09123456789', '1', '2023-10-19 00:00:00', '1013', '101315', '101315016', '222', 'Grade 12', '21', '', '', '1234', 'student', 0, '2023-07-11 01:55:42', 'New', 'Not Enrolled'),
-(11, 'STDNT005', 'Cyborg', 'D', 'Franky', '', 'Male', 'a@gmail.com', '09123456789', '111', '2023-10-19 00:00:00', '0516', '051605', '051605011', '2121', 'Grade 10', '12', '', '', '1234', 'student', 0, '2023-10-21 01:57:18', 'New', 'Not Enrolled');
+(1, 'STDNT001', 'John1', 'D1', 'Doe1', '1', 'Female', 'breezelback@gmail.com', '091234567891', '1', '2023-10-19 00:00:00', '1013', '101313', '101313002', '111', 'Kinder', 'K1', '1697982278.jpg', '', '5DN6OZpIJd8=', 'student', 0, '2023-09-22 21:19:56', 'New', 'Not Enrolled'),
+(2, 'TCHR001', 'BlakeX', 'RX', 'GriffinX', 'X', 'Female', 'breezelback@gmail.com', '09123456789', '222', '2023-10-20 00:00:00', '0712', '071214', '071214013', '1231', 'Kinder', '1A', '1697818195.png', '', '4VcqfA==', 'teacher', 0, '2023-09-22 21:20:38', '', ''),
+(9, 'STDNT003', 'Monkey', 'D', 'Luffy', '', 'Male', 'a@gmail.com', '09123456789', '111', '2023-10-21 00:00:00', '1013', '101314', '101314015', '212', 'Third Year', '301', '1698064993.jpg', '', '4VcqfA==', 'student', 0, '2023-08-02 01:53:22', 'Transferee', 'Not Enrolled'),
+(10, 'STDNT004', 'Roronoa', '', 'Zorro', '', 'Male', 'a@gmail.com', '09123456789', '1', '2023-10-19 00:00:00', '1013', '101315', '101315016', '222', 'Third Year', '301', '', '', '5DN6OZpIJd8=', 'student', 0, '2023-07-11 01:55:42', 'New', 'Not Enrolled'),
+(11, 'STDNT005', 'Cyborg', 'D', 'Franky', '', 'Male', 'a@gmail.com', '09123456789', '111', '2023-10-19 00:00:00', '0516', '051605', '051605011', '2121', 'Grade 10', 'Gumamela', '', '', '4VcqfA==', 'student', 0, '2023-10-21 01:57:18', 'New', 'Not Enrolled'),
+(12, 'Admin', 'Meradian Shool', 'RX', 'Administrator', '', 'Female', 'breezelback@gmail.com', '09123456789', '222', '2023-10-20 00:00:00', '0712', '071214', '071214013', '1231', 'Kinder', '1A', '1697818195.png', '', '4VcqfMk/L9o=', 'admin', 0, '2023-09-22 21:20:38', '', ''),
+(13, 'ST001', 'Tony', '', 'Starks', '', 'Male', 'a@gmail.com', '09123456789', '', '2023-10-23 00:00:00', '0314', '031416', '031416014', '111', 'Grade 10', 'Gumamela', '1698065409.png', '', '4VcqfA==', 'student', 0, '2023-10-23 20:49:39', 'New', 'Not Enrolled'),
+(14, 'ST002', 'Bruce', '', 'Banner', '', 'Male', 'a@gmail.com', '09123456789', '', '2023-10-23 00:00:00', '0516', '051605', '051605005', '101', 'Grade 10', 'Santan', '1698065540.png', '', '4VcqfA==', 'student', 0, '2023-10-23 20:52:20', 'Transferee', 'Not Enrolled'),
+(15, 'T001', 'To be', '', 'Announced', '', 'Male', 'a@gmail.com', '09123456789', '', '2023-10-23 00:00:00', '1411', '141102', '141102023', '200', 'Second Year', '1', '', '', '1234', 'teacher', 0, '2023-10-23 20:56:56', '', 'Not Enrolled'),
+(16, 'TCHR002', 'Peter', '', 'Parker', '', 'Male', 'a@gmail.com', '09123456789', '', '2023-10-23 00:00:00', '0434', '043419', '043419001', '200', 'Kinder', '401', '1698066022.png', '', '1234', 'teacher', 0, '2023-10-23 21:00:22', '', 'Not Enrolled'),
+(17, 'TCHR003', 'aa', 'aa', 'aa', '', 'Male', 'a@gmail.com', '1', '', '2023-10-23 00:00:00', '0712', '071214', '071214013', '1', 'First Year', '11', '', '', '6dGryjZ8ERk=', 'teacher', 0, '2023-10-23 21:21:59', '', 'Not Enrolled'),
+(18, 'TCHR003', 'Bruce', '', 'Willis', '', 'Male', 'breezelback@gmail.com', '09123456789', '', '2023-10-23 00:00:00', '0314', '031415', '031415017', '111', 'Second Year', '222', '', '', '4VcqfMk=', 'teacher', 0, '2023-10-23 21:28:50', '', 'Not Enrolled');
 
 --
 -- Indexes for dumped tables
@@ -44294,6 +44337,12 @@ ALTER TABLE `tbl_academic_year`
 -- Indexes for table `tbl_announcement`
 --
 ALTER TABLE `tbl_announcement`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_dtr`
+--
+ALTER TABLE `tbl_dtr`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -44352,7 +44401,7 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `refbrgy`
@@ -44391,28 +44440,34 @@ ALTER TABLE `tbl_announcement`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT for table `tbl_dtr`
+--
+ALTER TABLE `tbl_dtr`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `tbl_enrollment`
 --
 ALTER TABLE `tbl_enrollment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tbl_grades`
 --
 ALTER TABLE `tbl_grades`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tbl_liabilities`
 --
 ALTER TABLE `tbl_liabilities`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tbl_schedule`
 --
 ALTER TABLE `tbl_schedule`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbl_scholarship`
@@ -44424,19 +44479,19 @@ ALTER TABLE `tbl_scholarship`
 -- AUTO_INCREMENT for table `tbl_student_schedule`
 --
 ALTER TABLE `tbl_student_schedule`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `tbl_subject`
 --
 ALTER TABLE `tbl_subject`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

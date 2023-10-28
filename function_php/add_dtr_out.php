@@ -14,7 +14,7 @@ $sql = ' UPDATE `tbl_dtr` SET `time_out` = NOW() WHERE schedule_id = '.$schedule
 $exec = $conn->query($sql);
 
 
-if ($exec == true) 
+if ($exec->num_rows > 0) 
 {
 	$_SESSION['toastr']['title'] = 'Looking Good!';
 	$_SESSION['toastr']['message'] = 'Successfully Logged out.';

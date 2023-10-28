@@ -67,7 +67,7 @@
                       <th><center>GENDER</center></th>
                       <th><center>EMAIL</center></th>
                       <th><center>CONTACT NUMBER</center></th>
-                      <th><center>BIRTHDATE</center></th>
+                      <!-- <th><center>BIRTHDATE</center></th> -->
                       <th><center>ADDRESS</center></th>
                       <th><center>YEAR & SECTION</center></th>
                       <th><center>ACTION</center></th>
@@ -99,16 +99,18 @@
                           <td><?php echo $row['gender']; ?></td>
                           <td><?php echo $row['email']; ?></td>
                           <td><?php echo $row['contact_number']; ?></td>
-                          <td><?php echo $row['birthdate']; ?></td>
+                          <!-- <td><?php echo $row['birthdate']; ?></td> -->
                           <td><?php echo $row['house_no']; ?> <?php echo $barangay['brgyDesc']; ?> <?php echo $citymun['citymunDesc']; ?> <?php echo $province['provDesc']; ?></td>
                           <td><?php echo $row['school_year']; ?> | <?php echo $row['section']; ?></td>
                           <td>
                             <div class="btn-group">
-                              <a href="edit_user.php?id=<?php echo $row['id']; ?>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
+                              <a href="edit_user.php?id=<?php echo $row['id']; ?>" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update Information"><i class="fa fa-edit"></i></a>
                               <!-- <a href="../function_php/delete_user.php?id=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a> -->
-                              <button onclick="delete_user(<?php echo $row['id']; ?>)" class="btn btn-danger btn-sm text-white"><i class="fa fa-trash"></i></button>
+                              <button onclick="delete_user(<?php echo $row['id']; ?>)" class="btn btn-danger btn-sm text-white" data-toggle="tooltip" data-placement="bottom" title="Delete Teacher"><i class="fa fa-trash"></i></button>
 
-                              <a href="view_teacher.php?id=<?php echo $row['id']; ?>" class="btn btn-warning btn-sm text-white"><i class="fa fa-cog"></i></a>
+                              <a href="view_teacher.php?id=<?php echo $row['id']; ?>" class="btn btn-warning btn-sm text-white" data-toggle="tooltip" data-placement="bottom" title="View"><i class="fa fa-cog"></i></a>
+
+                              <a href="teacher_dtr.php?id=<?php echo $row['id']; ?>" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Daily Time Record"><i class="fa fa-user-clock"></i></a>
                             </div>
                           </td>
                         </tr>
