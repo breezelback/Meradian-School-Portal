@@ -5,6 +5,8 @@ $year_id = $_POST['year_id'];
 $check_id = $_POST['check_id'];
 
 
+
+
 if(empty($check_id))
 {
 	header('location: ../admin/student_liabilities.php');
@@ -16,15 +18,17 @@ if(empty($check_id))
 }
 else
 {
-	for ($i=0; $i < count($check_id); $i++) { 
+	// for ($i=0; $i < count($check_id); $i++) { 
+	foreach ($check_id as $key => $value) {
 
 		
-		$sql = ' INSERT INTO `tbl_liabilities`(`student_id`, `academic_year_id`, `amount`, `date_created`, `title`)  VALUES ( '.$check_id[$i].', '.$year_id.', '.$_POST['liability'][$i].', NOW(), "'.$_POST['title'][$i].'" ) ';
+		// echo $sql = ' INSERT INTO `tbl_liabilities`(`student_id`, `academic_year_id`, `amount`, `date_created`, `title`)  VALUES ( '.$check_id[$i].', '.$year_id.', '.$_POST['liability'][$i].', NOW(), "'.$_POST['title'][$i].'" ) ';
+		$sql = ' INSERT INTO `tbl_liabilities`(`student_id`, `academic_year_id`, `amount`, `date_created`, `title`)  VALUES ( '.$key.', '.$year_id.', '.$_POST['liability'][$key].', NOW(), "'.$_POST['title'][$key].'" ) ';
 		$exec = $conn->query($sql);
 
 
 	}
-
+	
 	header('location: ../admin/student_liabilities.php');
 
 

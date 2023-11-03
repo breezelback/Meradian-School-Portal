@@ -24,4 +24,18 @@ $_SESSION['toastr']['color'] = 'green';
 // 	header('location: ../admin/teachers.php');
 // }	
 
+$deleteLia = ' DELETE FROM `tbl_liabilities` WHERE student_id = '.$id;
+$conn->query($deleteLia);
+
+$deleteVou = ' DELETE FROM `tbl_scholarship` WHERE student_id = '.$id;
+$conn->query($deleteVou);
+
+$deleteEnr = ' DELETE FROM `tbl_enrollment` WHERE student_id = '.$id;
+$conn->query($deleteEnr);
+
+$deleteSched = ' DELETE FROM `tbl_student_schedule` WHERE student_id = '.$id;
+$conn->query($deleteSched);
+
+
+
 echo "<script>javascript:history.go(-1)</script>";

@@ -108,13 +108,13 @@ $active = $exec1->fetch_assoc();
                           </td>
                           <td style="font-size: 13px;">
                             <center>
-                              <?php echo ($sched['monday'] == true ? "<span class='schedule_day'>Monday</span>" : "" ); ?>
-                              <?php echo ($sched['tuesday'] == true ? "<span class='schedule_day'>Tuesday</span>" : "" ); ?> 
-                              <?php echo ($sched['wednesday'] == true ? "<span class='schedule_day'>Wednesday</span>" : "" ); ?> 
-                              <?php echo ($sched['thursday'] == true ? "<span class='schedule_day'>Thursday</span>" : "" ); ?> 
-                              <?php echo ($sched['friday'] == true ? "<span class='schedule_day'>Friday</span>" : "" ); ?> 
-                              <?php echo ($sched['saturday'] == true ? "<span class='schedule_day'>Saturday</span>" : "" ); ?> 
-                              <?php echo ($sched['sunday'] == true ? "<span class='schedule_day'>Sunday</span>" : "" ); ?>  |  <?php echo date('h:i A', strtotime($sched['teaching_time'])); ?> - <?php echo date('h:i A', strtotime($sched['teaching_time_to'])); ?>
+                              <?php echo ($sched['monday'] == true ? "<span class='schedule_day'>Mon</span>" : "" ); ?>
+                              <?php echo ($sched['tuesday'] == true ? "<span class='schedule_day'>Tue</span>" : "" ); ?> 
+                              <?php echo ($sched['wednesday'] == true ? "<span class='schedule_day'>Wed</span>" : "" ); ?> 
+                              <?php echo ($sched['thursday'] == true ? "<span class='schedule_day'>Thu</span>" : "" ); ?> 
+                              <?php echo ($sched['friday'] == true ? "<span class='schedule_day'>Fri</span>" : "" ); ?> 
+                              <?php echo ($sched['saturday'] == true ? "<span class='schedule_day'>Sat</span>" : "" ); ?> 
+                              <?php echo ($sched['sunday'] == true ? "<span class='schedule_day'>Sun</span>" : "" ); ?>  <br>  <?php echo date('h:i A', strtotime($sched['teaching_time'])); ?> - <?php echo date('h:i A', strtotime($sched['teaching_time_to'])); ?>
                             </center>
                           </td>
                           <td style="font-size: 13px;">
@@ -149,15 +149,15 @@ $active = $exec1->fetch_assoc();
 
                               <?php //echo date('h:i A', strtotime($row['time_out_time'])); ?>
                               <br>
-                              <?php if (date('h:i A', strtotime($row['time_in_time'])) > date('h:i A', strtotime($sched['teaching_time']))): ?>
+                              <?php if (strtotime($row['time_in_time']) > strtotime($sched['teaching_time'])): ?>
                                 <span style="  background-color: #dd0a34; padding: 2px; color: white; border-radius: 5px; margin: 1px; font-size: 13px;">- Late -</span>
                               <?php endif ?>
 
-                              <?php if (date('h:i A', strtotime($sched['teaching_time_to'])) > date('h:i A', strtotime($row['time_out_time']))): ?>
+                              <?php if (strtotime($sched['teaching_time_to']) > strtotime($row['time_out_time']) && $row['time_out'] != "0000-00-00 00:00:00"): ?>
                                 <span style="  background-color: #b3bb12; padding: 2px; color: white; border-radius: 5px; margin: 1px; font-size: 13px;">- Undertime -</span>
                               <?php endif ?>
 
-                              <?php if (date('h:i A', strtotime($row['time_out_time']) && $row['time_out'] != "0000-00-00 00:00:00") > date('h:i A', strtotime($sched['teaching_time_to']))): ?>
+                              <?php if (strtotime($row['time_out_time'] && $row['time_out'] != "0000-00-00 00:00:00") > strtotime($sched['teaching_time_to'])): ?>
                                 <span style="  background-color: seagreen; padding: 2px; color: white; border-radius: 5px; margin: 1px; font-size: 13px;">- Overtime -</span> 
                               <?php endif ?>
 

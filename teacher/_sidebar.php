@@ -1,3 +1,10 @@
+<?php 
+
+$sqlDtrA = ' SELECT `id`, `active`, `date_created` FROM `tbl_dtr_availability` ';
+$execDtrA = $conn->query($sqlDtrA);
+$dtr_option = $execDtrA->fetch_assoc();
+$dtrVal = $dtr_option['active'];
+ ?>
 
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -86,14 +93,29 @@
             </a>
           </li>
 
+          <?php if ($dtrVal == true): ?>
+
+            <li class="nav-item">
+              <a href="teacher_dtr.php" class="nav-link">
+                <i class="nav-icon fas fa-user-clock"></i>
+                <p>
+                  Daily Time Record
+                </p>
+              </a>
+            </li>
+
+          <?php else: ?>
+
           <li class="nav-item">
-            <a href="teacher_dtr.php" class="nav-link">
+            <a href="#" class="nav-link" style="cursor: not-allowed;" data-toggle="tooltip" data-placement="bottom" title="Online DTR has been disabled!">
               <i class="nav-icon fas fa-user-clock"></i>
               <p>
                 Daily Time Record
               </p>
             </a>
           </li>
+          
+          <?php endif; ?>
 
           <li class="nav-item">
             <a href="student_grading.php" class="nav-link">

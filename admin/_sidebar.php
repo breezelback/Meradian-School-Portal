@@ -1,3 +1,16 @@
+<?php require('../function_php/conn.php'); ?>
+<?php 
+
+// if(isset($_SESSION['blah']) && !empty($_SESSION['blah'])) {
+   
+// }
+
+$sqlDtrA = ' SELECT `id`, `active`, `date_created` FROM `tbl_dtr_availability` ';
+$execDtrA = $conn->query($sqlDtrA);
+$dtr_option = $execDtrA->fetch_assoc();
+
+ ?>
+
 
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -113,6 +126,21 @@
                   <p>Scholarship Vouchers</p>
                 </a>
               </li>
+              <?php if ($dtr_option['active'] == true): ?>
+                <li class="nav-item">
+                  <a href="../function_php/disable_dtr.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Disable Online DTR</p>
+                  </a>
+                </li>
+              <?php else: ?>
+                <li class="nav-item">
+                  <a href="../function_php/enable_dtr.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Enable Online DTR</p>
+                  </a>
+                </li>
+              <?php endif ?>
             </ul>
           </li>
       <!--     <li class="nav-item">

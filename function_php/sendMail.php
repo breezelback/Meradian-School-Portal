@@ -19,13 +19,13 @@ function send_mail_admin($email, $subject, $body)
 	$mail->Host	 = 'smtp.gmail.com';					
 	$mail->SMTPAuth = true;							
 	// $mail->Username = 'ayosthetic@gmail.com';				
-	$mail->Username = 'meradianschoolportal@gmail.com	';				
+	$mail->Username = 'meradianschoolportal@gmail.com';				
 	// $mail->Password = 'wkrfscekmdndzuyg';						
 	$mail->Password = 'vpkieebrepmazjss';						
 	$mail->SMTPSecure = 'tls';						
 	$mail->Port	 = 587;
 
-	$mail->setFrom('ayosthetic@gmail.com', 'The Meradian School Portal');		
+	$mail->setFrom('meradianschoolportal@gmail.com', 'The Meradian School Portal');		
 	$mail->addAddress($email);
 	// $mail->addAddress('breezelback@gmail.com', 'Name');
 

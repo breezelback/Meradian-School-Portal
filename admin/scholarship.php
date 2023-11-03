@@ -164,15 +164,21 @@
                     while ( $sub = $exec->fetch_assoc() ) {
                   ?>
                     <tr style="font-size: 14px;">
-                      <td><center><input type="checkbox" value="<?php echo $sub['id']; ?>" name="check_id[]"></center></td>
+                      <!-- <td><center><input type="checkbox" value="<?php echo $sub['id']; ?>" name="check_id[]"></center></td> -->
+                      <td>
+                        <center>
+                          <input type="checkbox" value="<?php echo $sub['id']; ?>" name="check_id[<?php echo $sub['id']; ?>]">
+                          <!-- <input type="text" value="<?php echo $sub['id']; ?>"> -->
+                        </center>
+                      </td>
                       <td><center><?php echo $sub['id_number']; ?></center></td>
                       <td><center><?php echo $sub['firstname']; ?></center></td>
                       <td><center><?php echo $sub['middlename']; ?></center></td>
                       <td><center><?php echo $sub['lastname']; ?></center></td>
                       <td><center><?php echo $sub['school_year']; ?></center></td>
                       <td><center><?php echo $sub['section']; ?></center></td>
-                      <td><center><input type="text" class="form-control" name="amount[]"></center></td>
-                      <td><center><input type="text" class="form-control" name="title[]"></center></td>
+                      <td><center><input type="text" class="form-control" name="amount[<?php echo $sub['id']; ?>]"></center></td>
+                      <td><center><input type="text" class="form-control" name="title[<?php echo $sub['id']; ?>]"></center></td>
                     </tr>
                   <?php } ?>
 

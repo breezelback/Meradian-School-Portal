@@ -135,12 +135,13 @@ $active = $exec1->fetch_assoc();
                               $button_value = "Time in";
                               $button_timeout_value = "Time out";
                               $button_stat = "";
-                              $button_timeout = "";
+                              $button_timeout = 'style="pointer-events: none; cursor: not-allowed;"';
 
                              $selectDtr = ' SELECT `id`, `schedule_id`, `teacher_id`, DATE_FORMAT(`time_in`,"%r") AS time_in, DATE_FORMAT(`time_out`,"%r") AS time_out, `status`, `academic_year_id` FROM `tbl_dtr` WHERE schedule_id = '.$schedule['id'].' AND academic_year_id = '.$active['id'].' AND time_in LIKE "'.$date_today.'%" ';
                               $execDtr = $conn->query($selectDtr);
                               if ($execDtr->num_rows > 0) 
                               {
+                                $button_timeout = "";
                                 $dtr = $execDtr->fetch_assoc();
                                 if ($dtr['time_out'] != "12:00:00 AM") 
                                 {

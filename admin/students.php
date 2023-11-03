@@ -107,7 +107,11 @@
                             <div class="btn-group">
                               <a href="edit_user.php?id=<?php echo $row['id']; ?>" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update Information"><i class="fa fa-edit"></i></a>
                               <a href="view_student_academic.php?id=<?php echo $row['id']; ?>" class="btn btn-warning btn-sm text-white" data-toggle="tooltip" data-placement="bottom" title="View Academic Information"><i class="fa fa-cog"></i></a>
-                              <a href="../function_php/delete_user.php?id=<?php echo $row['id']; ?>&user_type=student" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Delete Student Record"><i class="fa fa-trash"></i></a>
+
+                              <!-- <a href="../function_php/delete_user.php?id=<?php echo $row['id']; ?>&user_type=student" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Delete Student Record"><i class="fa fa-trash"></i></a> -->
+
+                              <button onclick="delete_user(<?php echo $row['id']; ?>)" class="btn btn-danger btn-sm text-white" data-toggle="tooltip" data-placement="bottom" title="Delete Student Record"><i class="fa fa-trash"></i></button>
+
                             </div>
                           </td>
                         </tr>
@@ -156,30 +160,8 @@
 
 <?php include'_include_footer.php'; ?>
 
-<script src="https://f001.backblazeb2.com/file/buonzz-assets/jquery.ph-locations-v1.0.0.js"></script>
-
 
 <script>  
-  var delayInMilliseconds = 2000; //1 second
-  //jeck pending
-  alert('<?php echo $row['province']; ?>');
-  $('#my-province-dropdown').ph_locations({'location_type': 'provinces'});
-  $('#my-province-dropdown').ph_locations( 'fetch_list');
-  $('#my-city-dropdown').ph_locations({'location_type': 'cities'});
-  $('#my-city-dropdown').ph_locations( 'fetch_list', [{"province_code": '<?php echo $row['province']; ?>'}]);
-
-  $('#my-barangay-dropdown').ph_locations({'location_type': 'barangays'});
-  $('#my-barangay-dropdown').ph_locations( 'fetch_list', [{"city_code": '<?php echo $row['city']; ?>'}]);
-
-  setTimeout(function() {
-    $('#my-province-dropdown').val('<?php echo $row['province']; ?>');
-    $('#my-city-dropdown').val('<?php echo $row['city']; ?>');
-    $('#my-barangay-dropdown').val('<?php echo $row['barangay']; ?>');
-  }, delayInMilliseconds);
-
-
-
-
 
   $(function () {
     $("#example1").DataTable({
@@ -199,6 +181,14 @@
   });
 
 
+   function delete_user(id)
+  {
+    if (confirm('Are you sure you want to delete this user?')) {
+      window.location.href = "../function_php/delete_user.php?id="+id;
+    } else {
+      // Do nothing!
+    }
+  }
 
 </script>
 </body>

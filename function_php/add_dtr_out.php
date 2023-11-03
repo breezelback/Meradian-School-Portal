@@ -14,18 +14,18 @@ $sql = ' UPDATE `tbl_dtr` SET `time_out` = NOW() WHERE schedule_id = '.$schedule
 $exec = $conn->query($sql);
 
 
-if ($exec->num_rows > 0) 
-{
+// if ($exec->num_rows > 0) 
+// {
 	$_SESSION['toastr']['title'] = 'Looking Good!';
 	$_SESSION['toastr']['message'] = 'Successfully Logged out.';
 	$_SESSION['toastr']['color'] = 'green';
-}
-else
-{
-	$_SESSION['toastr']['title'] = 'Error!';
-	$_SESSION['toastr']['message'] = 'Missing Time in.';
-	$_SESSION['toastr']['color'] = 'red';
-}
+// }
+// else
+// {
+// 	$_SESSION['toastr']['title'] = 'Error!';
+// 	$_SESSION['toastr']['message'] = 'Missing Time in.';
+// 	$_SESSION['toastr']['color'] = 'red';
+// }
 
 
 header('location: ../teacher/teacher_dtr.php');

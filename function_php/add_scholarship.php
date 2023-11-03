@@ -16,10 +16,11 @@ if(empty($check_id))
 }
 else
 {
-	for ($i=0; $i < count($check_id); $i++) { 
+	// for ($i=0; $i < count($check_id); $i++) { 
+	foreach ($check_id as $key => $value) {
 
 		
-		$sql = ' INSERT INTO `tbl_scholarship`(`student_id`, `academic_year_id`, `amount`, `title`, `date_created`)  VALUES ( '.$check_id[$i].', '.$year_id.', '.$_POST['amount'][$i].', "'.$_POST['title'][$i].'", NOW() ) ';
+		$sql = ' INSERT INTO `tbl_scholarship`(`student_id`, `academic_year_id`, `amount`, `title`, `date_created`)  VALUES ( '.$key.', '.$year_id.', '.$_POST['amount'][$key].', "'.$_POST['title'][$key].'", NOW() ) ';
 		$exec = $conn->query($sql);
 
 

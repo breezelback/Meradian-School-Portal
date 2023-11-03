@@ -83,7 +83,7 @@
                           <td><center><?php echo $row['date_created']; ?></td>
                           <td><center>
                             <div class="btn-group">
-                              <a href="edit_user.php?id=<?php echo $row['id']; ?>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
+                              <a href="update_subject.php?id=<?php echo $row['id']; ?>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
                               <!-- <a href="../function_php/delete_subject.php?id=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a> -->
                               <button onclick="delete_subject(<?php echo $row['id']; ?>);" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></butto>
                           </td>

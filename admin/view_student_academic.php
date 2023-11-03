@@ -205,6 +205,98 @@
           <!-- right col -->
         </div>
         <!-- /.row (main row) -->
+
+        <!-- Table Grades -->
+        <div class="row">
+          <!-- Left col -->
+          <section class="col-lg-12">
+            <!-- Custom tabs (Charts with tabs)-->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <p><b>Grading</b></p>
+                      <a class="nav-link btn-warning text-white float-right" target="_blank" href="../student/student_print_grades.php?academic_year_id=<?php echo $active['id']; ?>&student_id=<?php echo $_GET['id']; ?>">Print Grade Report &nbsp;<i class="fa fa-print"></i></a>
+                </h3>
+              </div><!-- /.card-header -->
+              <div class="card-body">
+                <div class="tab-content p-0">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <table id="example1" class="table table-bordered table-striped">
+                          <thead>
+                          <tr>
+                            <th>CODE</th>
+                            <th>SUBJECT</th>
+                            <th>1ST</th>
+                            <th>2ND</th>
+                            <th>3RD</th>
+                            <th>4TH</th>
+                            <th>AVERAGE</th>
+                          </tr>
+                          </thead>
+                    <tbody>
+
+                      <?php   
+
+                       
+
+                          $selectStudSched = ' SELECT `id`, `student_id`, `schedule_id`, `date_created`, `academic_year_id` FROM `tbl_student_schedule` WHERE student_id = '.$_GET['id'].' AND academic_year_id = '.$active['id'];
+                          $execStudSched = $conn->query($selectStudSched);
+                          while ($stud = $execStudSched->fetch_assoc() ) {
+
+                            $selectSched = ' SELECT `id`, `teacher_id`, `subject_id`, `teaching_day`, `teaching_time`, `schedule_code`, `status`, `date_created`, `teaching_time_to`, `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`, `school_year`, `section` FROM `tbl_schedule` WHERE id = '.$stud['schedule_id'];
+                            $execSched = $conn->query($selectSched);
+                            $sched = $execSched->fetch_assoc();
+
+                            $selectSub = ' SELECT `id`, `subject_name`, `subject_code`, `date_created`, `school_year` FROM `tbl_subject` WHERE id = '.$sched['subject_id'];
+                            $execSub = $conn->query($selectSub);
+                            $subject = $execSub->fetch_assoc();
+
+                            $selectSched = ' SELECT `id`, `stud_schedule_id`, `first`, `second`, `third`, `fourth`, `average`, `academic_year_id`, `date_created` FROM tbl_grades WHERE stud_schedule_id = '.$stud['id'];
+                            $execSched = $conn->query($selectSched);
+                            $rowGrade = $execSched->fetch_assoc();
+
+                            $sql = ' SELECT `id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, DATE_FORMAT(birthdate, "%M %d, %Y") AS birthdate, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `username`, `password`, `user_type`, `status`, `date_created` FROM `tbl_user` WHERE id = '.$stud['student_id'];
+                            $exec = $conn->query($sql);
+                            $row = $exec->fetch_assoc();
+                           
+                      ?>
+                        <tr style="font-size: 14px;">
+                         <!--  <td><?php echo $row['id_number']; ?></td>
+                          <td><?php echo $row['firstname']; ?> <?php echo $row['lastname']; ?></td>
+                          <td><?php echo $row['school_year']; ?> | <?php echo $row['section']; ?></td> -->
+                          <td><?php echo $subject['subject_code']; ?></td>
+                          <td><?php echo $subject['subject_name']; ?></td>
+                          <td><?php echo (empty($rowGrade['first']) ? 0 : $rowGrade['first']); ?></td>
+                          <td><?php echo (empty($rowGrade['second']) ? 0 : $rowGrade['second']); ?></td>
+                          <td><?php echo (empty($rowGrade['third']) ? 0 : $rowGrade['third']); ?></td>
+                          <td><?php echo (empty($rowGrade['fourth']) ? 0 : $rowGrade['fourth']); ?></td>
+                          <td><b><?php echo ((empty($rowGrade['first']) ? 0 : $rowGrade['first']) + (empty($rowGrade['second']) ? 0 : $rowGrade['second']) + (empty($rowGrade['third']) ? 0 : $rowGrade['third']) + (empty($rowGrade['fourth']) ? 0 : $rowGrade['fourth'])) / 4; ?></b> </td>
+                          <!-- <td>
+                            <center>
+                              <div class="btn-group">
+                                <a href="view_student_grade.php?id=<?php echo $row['id']; ?>&sched_id=<?php echo $stud['id']; ?>" class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-placement="bottom" title="View Grades"><i class="fa fa-sync-alt"></i></a>
+                              </div>
+                            </center>
+                          </td> -->
+                        </tr>
+                      <?php  }  ?>
+
+                    </tbody>  
+
+                        </table>
+                      </div>
+                    </div>  
+
+                </div>
+              </div><!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+            <!-- /.card -->
+          </section>
+          <!-- right col -->
+        </div>
+        <!-- /.row (main row) -->
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
