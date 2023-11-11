@@ -164,12 +164,37 @@ $(function () {
     }
   }
 
+  var studentChartOptions = {
+    maintainAspectRatio: false,
+    responsive: true,
+    legend: {
+      display: false
+    },
+    scales: {
+      xAxes: [{
+        gridLines: {
+          display: false
+        }
+      }],
+      yAxes: [{
+        gridLines: {
+          display: false
+        }
+      }]
+    }
+  }
+
   // This will get the first returned node in the jQuery collection.
   // eslint-disable-next-line no-unused-vars
   var salesChart = new Chart(salesChartCanvas, { // lgtm[js/unused-local-variable]
     type: 'bar',
     data: salesChartData,
     options: salesChartOptions
+  })
+  var salesChart = new Chart(studentChartCanvas, { // lgtm[js/unused-local-variable]
+    type: 'pie',
+    data: studentChartData,
+    options: studentChartOptions
   })
 
   // Donut Chart

@@ -78,6 +78,97 @@
   $execStudent12 = $conn->query($sqlStudentCount12);
   $dec = $execStudent12->fetch_assoc();
 
+
+ $sqlKinder = ' SELECT COUNT(a.id) as total_enrolled_students FROM tbl_user a LEFT JOIN tbl_enrollment b ON b.student_id = a.id WHERE a.user_type = "student" AND b.status = "Enrolled" AND b.academic_year_id = '.$active['id'].' AND a.school_year = "Kinder" ';
+  $execKinder = $conn->query($sqlKinder);
+  $Kinder = $execKinder->fetch_assoc();
+
+ $sqlGrade = ' SELECT COUNT(a.id) as total_enrolled_students FROM tbl_user a LEFT JOIN tbl_enrollment b ON b.student_id = a.id WHERE a.user_type = "student" AND b.status = "Enrolled" AND b.academic_year_id = '.$active['id'].' AND a.school_year = "Grade 1" ';
+  $execGrade = $conn->query($sqlGrade);
+  $Grade1 = $execGrade->fetch_assoc();
+
+ $sqlGrade = ' SELECT COUNT(a.id) as total_enrolled_students FROM tbl_user a LEFT JOIN tbl_enrollment b ON b.student_id = a.id WHERE a.user_type = "student" AND b.status = "Enrolled" AND b.academic_year_id = '.$active['id'].' AND a.school_year = "Grade 2" ';
+  $execGrade = $conn->query($sqlGrade);
+  $Grade2 = $execGrade->fetch_assoc();
+
+ $sqlGrade = ' SELECT COUNT(a.id) as total_enrolled_students FROM tbl_user a LEFT JOIN tbl_enrollment b ON b.student_id = a.id WHERE a.user_type = "student" AND b.status = "Enrolled" AND b.academic_year_id = '.$active['id'].' AND a.school_year = "Grade 3" ';
+  $execGrade = $conn->query($sqlGrade);
+  $Grade3 = $execGrade->fetch_assoc();
+
+ $sqlGrade = ' SELECT COUNT(a.id) as total_enrolled_students FROM tbl_user a LEFT JOIN tbl_enrollment b ON b.student_id = a.id WHERE a.user_type = "student" AND b.status = "Enrolled" AND b.academic_year_id = '.$active['id'].' AND a.school_year = "Grade 4" ';
+  $execGrade = $conn->query($sqlGrade);
+  $Grade4 = $execGrade->fetch_assoc();
+
+ $sqlGrade = ' SELECT COUNT(a.id) as total_enrolled_students FROM tbl_user a LEFT JOIN tbl_enrollment b ON b.student_id = a.id WHERE a.user_type = "student" AND b.status = "Enrolled" AND b.academic_year_id = '.$active['id'].' AND a.school_year = "Grade 5" ';
+  $execGrade = $conn->query($sqlGrade);
+  $Grade5 = $execGrade->fetch_assoc();
+
+ $sqlGrade = ' SELECT COUNT(a.id) as total_enrolled_students FROM tbl_user a LEFT JOIN tbl_enrollment b ON b.student_id = a.id WHERE a.user_type = "student" AND b.status = "Enrolled" AND b.academic_year_id = '.$active['id'].' AND a.school_year = "Grade 6" ';
+  $execGrade = $conn->query($sqlGrade);
+  $Grade6 = $execGrade->fetch_assoc();
+
+ $sqlGrade = ' SELECT COUNT(a.id) as total_enrolled_students FROM tbl_user a LEFT JOIN tbl_enrollment b ON b.student_id = a.id WHERE a.user_type = "student" AND b.status = "Enrolled" AND b.academic_year_id = '.$active['id'].' AND a.school_year = "Grade 7" ';
+  $execGrade = $conn->query($sqlGrade);
+  $Grade7 = $execGrade->fetch_assoc();
+
+ $sqlGrade = ' SELECT COUNT(a.id) as total_enrolled_students FROM tbl_user a LEFT JOIN tbl_enrollment b ON b.student_id = a.id WHERE a.user_type = "student" AND b.status = "Enrolled" AND b.academic_year_id = '.$active['id'].' AND a.school_year = "Grade 8" ';
+  $execGrade = $conn->query($sqlGrade);
+  $Grade8 = $execGrade->fetch_assoc();
+
+ $sqlGrade = ' SELECT COUNT(a.id) as total_enrolled_students FROM tbl_user a LEFT JOIN tbl_enrollment b ON b.student_id = a.id WHERE a.user_type = "student" AND b.status = "Enrolled" AND b.academic_year_id = '.$active['id'].' AND a.school_year = "Grade 9" ';
+  $execGrade = $conn->query($sqlGrade);
+  $Grade9 = $execGrade->fetch_assoc();
+
+ $sqlGrade = ' SELECT COUNT(a.id) as total_enrolled_students FROM tbl_user a LEFT JOIN tbl_enrollment b ON b.student_id = a.id WHERE a.user_type = "student" AND b.status = "Enrolled" AND b.academic_year_id = '.$active['id'].' AND a.school_year = "Grade 10" ';
+  $execGrade = $conn->query($sqlGrade);
+  $Grade10 = $execGrade->fetch_assoc();
+
+ $sqlGrade = ' SELECT COUNT(a.id) as total_enrolled_students FROM tbl_user a LEFT JOIN tbl_enrollment b ON b.student_id = a.id WHERE a.user_type = "student" AND b.status = "Enrolled" AND b.academic_year_id = '.$active['id'].' AND a.school_year = "Grade 11" ';
+  $execGrade = $conn->query($sqlGrade);
+  $Grade11 = $execGrade->fetch_assoc();
+
+ $sqlGrade = ' SELECT COUNT(a.id) as total_enrolled_students FROM tbl_user a LEFT JOIN tbl_enrollment b ON b.student_id = a.id WHERE a.user_type = "student" AND b.status = "Enrolled" AND b.academic_year_id = '.$active['id'].' AND a.school_year = "Grade 12" ';
+  $execGrade = $conn->query($sqlGrade);
+  $Grade12 = $execGrade->fetch_assoc();
+
+ $sqlGrade = ' SELECT COUNT(a.id) as total_enrolled_students FROM tbl_user a LEFT JOIN tbl_enrollment b ON b.student_id = a.id WHERE a.user_type = "student" AND b.status = "Enrolled" AND b.academic_year_id = '.$active['id'].' AND a.school_year = "First Year" ';
+  $execGrade = $conn->query($sqlGrade);
+  $FirstYear = $execGrade->fetch_assoc();
+
+ $sqlKinder = ' SELECT COUNT(a.id) as total_enrolled_students FROM tbl_user a LEFT JOIN tbl_enrollment b ON b.student_id = a.id WHERE a.user_type = "student" AND b.status = "Enrolled" AND b.academic_year_id = '.$active['id'].' AND a.school_year = "Second Year" ';
+  $execKinder = $conn->query($sqlKinder);
+  $SecondYear = $execKinder->fetch_assoc();
+
+ $sqlKinder = ' SELECT COUNT(a.id) as total_enrolled_students FROM tbl_user a LEFT JOIN tbl_enrollment b ON b.student_id = a.id WHERE a.user_type = "student" AND b.status = "Enrolled" AND b.academic_year_id = '.$active['id'].' AND a.school_year = "Third Year" ';
+  $execKinder = $conn->query($sqlKinder);
+  $ThirdYear = $execKinder->fetch_assoc();
+
+ $sqlKinder = ' SELECT COUNT(a.id) as total_enrolled_students FROM tbl_user a LEFT JOIN tbl_enrollment b ON b.student_id = a.id WHERE a.user_type = "student" AND b.status = "Enrolled" AND b.academic_year_id = '.$active['id'].' AND a.school_year = "Fourth Year" ';
+  $execKinder = $conn->query($sqlKinder);
+  $FourthYear = $execKinder->fetch_assoc();
+
+  // Acad Year
+  $aa = 0;
+  
+  $selectAcadYear = ' SELECT `id`, `academic_year`, `status`, `date_created` FROM `tbl_academic_year` ORDER BY academic_year ASC';
+  $execAcadYear = $conn->query($selectAcadYear);
+  while ($acad_years = $execAcadYear->fetch_assoc()) {
+
+    $getStudAcad = ' SELECT count(id) as ttlstdnt FROM tbl_enrollment WHERE academic_year_id = '.$acad_years['id'];
+    $execStudAcad = $conn->query($getStudAcad);
+    $rowStudAcad = $execStudAcad->fetch_assoc();
+
+    $gg[$aa] = $acad_years['academic_year'];
+    $hh[$aa] = $rowStudAcad['ttlstdnt'];
+    $aa++;
+  }
+  // print_r($gg);
+  // print_r($hh);
+  // die();
+  // $acad_years = $execAcadYear->fetch_assoc();
+
+  // print_r($acad_years['academic_year']);
+
   ?>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -346,37 +437,25 @@
 
 
               <!-- Map card -->
-              <div class="card bg-gradient-primary">
+              <div class="card">
                 <div class="card-header border-0">
                   <h3 class="card-title">
                     <i class="fas fa-chart mr-1"></i>
-                    Student Analytics
+                    Enrolled by Student Year
                   </h3>
                 </div>
                 <div class="card-body">
-                  <!-- <div id="world-map" style="height: 250px; width: 100%;"></div> -->
+                  <div class="tab-content p-0">
+                    <!-- Morris chart - Sales -->
+                    <div class="chart tab-pane active" id="student-chart" style="position: relative; height: 450px;">
+                        <canvas id="student_year_chart" height="300" style="height: 300px;"></canvas>
+                     </div>
+                    <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;">
+                      <canvas id="sales-chart-canvas" height="300" style="height: 300px;"></canvas>
+                    </div>
+                  </div>
                 </div>
                 <!-- /.card-body-->
-                <div class="card-footer bg-transparent">
-                  <div class="row">
-                    <div class="col-4 text-center">
-                      <div id="sparkline-1"></div>
-                      <div class="text-white">All</div>
-                    </div>
-                    <!-- ./col -->
-                    <div class="col-4 text-center">
-                      <div id="sparkline-2"></div>
-                      <div class="text-white">New</div>
-                    </div>
-                    <!-- ./col -->
-                    <div class="col-4 text-center">
-                      <div id="sparkline-3"></div>
-                      <div class="text-white">Transferee</div>
-                    </div>
-                    <!-- ./col -->
-                  </div>
-                  <!-- /.row -->
-                </div>
               </div>
               <!-- /.card -->
 
@@ -691,15 +770,18 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-
 <script>
    /* Chart.js Charts */
   // Sales chart
   var salesChartCanvas = document.getElementById('revenue-chart-canvas').getContext('2d')
   // $('#revenue-chart').get(0).getContext('2d');
-
+  // const array_acad_year = ['a', 'b', 'c'];
+  const array_acad_year = <?php echo json_encode($gg); ?>;
+  const array_total_students = <?php echo json_encode($hh); ?>;
   var salesChartData = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    // labels: ['January', 'February'],
+    // labels: [],
+    labels: array_acad_year,
     datasets: [
       {
         label: 'Enrolled Students',
@@ -711,7 +793,43 @@
         pointStrokeColor: 'rgba(60,141,188,1)',
         pointHighlightFill: '#fff',
         pointHighlightStroke: 'rgba(60,141,188,1)',
-        data: [<?php echo $jan['total_count']; ?>, <?php echo $feb['total_count']; ?>, <?php echo $mar['total_count']; ?>, <?php echo $apr['total_count']; ?>, <?php echo $may['total_count']; ?>, <?php echo $jun['total_count']; ?>, <?php echo $jul['total_count']; ?>, <?php echo $aug['total_count']; ?>, <?php echo $sep['total_count']; ?>, <?php echo $oct['total_count']; ?>, <?php echo $nov['total_count']; ?>, <?php echo $dec['total_count']; ?>]
+        data: array_total_students
+      }
+      // {
+      //   label: 'Electronics',
+      //   backgroundColor: 'rgba(210, 214, 222, 1)',
+      //   borderColor: 'rgba(210, 214, 222, 1)',
+      //   pointRadius: false,
+      //   pointColor: 'rgba(210, 214, 222, 1)',
+      //   pointStrokeColor: '#c1c7d1',
+      //   pointHighlightFill: '#fff',
+      //   pointHighlightStroke: 'rgba(220,220,220,1)',
+      //   data: [65, 59, 80, 81, 56, 55, 40]
+      // }
+    ]
+  }
+</script>
+
+<script>
+   /* Chart.js Charts */
+  // Sales chart
+  var studentChartCanvas = document.getElementById('student_year_chart').getContext('2d')
+  // $('#revenue-chart').get(0).getContext('2d');
+
+  var studentChartData = {
+    labels: ['Kinder', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6', 'Grade 7', 'Grade 8', 'Grade 9', 'Grade 10', 'Grade 11', 'Grade 12', 'First Year', 'Second Year', 'Third Year', 'Fourth Year'],
+    datasets: [
+      {
+        label: 'Enrolled Students',
+        // backgroundColor: 'rgba(60,141,188,0.9)',
+        backgroundColor: ['#ffc107','#28a745','#20c997','#6c757d','#dc3545','#6f42c1','#ffc107','#28a745','#20c997','#6c757d','#dc3545','#6f42c1','#ffc107','#28a745','#20c997','#6c757d'],
+        borderColor: 'rgba(60,141,188,0.8)',
+        pointRadius: false,
+        pointColor: '#3b8bba',
+        pointStrokeColor: 'rgba(60,141,188,1)',
+        pointHighlightFill: '#fff',
+        pointHighlightStroke: 'rgba(60,141,188,1)',
+        data: [<?php echo $Kinder['total_enrolled_students']; ?>, <?php echo $Grade1['total_enrolled_students']; ?>, <?php echo $Grade2['total_enrolled_students']; ?>, <?php echo $Grade3['total_enrolled_students']; ?>, <?php echo $Grade4['total_enrolled_students']; ?>, <?php echo $Grade5['total_enrolled_students']; ?>, <?php echo $Grade6['total_enrolled_students']; ?>, <?php echo $Grade7['total_enrolled_students']; ?>, <?php echo $Grade8['total_enrolled_students']; ?>, <?php echo $Grade9['total_enrolled_students']; ?>, <?php echo $Grade10['total_enrolled_students']; ?>, <?php echo $Grade11['total_enrolled_students']; ?>, <?php echo $Grade12['total_enrolled_students']; ?>, <?php echo $FirstYear['total_enrolled_students']; ?>, <?php echo $SecondYear['total_enrolled_students']; ?>, <?php echo $ThirdYear['total_enrolled_students']; ?>, <?php echo $FourthYear['total_enrolled_students']; ?>]
       }
       // {
       //   label: 'Electronics',
