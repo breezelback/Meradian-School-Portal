@@ -79,7 +79,7 @@
                     
                     <div class="row">
                       <div class="col-md-12">
-                        <h3>Current Academic Year: <span style="color: darkred; font-weight: bold;"><?php if(!empty($active['academic_year'])) { echo $active['academic_year'];} else {echo "";}  ?></span></h3>
+                        <!-- <h3>Current Academic Year: <span style="color: darkred; font-weight: bold;"><?php if(!empty($active['academic_year'])) { echo $active['academic_year'];} else {echo "";}  ?></span></h3> -->
                         <table id="example1" class="table table-bordered table-striped">
                           <thead>
                           <tr>
@@ -93,7 +93,8 @@
                           </thead>
                           <tbody>
                             <?php 
-                              $sql = ' SELECT `id`, `student_id`, `academic_year_id`, `amount`, `status`, DATE_FORMAT(`date_created`, "%M %d, %Y") as date_created, `title` FROM `tbl_scholarship` WHERE student_id = '.$_SESSION['id'].' AND academic_year_id = '.$active['id'].' ';
+                              // $sql = ' SELECT `id`, `student_id`, `academic_year_id`, `amount`, `status`, DATE_FORMAT(`date_created`, "%M %d, %Y") as date_created, `title` FROM `tbl_scholarship` WHERE student_id = '.$_SESSION['id'].' AND academic_year_id = '.$active['id'].' ';
+                              $sql = ' SELECT `id`, `student_id`, `academic_year_id`, `amount`, `status`, DATE_FORMAT(`date_created`, "%M %d, %Y") as date_created, `title` FROM `tbl_scholarship` WHERE student_id = '.$_SESSION['id'].' ';
                               $exec = $conn->query($sql);
                               while ( $row = $exec->fetch_assoc() ) {
                             ?>

@@ -231,10 +231,10 @@
                   <h3 class="card-title">
                     <i class="fas fa-chart mr-1"></i>
                     Newly Registered Students
-                  </h3> <a href="print_student.php" target="_blank" class="btn btn-primary float-sm-right"><i class="fa fa-print"></i></a>
+                  </h3>
                 </div>
                 <div class="card-body">
-                    <table id="example3" class="table table-bordered">
+                    <table class="table table-bordered">
                       <thead>
                         <th>ID Number</th>
                         <th>Name</th>
@@ -306,7 +306,7 @@
 
 
              <!-- Map card -->
-              <div class="card" style="display: none;">
+              <div class="card">
                 <div class="card-header border-0">
                   <h3 class="card-title">
                     <i class="fas fa-chart mr-1"></i>
@@ -346,7 +346,7 @@
 
 
               <!-- Map card -->
-              <div class="card bg-gradient-primary">
+              <div class="card bg-gradient-primary" style="display: none;">
                 <div class="card-header border-0">
                   <h3 class="card-title">
                     <i class="fas fa-chart mr-1"></i>
@@ -742,16 +742,6 @@
       "paging": true,
       "lengthChange": false,
       "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-
-    $("#example3").DataTable({
-      "paging": false,
-      "lengthChange": false,
-      "searching": true,
       "ordering": true,
       "info": true,
       "autoWidth": false,

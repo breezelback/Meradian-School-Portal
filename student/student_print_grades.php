@@ -49,17 +49,17 @@ $student = $exec->fetch_assoc();
 		</div>
 		<hr>
 		<div class="row mt-5">
-			<div class="col-md-4">
+			<div class="col-sm-4">
 				<p>First Name: <b><?php echo $student['firstname']; ?></b></p>
 				<p>Middle Name: <b><?php echo $student['middlename']; ?></b></p>
 				<p>Last Name: <b><?php echo $student['lastname']; ?></b></p>
 			</div>
-			<div class="col-md-4">
+			<div class="col-sm-4">
 				<p>Gender: <b><?php echo $student['gender']; ?></b></p>
 				<p>Email: <b><?php echo $student['email']; ?></b></p>
 				<p>Contact Number: <b><?php echo $student['contact_number']; ?></b></p>
 			</div>
-			<div class="col-md-4">
+			<div class="col-sm-4">
 				<p>Student Number: <b><?php echo $student['id_number']; ?></b></p>
 				<p>School Year: <b><?php echo $student['school_year']; ?></b></p>
 				<p>Section: <b><?php echo $student['section']; ?></b></p>

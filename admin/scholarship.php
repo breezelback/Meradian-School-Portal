@@ -64,7 +64,7 @@
               </div><!-- /.card-header -->
               <div class="card-body">
                 <div class="tab-content p-0">
-                  <h3>Current Academic Year: <span style="color: darkred; font-weight: bold;"><?php if(!empty($active['academic_year'])) { echo $active['academic_year'];} else {echo "";}  ?></span></h3>
+                  <!-- <h3>Current Academic Year: <span style="color: darkred; font-weight: bold;"><?php if(!empty($active['academic_year'])) { echo $active['academic_year'];} else {echo "";}  ?></span></h3> -->
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                     <tr>
@@ -80,8 +80,8 @@
                     </thead>
                     <tbody>
                       <?php 
-                        // $sql = " SELECT `id`, `academic_year_id`, `student_id`, `status`, `date_created` FROM `tbl_enrollment` WHERE academic_year_id = ".$active['id']." AND status = 'Enrolled' ";
-                        $sql = " SELECT `id`, `student_id`, `academic_year_id`, `amount`, `title`, `status`, `date_created` FROM `tbl_scholarship` WHERE academic_year_id = ".$active['id']." ";
+                        // $sql = " SELECT `id`, `student_id`, `academic_year_id`, `amount`, `title`, `status`, `date_created` FROM `tbl_scholarship` WHERE academic_year_id = ".$active['id']." ";
+                        $sql = " SELECT `id`, `student_id`, `academic_year_id`, `amount`, `title`, `status`, `date_created` FROM `tbl_scholarship` ";
                         $exec = $conn->query($sql);
                         while($row = $exec->fetch_assoc()){
 

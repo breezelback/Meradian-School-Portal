@@ -1,6 +1,7 @@
 <?php 
 session_start();
 require('conn.php');
+require 'sendMail.php';
 
 
 
@@ -119,6 +120,8 @@ else
 if ($usertype == "student") 
 {
 	header('location: ../admin/students.php');
+
+	send_mail_admin($email, 'Welcome to The Meradian School Portal!', 'Dear '.$firstname.' '.$lastname.', <br><br> We are pleased to inform you that you have been successfully registered in our system. Below are your login credentials:<br><br>Username: <b>'.$id_number.'</b><br></b>Password:<b>'.$simple_string.'</b><br>Student Type: <b>'.$student_status.'</b><br><br><br><br>-----<i>This is a system generated email.</i>-----');
 }
 else
 {
