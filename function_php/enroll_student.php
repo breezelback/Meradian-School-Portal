@@ -28,7 +28,11 @@ else
 		}
 		else
 		{
-			$sql = ' INSERT INTO `tbl_enrollment`(`academic_year_id`, `student_id`, `status`, `date_created`) VALUES ( '.$year_id.', '.$check_id[$i].', "Enrolled", NOW() ) ';
+			$getYear = 'SELECT school_year, gender FROM tbl_user WHERE id = '.$check_id[$i];
+			$execYear = $conn->query($getYear);
+			$stud_info = $execYear->fetch_assoc();
+
+			$sql = ' INSERT INTO `tbl_enrollment`(`academic_year_id`, `student_id`, `status`, `date_created`, `school_year`, `gender`) VALUES ( '.$year_id.', '.$check_id[$i].', "Enrolled", NOW(), "'.$stud_info['school_year'].'", "'.$stud_info['gender'].'" ) ';
 			$exec = $conn->query($sql);
 		}
 

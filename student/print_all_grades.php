@@ -145,7 +145,11 @@ $student = $exec->fetch_assoc();
                   <td></td>
                   <td></td>
                   <td><b>Average:</b></td>
-                  <td><span style="color: darkred; font-weight: bold;"><?php echo number_format((float)$average_sum / $counter, 2, '.', ''); ?></span></td>
+                  <?php if ($counter == 0): ?>
+                    <td>0</td>
+                  <?php else: ?>
+                    <td><span style="color: darkred; font-weight: bold;"><?php echo number_format((float)$average_sum / $counter, 2, '.', ''); ?></span></td>
+                  <?php endif ?>
                 </tr>
               </tfoot>
             </tbody>  

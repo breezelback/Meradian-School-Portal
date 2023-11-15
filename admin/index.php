@@ -147,6 +147,37 @@
   $execKinder = $conn->query($sqlKinder);
   $FourthYear = $execKinder->fetch_assoc();
 
+
+  $year_qry = '';
+  $gender_qry = '';
+
+  $year_val = "All Year";
+  $gender_val = "All Gender";
+
+  if (isset($_POST['btn_search'])) 
+  {
+    if ($_POST['filter_year'] == "") 
+    {
+      $year_qry = "";
+    }
+    else
+    {
+      $year_qry = "AND school_year = '".$_POST['filter_year']."' ";
+      $year_val = $_POST['filter_year'];
+    }
+
+    if ($_POST['filter_gender'] == "") 
+    {
+      $gender_qry = "";
+    }
+    else
+    {
+      $gender_qry = "AND gender = '".$_POST['filter_gender']."' ";
+      $gender_val = $_POST['filter_gender'];
+    }
+  }
+
+
   // Acad Year
   $aa = 0;
   
@@ -154,7 +185,7 @@
   $execAcadYear = $conn->query($selectAcadYear);
   while ($acad_years = $execAcadYear->fetch_assoc()) {
 
-    $getStudAcad = ' SELECT count(id) as ttlstdnt FROM tbl_enrollment WHERE academic_year_id = '.$acad_years['id'];
+    $getStudAcad = ' SELECT count(id) as ttlstdnt FROM tbl_enrollment WHERE academic_year_id = '.$acad_years['id'].' '.$year_qry.' '.$gender_qry;
     $execStudAcad = $conn->query($getStudAcad);
     $rowStudAcad = $execStudAcad->fetch_assoc();
 
@@ -281,7 +312,7 @@
               <div class="card-header">
                 <h3 class="card-title">
                   <i class="fas fa-chart-pie mr-1"></i>
-                  User Monthly Registration
+                  Academic Year Enrollees <i style="font-size: 13px;">(<?php echo $year_val; ?>, <?php echo $gender_val; ?>)</i>
                 </h3>
                 <div class="card-tools">
                   <!-- <ul class="nav nav-pills ml-auto">
@@ -292,6 +323,42 @@
                       <a class="nav-link" href="#sales-chart" data-toggle="tab">Donut</a>
                     </li>
                   </ul> -->
+                  <form action="" method="POST">
+                    <ul class="nav nav-pills ml-auto">
+                      <li class="nav-item">
+                        <select class="nav-link" name="filter_year" id="filter_year">
+                          <option value="" selected="">All Year</option>
+                          <option value="Kinder">Kinder</option>
+                          <option value="Grade 1">Grade 1</option>
+                          <option value="Grade 2">Grade 2</option>
+                          <option value="Grade 3">Grade 3</option>
+                          <option value="Grade 4">Grade 4</option>
+                          <option value="Grade 5">Grade 5</option>
+                          <option value="Grade 6">Grade 6</option>
+                          <option value="Grade 7">Grade 7</option>
+                          <option value="Grade 8">Grade 8</option>
+                          <option value="Grade 9">Grade 9</option>
+                          <option value="Grade 10">Grade 10</option>
+                          <option value="Grade 11">Grade 11</option>
+                          <option value="Grade 12">Grade 12</option>
+                          <option value="First Year">First Year</option>
+                          <option value="Second Year">Second Year</option>
+                          <option value="Third Year">Third Year</option>
+                          <option value="Fourth Year">Fourth Year</option>
+                        </select>
+                      </li>
+                      <li class="nav-item">
+                        <select class="nav-link mx-1" name="filter_gender" id="filter_gender">
+                          <option value="" selected="">All Gender</option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                        </select>
+                      </li>
+                    <li class="nav-item">
+                      <button class="btn btn-sm nav-link active" type="submit" name="btn_search">Search</button>
+                    </li>
+                    </ul>
+                  </form>
                 </div>
               </div><!-- /.card-header -->
               <div class="card-body">
@@ -549,7 +616,7 @@
             </button>
           </div>
           <div class="modal-body">
-           <table id="example1" class="table table-bordered table-striped">
+           <table id="example4" class="table table-bordered table-striped">
               <thead>
               <tr>
                 <th><center>ID NUMBER</center></th>
@@ -618,7 +685,7 @@
             </button>
           </div>
           <div class="modal-body">
-           <table id="example1" class="table table-bordered table-striped">
+           <table id="example5" class="table table-bordered table-striped">
               <thead>
               <tr>
                 <th><center>ID NUMBER</center></th>
@@ -692,7 +759,7 @@
             </button>
           </div>
           <div class="modal-body">
-           <table id="example1" class="table table-bordered table-striped">
+           <table id="example6" class="table table-bordered table-striped">
               <thead>
               <tr>
                 <th><center>ID NUMBER</center></th>
@@ -875,6 +942,21 @@
       "autoWidth": false,
       "responsive": true,
     });
+    $("#example4").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      "buttons": ["copy", "csv", "excel", "pdf", "print"]
+    }).buttons().container().appendTo('#example4_wrapper .col-md-6:eq(0)');
+    $("#example5").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      "buttons": ["copy", "csv", "excel", "pdf", "print"]
+    }).buttons().container().appendTo('#example5_wrapper .col-md-6:eq(0)');
+    $("#example6").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      "buttons": ["copy", "csv", "excel", "pdf", "print"]
+    }).buttons().container().appendTo('#example6_wrapper .col-md-6:eq(0)');
   });
 </script>
 </body>
