@@ -65,7 +65,7 @@
               <div class="card-body">
                 <div class="tab-content p-0">
                   <h3>Current Academic Year: <span style="color: darkred; font-weight: bold;"><?php if(!empty($active['academic_year'])) { echo $active['academic_year'];} else {echo "";}  ?></span></h3>
-                  <table id="example1" class="table table-bordered table-striped">
+                  <table id="example1" class="table table-bordered table-striped table-responsive">
                     <thead>
                     <tr>
                       <th><center>ID NUMBER</center></th>
@@ -149,7 +149,7 @@
           </div>
           <div class="modal-body">
             <input type="hidden" value="<?php echo $active['id']; ?> " name="year_id">
-            <table id="example2" class="table table-bordered table-striped">
+            <table id="example2" class="table table-bordered table-striped table-responsive">
               <thead>
                 <tr>
                   <th><center></center></th>

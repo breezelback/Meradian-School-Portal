@@ -183,6 +183,15 @@ $dtr_option = $execDtrA->fetch_assoc();
           </li>
 
           <li class="nav-item">
+            <a href="query.php" class="nav-link">
+              <i class="nav-icon fa fa-database"></i>
+              <p>
+                Query
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="announcements.php" class="nav-link">
               <i class="nav-icon fa fa-exclamation-circle"></i>
               <p>

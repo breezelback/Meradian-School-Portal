@@ -117,7 +117,7 @@
                     <div class="row">
                       <div class="col-md-12">
                   <h3>Current Academic Year: <span style="color: darkred; font-weight: bold;"><?php if(!empty($active['academic_year'])) { echo $active['academic_year'];} else {echo "";}  ?></span></h3>
-                        <table id="example1" class="table table-bordered table-striped">
+                        <table id="example1" class="table table-bordered table-striped table-responsive">
                           <thead>
                           <tr>
                             <th><center>CODE</center></th>
@@ -222,7 +222,7 @@
                 <div class="tab-content p-0">
                     <div class="row">
                       <div class="col-md-12">
-                        <table id="example1" class="table table-bordered table-striped">
+                        <table id="example1" class="table table-bordered table-striped table-responsive">
                           <thead>
                           <tr>
                             <th>CODE</th>
@@ -329,7 +329,7 @@
               while ($acadyears = $execAcadYears->fetch_assoc()) {
             ?>
                 <h5><span style="color: darkred; font-weight: bold;"><?php echo $acadyears['academic_year']; ?></span></h5>
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="example1" class="table table-bordered table-striped table-responsive">
                   <thead>
                   <tr>
                     <th>CODE</th>
@@ -459,7 +459,7 @@
             <label for="name-l" style="color: grey;">Time</i></label>
             <input type="time" class="form-control" name="teaching_time"> -->
             <input type="hidden" value="<?php echo $row['id']; ?> " name="student_id">
-            <table id="example1" class="table table-bordered table-striped">
+            <table id="example1" class="table table-bordered table-striped table-responsive">
               <thead>
                 <tr>
                   <th><center></center></th>

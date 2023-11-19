@@ -129,7 +129,7 @@
                       </div>
                       <div class="col-sm-3 form-group">
                         <label for="email">Contact Number <span class="text-danger">*</span></label>
-                        <input type="number" class="form-control" name="contact_number" id="contact_number" placeholder="Enter Contact Number." required="">
+                        <input type="number" class="form-control" name="contact_number" id="contact_number" placeholder="Enter Contact Number." required="" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "11">
                       </div>
                       <div class="col-sm-2 form-group">
                         <label for="email">Telephone Number</label>
