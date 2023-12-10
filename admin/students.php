@@ -92,6 +92,11 @@
                         $selectBarangay = ' SELECT brgyDesc FROM refbrgy WHERE brgyCode = "'.$row['barangay'].'" ';
                         $execBarangay = $conn->query($selectBarangay);
                         $barangay = $execBarangay->fetch_assoc();
+
+
+                        $selectSection = 'SELECT `id`, `school_year`, `section`, `status`, `date_created` FROM `tbl_section` WHERE id = '.$row['section'];
+                        $execSection = $conn->query($selectSection);
+                        $section = $execSection->fetch_assoc();
                       ?>
                         <tr style="font-size: 14px;">
                           <td><?php echo $row['id_number']; ?></td>
@@ -102,7 +107,7 @@
                           <td><?php echo $row['contact_number']; ?></td>
                           <td><?php echo $row['birthdate']; ?></td>
                           <td><?php echo $row['house_no']; ?> <?php echo $barangay['brgyDesc']; ?> <?php echo $citymun['citymunDesc']; ?> <?php echo $province['provDesc']; ?></td>
-                          <td><?php echo $row['school_year']; ?> | <?php echo $row['section']; ?></td>
+                          <td><?php echo $row['school_year']; ?> | <?php echo $section['section']; ?></td>
                           <td>
                             <div class="btn-group">
                               <a href="edit_user.php?id=<?php echo $row['id']; ?>" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update Information"><i class="fa fa-edit"></i></a>

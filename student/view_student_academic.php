@@ -28,6 +28,10 @@
   $barangay = $execBarangay->fetch_assoc();
 
 
+  $selectSection = 'SELECT `id`, `school_year`, `section`, `status`, `date_created` FROM `tbl_section` WHERE id = '.$row['section'];
+  $execSection = $conn->query($selectSection);
+  $section = $execSection->fetch_assoc();
+
   $sql1 = ' SELECT `id`, `academic_year`, `status`, `date_created` FROM `tbl_academic_year` WHERE status = "Active" ';
   $exec1 = $conn->query($sql1);
   $active = $exec1->fetch_assoc();
@@ -106,7 +110,7 @@
                       </div>
                       <div class="col-sm-3 form-group">
                         Date of Birth:<label for="name-f"> <?php echo $row['birthdate']; ?></label><br>
-                        Year | Section :<label for="name-f"> <?php echo $row['school_year']; ?> | <?php echo $row['section']; ?></label><br>
+                        Year | Section :<label for="name-f"> <?php echo $row['school_year']; ?> | <?php echo $section['section']; ?></label><br>
                       </div>
                     </div>
                     <hr>

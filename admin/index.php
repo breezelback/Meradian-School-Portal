@@ -21,6 +21,14 @@
   $execStudent = $conn->query($sqlStudent);
   $student = $execStudent->fetch_assoc();
 
+  $sqlStudentNew = ' SELECT COUNT(id) AS total FROM tbl_user WHERE user_type = "student" AND student_status = "New" ';
+  $execStudentNew = $conn->query($sqlStudentNew);
+  $new = $execStudentNew->fetch_assoc();
+
+  $sqlStudentTrans = ' SELECT COUNT(id) AS total FROM tbl_user WHERE user_type = "student" AND student_status = "Transferee" ';
+  $execStudentTrans = $conn->query($sqlStudentTrans);
+  $transferee = $execStudentTrans->fetch_assoc();
+
   $sqlEnrolled = ' SELECT COUNT(id) AS total_enrolled FROM tbl_enrollment WHERE academic_year_id = '.$active['id'].' AND status = "Enrolled" ';
   $execEnrolled = $conn->query($sqlEnrolled);
   $enrolled = $execEnrolled->fetch_assoc();
@@ -233,7 +241,7 @@
       <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
         <div class="row">
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-2 col-6">
             <!-- small box -->
             <a href="" data-toggle="modal" data-target="#modal_view_teachers">
               <div class="small-box bg-info">
@@ -250,7 +258,7 @@
             </a>
           </div>
           <!-- ./col -->
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-2 col-6">
             <!-- small box -->
             <a href="" data-toggle="modal" data-target="#modal_view_students">
               <div class="small-box bg-success">
@@ -267,7 +275,7 @@
             </a>
           </div>
           <!-- ./col -->
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-2 col-6">
             <!-- small box -->
             <a href="" data-toggle="modal" data-target="#modal_view_enrolled">
               <div class="small-box bg-warning">
@@ -284,7 +292,7 @@
             </a>
           </div>
           <!-- ./col -->
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-2 col-6">
             <!-- small box -->
             <a href="" data-toggle="modal" data-target="#modal_view_dropped">
               <div class="small-box bg-danger">
@@ -292,6 +300,40 @@
                   <h3><?php echo $dropped['total_dropped']; ?></h3>
 
                   <p>Dropped Students</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-pie-graph"></i>
+                </div>
+                <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
+              </div>
+            </a>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-2 col-6">
+            <!-- small box -->
+            <a href="" data-toggle="modal" data-target="#modal_view_new">
+              <div class="small-box bg-primary">
+                <div class="inner">
+                  <h3><?php echo $new['total']; ?></h3>
+
+                  <p>New</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-pie-graph"></i>
+                </div>
+                <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
+              </div>
+            </a>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-2 col-6">
+            <!-- small box -->
+            <a href="" data-toggle="modal" data-target="#modal_view_trans">
+              <div class="small-box bg-dark">
+                <div class="inner">
+                  <h3><?php echo $transferee['total']; ?></h3>
+
+                  <p>Transferee</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-pie-graph"></i>
@@ -822,6 +864,144 @@
     </div>
     <!-- Dropped -->
 
+    <!-- New Students -->
+    <div class="modal fade" id="modal_view_new" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">New Students</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+           <table id="example7" class="table table-bordered table-striped">
+              <thead>
+              <tr>
+                <th><center>ID NUMBER</center></th>
+                <th><center>NAME</center></th>
+                <th><center>GENDER</center></th>
+                <th><center>EMAIL</center></th>
+                <th><center>CONTACT NUMBER</center></th>
+                <!-- <th><center>BIRTHDATE</center></th> -->
+                <th><center>ADDRESS</center></th>
+                <th><center>YEAR & SECTION</center></th>
+              </tr>
+              </thead>
+              <tbody>
+
+                <?php 
+                  $sql = ' SELECT `id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, DATE_FORMAT(birthdate, "%M %d, %Y") AS birthdate, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `username`, `password`, `user_type`, `status`, `date_created` FROM `tbl_user` WHERE user_type = "student" AND student_status = "New" ';
+                  $exec = $conn->query($sql);
+                  while ( $row = $exec->fetch_assoc() ) {
+
+
+                  $selectProvince = ' SELECT provDesc FROM refprovince WHERE provCode = "'.$row['province'].'" ';
+                  $execProvince = $conn->query($selectProvince);
+                  $province = $execProvince->fetch_assoc();
+                  
+                  $selectCityMun = ' SELECT citymunDesc FROM refcitymun WHERE citymunCode = "'.$row['city'].'" ';
+                  $execCityMun = $conn->query($selectCityMun);
+                  $citymun = $execCityMun->fetch_assoc();
+
+                  $selectBarangay = ' SELECT brgyDesc FROM refbrgy WHERE brgyCode = "'.$row['barangay'].'" ';
+                  $execBarangay = $conn->query($selectBarangay);
+                  $barangay = $execBarangay->fetch_assoc();
+                ?>
+                  <tr style="font-size: 14px;">
+                    <td><?php echo $row['id_number']; ?></td>
+                    <td><?php echo $row['firstname']; ?> <?php echo $row['lastname']; ?></td>
+                    <td><?php echo $row['gender']; ?></td>
+                    <td><?php echo $row['email']; ?></td>
+                    <td><?php echo $row['contact_number']; ?></td>
+                    <!-- <td><?php echo $row['birthdate']; ?></td> -->
+                    <td><?php echo $row['house_no']; ?> <?php echo $barangay['brgyDesc']; ?> <?php echo $citymun['citymunDesc']; ?> <?php echo $province['provDesc']; ?></td>
+                    <td><?php echo $row['school_year']; ?> | <?php echo $row['section']; ?></td>
+                  </tr>
+                <?php } ?>
+
+              </tbody>  
+
+            </table>
+          </div>
+          <div class="modal-footer">
+           <!--  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- New Students -->
+
+    <!-- Transferee Students -->
+    <div class="modal fade" id="modal_view_trans" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Transferee Students</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+           <table id="example8" class="table table-bordered table-striped">
+              <thead>
+              <tr>
+                <th><center>ID NUMBER</center></th>
+                <th><center>NAME</center></th>
+                <th><center>GENDER</center></th>
+                <th><center>EMAIL</center></th>
+                <th><center>CONTACT NUMBER</center></th>
+                <!-- <th><center>BIRTHDATE</center></th> -->
+                <th><center>ADDRESS</center></th>
+                <th><center>YEAR & SECTION</center></th>
+              </tr>
+              </thead>
+              <tbody>
+
+                <?php 
+                  $sql = ' SELECT `id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, DATE_FORMAT(birthdate, "%M %d, %Y") AS birthdate, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `username`, `password`, `user_type`, `status`, `date_created` FROM `tbl_user` WHERE user_type = "student" AND student_status = "Transferee" ';
+                  $exec = $conn->query($sql);
+                  while ( $row = $exec->fetch_assoc() ) {
+
+
+                  $selectProvince = ' SELECT provDesc FROM refprovince WHERE provCode = "'.$row['province'].'" ';
+                  $execProvince = $conn->query($selectProvince);
+                  $province = $execProvince->fetch_assoc();
+                  
+                  $selectCityMun = ' SELECT citymunDesc FROM refcitymun WHERE citymunCode = "'.$row['city'].'" ';
+                  $execCityMun = $conn->query($selectCityMun);
+                  $citymun = $execCityMun->fetch_assoc();
+
+                  $selectBarangay = ' SELECT brgyDesc FROM refbrgy WHERE brgyCode = "'.$row['barangay'].'" ';
+                  $execBarangay = $conn->query($selectBarangay);
+                  $barangay = $execBarangay->fetch_assoc();
+                ?>
+                  <tr style="font-size: 14px;">
+                    <td><?php echo $row['id_number']; ?></td>
+                    <td><?php echo $row['firstname']; ?> <?php echo $row['lastname']; ?></td>
+                    <td><?php echo $row['gender']; ?></td>
+                    <td><?php echo $row['email']; ?></td>
+                    <td><?php echo $row['contact_number']; ?></td>
+                    <!-- <td><?php echo $row['birthdate']; ?></td> -->
+                    <td><?php echo $row['house_no']; ?> <?php echo $barangay['brgyDesc']; ?> <?php echo $citymun['citymunDesc']; ?> <?php echo $province['provDesc']; ?></td>
+                    <td><?php echo $row['school_year']; ?> | <?php echo $row['section']; ?></td>
+                  </tr>
+                <?php } ?>
+
+              </tbody>  
+
+            </table>
+          </div>
+          <div class="modal-footer">
+           <!--  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Transferee Students -->
+
     <!-- modal end -->
   </div>
   <!-- /.content-wrapper -->
@@ -957,6 +1137,16 @@
       // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
       "buttons": ["copy", "csv", "excel", "pdf", "print"]
     }).buttons().container().appendTo('#example6_wrapper .col-md-6:eq(0)');
+    $("#example7").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      "buttons": ["copy", "csv", "excel", "pdf", "print"]
+    }).buttons().container().appendTo('#example7_wrapper .col-md-6:eq(0)');
+    $("#example8").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      "buttons": ["copy", "csv", "excel", "pdf", "print"]
+    }).buttons().container().appendTo('#example8_wrapper .col-md-6:eq(0)');
   });
 </script>
 </body>

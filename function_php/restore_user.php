@@ -7,15 +7,15 @@ $id = $_GET['id'];
 // $user_type = $_GET['user_type'];
 
 
-$insertLogs = ' INSERT INTO tbl_logs SELECT * FROM tbl_user WHERE id = '.$id;
+$insertLogs = ' INSERT INTO tbl_user SELECT * FROM tbl_logs WHERE id = '.$id;
 $conn->query($insertLogs);
 
-$sql = ' DELETE FROM tbl_user WHERE id = '.$id;
+$sql = ' DELETE FROM tbl_logs WHERE id = '.$id;
 $exec = $conn->query($sql);
 
 
 $_SESSION['toastr']['title'] = 'Success';
-$_SESSION['toastr']['message'] = 'User Deleted!';
+$_SESSION['toastr']['message'] = 'User Restored!';
 $_SESSION['toastr']['color'] = 'green';
 
 

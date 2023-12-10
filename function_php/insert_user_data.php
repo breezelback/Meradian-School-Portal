@@ -64,47 +64,23 @@ $decryption_key, $options, $decryption_iv);
 
 //---------password encryption-------
 
-if ($path == "") 
+
+$selectIdNumber = ' SELECT id FROM tbl_user WHERE id_number = "'.$id_number.'" ';
+$execIdNumber = $conn->query($selectIdNumber);
+if ($execIdNumber->num_rows > 0) 
 {
-
-	$sql = ' INSERT INTO tbl_user (id_number, firstname, middlename, lastname, suffix, gender, email, contact_number, telephone, birthdate, province, city, barangay, house_no, school_year, section, password, user_type, date_created, student_status, enrollment_status) VALUES ("'.$id_number.'", "'.$firstname.'", "'.$middlename.'", "'.$lastname.'", "'.$suffix.'", "'.$gender.'", "'.$email.'", "'.$contact_number.'", "'.$telephone.'", "'.$birthdate.'", "'.$province.'", "'.$city.'", "'.$barangay.'", "'.$house_no.'", "'.$school_year.'", "'.$section.'", "'.$password.'", "'.$usertype.'", NOW(), "'.$student_status.'", "'.$enrollment_status.'") ';
-
-	$exec = $conn->query($sql);
-
-
-	$_SESSION['toastr']['title'] = 'Success';
-	$_SESSION['toastr']['message'] = 'User Add!';
-	$_SESSION['toastr']['color'] = 'green';
+	$_SESSION['toastr']['title'] = 'Error';
+	$_SESSION['toastr']['message'] = 'ID Number Already Exist!';
+	$_SESSION['toastr']['color'] = 'red';
 }
 else
 {
-	// Check file size
-	if ($_FILES["profile_picture"]["size"] > 5000000) {
-		$error_message = "Sorry, your file is too large. Maximum of 5MB filesize.";
-	  $uploadOk = 0;
-	}
 
-	// Allow certain file formats
-	if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-	&& $imageFileType != "gif" ) {
-		$error_message = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-	  $uploadOk = 0;
-	}
 
-	// Check if $uploadOk is set to 0 by an error
-	if ($uploadOk == 0) {
-	  // echo "Sorry, your file was not uploaded.";
+	if ($path == "") 
+	{
 
-		$_SESSION['toastr']['title'] = 'Error';
-		$_SESSION['toastr']['message'] = $error_message;
-		$_SESSION['toastr']['color'] = 'red';
-
-	// if everything is ok, try to upload file
-	} else {
-
-		move_uploaded_file($_FILES["profile_picture"]["tmp_name"], $target_file);
-
-		$sql = ' INSERT INTO tbl_user (id_number, firstname, middlename, lastname, suffix, gender, email, contact_number, telephone, birthdate, province, city, barangay, house_no, school_year, section, profile_picture, password, user_type, date_created, student_status, enrollment_status) VALUES ("'.$id_number.'", "'.$firstname.'", "'.$middlename.'", "'.$lastname.'", "'.$suffix.'", "'.$gender.'", "'.$email.'", "'.$contact_number.'", "'.$telephone.'", "'.$birthdate.'", "'.$province.'", "'.$city.'", "'.$barangay.'", "'.$house_no.'", "'.$school_year.'", "'.$section.'", "'.$filename.'", "'.$password.'", "'.$usertype.'", NOW(), "'.$student_status.'", "'.$enrollment_status.'") ';
+		$sql = ' INSERT INTO tbl_user (id_number, firstname, middlename, lastname, suffix, gender, email, contact_number, telephone, birthdate, province, city, barangay, house_no, school_year, section, password, user_type, date_created, student_status, enrollment_status) VALUES ("'.$id_number.'", "'.$firstname.'", "'.$middlename.'", "'.$lastname.'", "'.$suffix.'", "'.$gender.'", "'.$email.'", "'.$contact_number.'", "'.$telephone.'", "'.$birthdate.'", "'.$province.'", "'.$city.'", "'.$barangay.'", "'.$house_no.'", "'.$school_year.'", "'.$section.'", "'.$password.'", "'.$usertype.'", NOW(), "'.$student_status.'", "'.$enrollment_status.'") ';
 
 		$exec = $conn->query($sql);
 
@@ -112,10 +88,48 @@ else
 		$_SESSION['toastr']['title'] = 'Success';
 		$_SESSION['toastr']['message'] = 'User Add!';
 		$_SESSION['toastr']['color'] = 'green';
+	}
+	else
+	{
+		// Check file size
+		if ($_FILES["profile_picture"]["size"] > 5000000) {
+			$error_message = "Sorry, your file is too large. Maximum of 5MB filesize.";
+		  $uploadOk = 0;
+		}
 
-	}	
+		// Allow certain file formats
+		if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+		&& $imageFileType != "gif" ) {
+			$error_message = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+		  $uploadOk = 0;
+		}
+
+		// Check if $uploadOk is set to 0 by an error
+		if ($uploadOk == 0) {
+		  // echo "Sorry, your file was not uploaded.";
+
+			$_SESSION['toastr']['title'] = 'Error';
+			$_SESSION['toastr']['message'] = $error_message;
+			$_SESSION['toastr']['color'] = 'red';
+
+		// if everything is ok, try to upload file
+		} else {
+
+			move_uploaded_file($_FILES["profile_picture"]["tmp_name"], $target_file);
+
+			$sql = ' INSERT INTO tbl_user (id_number, firstname, middlename, lastname, suffix, gender, email, contact_number, telephone, birthdate, province, city, barangay, house_no, school_year, section, profile_picture, password, user_type, date_created, student_status, enrollment_status) VALUES ("'.$id_number.'", "'.$firstname.'", "'.$middlename.'", "'.$lastname.'", "'.$suffix.'", "'.$gender.'", "'.$email.'", "'.$contact_number.'", "'.$telephone.'", "'.$birthdate.'", "'.$province.'", "'.$city.'", "'.$barangay.'", "'.$house_no.'", "'.$school_year.'", "'.$section.'", "'.$filename.'", "'.$password.'", "'.$usertype.'", NOW(), "'.$student_status.'", "'.$enrollment_status.'") ';
+
+			$exec = $conn->query($sql);
+
+
+			$_SESSION['toastr']['title'] = 'Success';
+			$_SESSION['toastr']['message'] = 'User Add!';
+			$_SESSION['toastr']['color'] = 'green';
+
+		}	
+	}
+
 }
-
 
 if ($usertype == "student") 
 {

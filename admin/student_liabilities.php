@@ -64,7 +64,7 @@
               </div><!-- /.card-header -->
               <div class="card-body">
                 <div class="tab-content p-0">
-                  <h3>Current Academic Year: <span style="color: darkred; font-weight: bold;"><?php if(!empty($active['academic_year'])) { echo $active['academic_year'];} else {echo "";}  ?></span></h3>
+                  <!-- <h3>Current Academic Year: <span style="color: darkred; font-weight: bold;"><?php if(!empty($active['academic_year'])) { echo $active['academic_year'];} else {echo "";}  ?></span></h3> -->
                   <table id="example1" class="table table-bordered table-striped table-responsive">
                     <thead>
                     <tr>
@@ -76,19 +76,29 @@
                       <th><center>SECTION</center></th>
                       <th><center>LIABILITIES</center></th>
                       <th><center>STATUS</center></th>
-                      <th width="100"><center>ACTION</center></th>
+                      <th><center>ACADEMIC YEAR</center></th>
+                      <th><center>ACTION</center></th>
                     </tr>
                     </thead>
                     <tbody>
                       <?php 
                         // $sql = " SELECT `id`, `academic_year_id`, `student_id`, `status`, `date_created` FROM `tbl_enrollment` WHERE academic_year_id = ".$active['id']." AND status = 'Enrolled' ";
-                        $sql = " SELECT `id`, `student_id`, `academic_year_id`, `amount`, `status`, `date_created`, `title`, `pay_date` FROM `tbl_liabilities` WHERE academic_year_id = ".$active['id']." ";
+                        $sql = " SELECT `id`, `student_id`, `academic_year_id`, `amount`, `status`, `date_created`, `title`, `pay_date` FROM `tbl_liabilities` ORDER BY academic_year_id ";
                         $exec = $conn->query($sql);
                         while($row = $exec->fetch_assoc()){
 
                         $sqlStudent = ' SELECT `id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, DATE_FORMAT(birthdate, "%M %d, %Y") AS birthdate, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `username`, `password`, `user_type`, `status`, `date_created` FROM `tbl_user` WHERE id = '.$row['student_id'];
                         $execStudent = $conn->query($sqlStudent);
                         $student = $execStudent->fetch_assoc();
+
+                        $sql2 = ' SELECT `id`, `academic_year`, `status`, `date_created` FROM `tbl_academic_year` WHERE id = '.$row['academic_year_id'];
+                        $exec2 = $conn->query($sql2);
+                        $active_year = $exec2->fetch_assoc();
+
+
+                        $selectSection = 'SELECT `id`, `school_year`, `section`, `status`, `date_created` FROM `tbl_section` WHERE id = '.$student['section'];
+                        $execSection = $conn->query($selectSection);
+                        $section = $execSection->fetch_assoc();
                        ?>
                        <tr>
                          <td><center><?php echo $student['id_number']; ?></center></td>
@@ -96,7 +106,7 @@
                          <td><center><?php echo $student['middlename']; ?></center></td>
                          <td><center><?php echo $student['lastname']; ?></center></td>
                          <td><center><?php echo $student['school_year']; ?></center></td>
-                         <td><center><?php echo $student['section']; ?></center></td>
+                         <td><center><?php echo $section['section']; ?></center></td>
                          <td>
                             <center>
                             <p>₱<?php echo number_format($row['amount']); ?></p>
@@ -104,6 +114,7 @@
                             </center>
                          </td>
                          <td><center><?php if ($row['status'] == 0) {echo 'Unpaid';} else {echo 'Paid';} ?></center></td>
+                         <td><center><?php echo $active_year['academic_year']; ?></center></td>
                          <td>
                             <center>
                               <?php if ($row['status'] == 0): ?>

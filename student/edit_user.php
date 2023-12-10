@@ -19,6 +19,11 @@
   $exec1 = $conn->query($sql1);
   $active = $exec1->fetch_assoc();
 
+
+  $selectSection = 'SELECT `id`, `school_year`, `section`, `status`, `date_created` FROM `tbl_section` WHERE id = '.$row['section'];
+  $execSection = $conn->query($selectSection);
+  $section = $execSection->fetch_assoc();
+
 ?>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -205,7 +210,7 @@
                       </div>
                       <div class="col-sm-3 form-group">
                         <label for="email">Section</label>
-                        <input type="text" class="form-control" name="section" readonly="" value="<?php echo $row['section']; ?>" id="section">
+                        <input type="text" class="form-control" name="section" readonly="" value="<?php echo $section['section']; ?>" id="section">
                       </div>
                     </div>
                     <hr>

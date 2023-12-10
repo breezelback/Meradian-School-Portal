@@ -134,10 +134,42 @@
                             </thead>
                             <tbody>
                               <tr>
-                                <td><input type="text" name="first" class="form-control" value="<?php echo $rowSched['first']; ?>"></td>
-                                <td><input type="text" name="second" class="form-control" value="<?php echo $rowSched['second']; ?>"></td>
-                                <td><input type="text" name="third" class="form-control" value="<?php echo $rowSched['third']; ?>"></td>
-                                <td><input type="text" name="fourth" class="form-control" value="<?php echo $rowSched['fourth']; ?>"></td>
+                                <td>
+                                  <!-- <input type="text" name="first" class="form-control" value="<?php echo $rowSched['first']; ?>"> -->
+                                  <select name="first" id="first" class="form-control">
+                                    <option value="<?php echo $rowSched['first']; ?>"><?php echo $rowSched['first']; ?></option>
+                                  <?php  for ($i=70; $i <= 100 ; $i++) { ?>
+                                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                                  <?php } ?>
+                                  </select>
+                                </td>
+                                <td>
+                                  <!-- <input type="text" name="second" class="form-control" value="<?php echo $rowSched['second']; ?>"> -->
+                                  <select name="second" id="second" class="form-control">
+                                    <option value="<?php echo $rowSched['second']; ?>"><?php echo $rowSched['second']; ?></option>
+                                  <?php  for ($i=70; $i <= 100 ; $i++) { ?>
+                                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                                  <?php } ?>
+                                  </select>
+                                </td>
+                                <td>
+                                  <!-- <input type="text" name="third" class="form-control" value="<?php echo $rowSched['third']; ?>"> -->
+                                  <select name="third" id="third" class="form-control">
+                                    <option value="<?php echo $rowSched['third']; ?>"><?php echo $rowSched['third']; ?></option>
+                                  <?php  for ($i=70; $i <= 100 ; $i++) { ?>
+                                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                                  <?php } ?>
+                                  </select>
+                                </td>
+                                <td>
+                                  <!-- <input type="text" name="fourth" class="form-control" value="<?php echo $rowSched['fourth']; ?>"> -->
+                                  <select name="fourth" id="fourth" class="form-control">
+                                    <option value="<?php echo $rowSched['fourth']; ?>"><?php echo $rowSched['fourth']; ?></option>
+                                  <?php  for ($i=70; $i <= 100 ; $i++) { ?>
+                                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                                  <?php } ?>
+                                  </select>
+                                </td>
                                 <td><?php echo ($rowSched['first'] + $rowSched['second'] + $rowSched['third'] + $rowSched['fourth']) / 4; ?> </td>
                               </tr>
                             </tbody>

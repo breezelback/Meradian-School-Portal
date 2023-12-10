@@ -21,12 +21,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Teachers</h1>
+            <h1 class="m-0">User Logs</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Teachers</li>
+              <li class="breadcrumb-item active">User Logs</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -51,9 +51,9 @@
                 </h3>
                 <div class="card-tools">
                   <ul class="nav nav-pills ml-auto">
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                       <a class="nav-link btn-success text-white" href="add_user.php?usertype=teacher">Add New Teacher &nbsp;<i class="fa fa-user-plus"></i></a>
-                    </li>
+                    </li> -->
                   </ul>
                 </div>
               </div><!-- /.card-header -->
@@ -70,13 +70,14 @@
                       <!-- <th><center>BIRTHDATE</center></th> -->
                       <th><center>ADDRESS</center></th>
                       <th><center>YEAR & SECTION</center></th>
+                      <th><center>TYPE</center></th>
                       <th><center>ACTION</center></th>
                     </tr>
                     </thead>
                     <tbody>
 
                       <?php 
-                        $sql = ' SELECT `id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, DATE_FORMAT(birthdate, "%M %d, %Y") AS birthdate, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `username`, `password`, `user_type`, `status`, `date_created` FROM `tbl_user` WHERE user_type = "teacher" ';
+                        $sql = ' SELECT `id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, DATE_FORMAT(birthdate, "%M %d, %Y") AS birthdate, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `username`, `password`, `user_type`, `status`, `date_created` FROM `tbl_logs`';
                         $exec = $conn->query($sql);
                         while ( $row = $exec->fetch_assoc() ) {
 
@@ -92,11 +93,6 @@
                         $selectBarangay = ' SELECT brgyDesc FROM refbrgy WHERE brgyCode = "'.$row['barangay'].'" ';
                         $execBarangay = $conn->query($selectBarangay);
                         $barangay = $execBarangay->fetch_assoc();
-
-
-                        $selectSection = 'SELECT `id`, `school_year`, `section`, `status`, `date_created` FROM `tbl_section` WHERE id = '.$row['section'];
-                        $execSection = $conn->query($selectSection);
-                        $section = $execSection->fetch_assoc();
                       ?>
                         <tr style="font-size: 14px;">
                           <td><?php echo $row['id_number']; ?></td>
@@ -106,17 +102,12 @@
                           <td><?php echo $row['contact_number']; ?></td>
                           <!-- <td><?php echo $row['birthdate']; ?></td> -->
                           <td><?php echo $row['house_no']; ?> <?php echo $barangay['brgyDesc']; ?> <?php echo $citymun['citymunDesc']; ?> <?php echo $province['provDesc']; ?></td>
-                          <td><?php echo $row['school_year']; ?> | <?php echo $section['section']; ?></td>
+                          <td><?php echo $row['school_year']; ?> | <?php echo $row['section']; ?></td>
+                          <td><?php echo strtoupper($row['user_type']); ?></td>
                           <td>
-                            <div class="btn-group">
-                              <a href="edit_user.php?id=<?php echo $row['id']; ?>" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update Information"><i class="fa fa-edit"></i></a>
-                              <!-- <a href="../function_php/delete_user.php?id=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a> -->
-                              <button onclick="delete_user(<?php echo $row['id']; ?>)" class="btn btn-danger btn-sm text-white" data-toggle="tooltip" data-placement="bottom" title="Delete Teacher"><i class="fa fa-trash"></i></button>
-
-                              <a href="view_teacher.php?id=<?php echo $row['id']; ?>" class="btn btn-warning btn-sm text-white" data-toggle="tooltip" data-placement="bottom" title="View"><i class="fa fa-cog"></i></a>
-
-                              <a href="teacher_dtr.php?id=<?php echo $row['id']; ?>" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Daily Time Record"><i class="fa fa-user-clock"></i></a>
-                            </div>
+                            <center>
+                              <button onclick="restore_user(<?php echo $row['id']; ?>)" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Restore User"><i class="fa fa-undo"></i></button>
+                            </center>
                           </td>
                         </tr>
                       <?php } ?>
@@ -170,10 +161,10 @@
   });
 
 
-   function delete_user(id)
+   function restore_user(id)
   {
-    if (confirm('Are you sure you want to delete this user?')) {
-      window.location.href = "../function_php/delete_user.php?id="+id;
+    if (confirm('Are you sure you want to restore this user?')) {
+      window.location.href = "../function_php/restore_user.php?id="+id;
     } else {
       // Do nothing!
     }

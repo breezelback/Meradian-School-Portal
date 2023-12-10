@@ -88,6 +88,11 @@
                         $sqlStudent = ' SELECT `id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, DATE_FORMAT(birthdate, "%M %d, %Y") AS birthdate, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `username`, `password`, `user_type`, `status`, `date_created` FROM `tbl_user` WHERE id = '.$row['student_id'];
                         $execStudent = $conn->query($sqlStudent);
                         $student = $execStudent->fetch_assoc();
+
+
+                        $selectSection = 'SELECT `id`, `school_year`, `section`, `status`, `date_created` FROM `tbl_section` WHERE id = '.$student['section'];
+                        $execSection = $conn->query($selectSection);
+                        $section = $execSection->fetch_assoc();
                        ?>
                        <tr>
                          <td><center><?php echo $student['id_number']; ?></center></td>
@@ -95,7 +100,7 @@
                          <td><center><?php echo $student['middlename']; ?></center></td>
                          <td><center><?php echo $student['lastname']; ?></center></td>
                          <td><center><?php echo $student['school_year']; ?></center></td>
-                         <td><center><?php echo $student['section']; ?></center></td>
+                         <td><center><?php echo $section['section']; ?></center></td>
                          <td>
                             <center>
                             <p>₱<?php echo number_format($row['amount']); ?></p>
@@ -162,6 +167,11 @@
                     $sql = ' SELECT `id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, DATE_FORMAT(birthdate, "%M %d, %Y") AS birthdate, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `username`, `password`, `user_type`, `status`, `date_created` FROM `tbl_user` WHERE user_type = "student" ';
                     $exec = $conn->query($sql);
                     while ( $sub = $exec->fetch_assoc() ) {
+
+
+                        $selectSection = 'SELECT `id`, `school_year`, `section`, `status`, `date_created` FROM `tbl_section` WHERE id = '.$sub['section'];
+                        $execSection = $conn->query($selectSection);
+                        $section = $execSection->fetch_assoc();
                   ?>
                     <tr style="font-size: 14px;">
                       <!-- <td><center><input type="checkbox" value="<?php echo $sub['id']; ?>" name="check_id[]"></center></td> -->
@@ -176,7 +186,7 @@
                       <td><center><?php echo $sub['middlename']; ?></center></td>
                       <td><center><?php echo $sub['lastname']; ?></center></td>
                       <td><center><?php echo $sub['school_year']; ?></center></td>
-                      <td><center><?php echo $sub['section']; ?></center></td>
+                      <td><center><?php echo $section['section']; ?></center></td>
                       <td><center><input type="text" class="form-control" name="amount[<?php echo $sub['id']; ?>]"></center></td>
                       <td><center><input type="text" class="form-control" name="title[<?php echo $sub['id']; ?>]"></center></td>
                     </tr>

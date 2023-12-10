@@ -77,6 +77,27 @@ $row = $exec->fetch_assoc();
                       <input type="text" class="form-control" name="subject_code" id="subject_code" value="<?php echo $row['subject_code']; ?>">
                       <label for="name-l" style="color: grey;">Subject Name</i></label>
                       <input type="text" class="form-control" name="subject_name" id="subject_name" value="<?php echo $row['subject_name']; ?>">
+                      <label for="email">Year</label>
+                      <select class="form-control" name="school_year">
+                        <option value="<?php echo $row['school_year']; ?>" selected=""><?php echo $row['school_year']; ?></option>
+                        <option value="Kinder">Kinder</option>
+                        <option value="Grade 1">Grade 1</option>
+                        <option value="Grade 2">Grade 2</option>
+                        <option value="Grade 3">Grade 3</option>
+                        <option value="Grade 4">Grade 4</option>
+                        <option value="Grade 5">Grade 5</option>
+                        <option value="Grade 6">Grade 6</option>
+                        <option value="Grade 7">Grade 7</option>
+                        <option value="Grade 8">Grade 8</option>
+                        <option value="Grade 9">Grade 9</option>
+                        <option value="Grade 10">Grade 10</option>
+                        <option value="Grade 11">Grade 11</option>
+                        <option value="Grade 12">Grade 12</option>
+                        <option value="First Year">First Year</option>
+                        <option value="Second Year">Second Year</option>
+                        <option value="Third Year">Third Year</option>
+                        <option value="Fourth Year">Fourth Year</option>
+                      </select>
                       <center>
                         <button type="submit" class="btn btn-primary mt-3">Update</button>
                       </center>

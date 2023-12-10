@@ -6,6 +6,18 @@
   <title>The Meradian School | Admin Portal</title>
 
   <?php include '_include_header.php'; ?>
+  <style>
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+  </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -81,6 +93,12 @@
                       </div>
                       <div class="col-sm-4 form-group">
                         <label for="name-f">Default Password <span class="text-danger">*</span></label>
+
+                        <input class="form-check-input ml-2" type="checkbox" value="" id="show_password" onclick="showPass()">
+                        <label class="form-check-label ml-4" for="show_password">
+                        Show Password
+                        </label>
+
                         <input type="password" class="form-control" name="password" id="password" placeholder="Enter ID Number">
                       </div>
                       <div class="col-sm-1 form-group"></div>
@@ -127,7 +145,7 @@
                         <label for="email">Email <span class="text-danger">*</span></label>
                         <input type="email" class="form-control" name="email" id="email" placeholder="Enter email." required="">
                       </div>
-                      <div class="col-sm-3 form-group">
+                      <div class="col-sm-2 form-group">
                         <label for="email">Contact Number <span class="text-danger">*</span></label>
                         <input type="number" class="form-control" name="contact_number" id="contact_number" placeholder="Enter Contact Number." required="" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "11">
                       </div>
@@ -138,6 +156,10 @@
                       <div class="col-sm-2 form-group">
                         <label for="email">Date of Birth <span class="text-danger">*</span></label>
                         <input type="date" class="form-control" name="birthdate" id="birthdate" required="">
+                      </div>
+                      <div class="col-sm-1 form-group">
+                        <label for="email">Age</label>
+                        <input type="text" class="form-control" name="age" id="age" readonly="">
                       </div>
                     </div>
                     <div class="row"><b class="text-primary">Home Address <span class="text-danger">*</span></b></div><hr>
@@ -164,7 +186,7 @@
                     <div class="row">
                       <div class="col-sm-3 form-group">
                         <label for="email">Year</label>
-                        <select class="form-control" name="school_year">
+                        <select class="form-control" name="school_year" id="school_year">
                           <option value="Kinder">Kinder</option>
                           <option value="Grade 1">Grade 1</option>
                           <option value="Grade 2">Grade 2</option>
@@ -186,7 +208,9 @@
                       </div>
                       <div class="col-sm-3 form-group">
                         <label for="email">Section</label>
-                        <input type="text" class="form-control" name="section" id="section">
+                        <!-- <input type="text" class="form-control" name="section" id="section"> -->
+                        <select type="text" class="form-control" name="section" id="section">
+                        </select>
                       </div>
                     </div>
                     <hr>
@@ -243,6 +267,79 @@
     $('#my-barangay-dropdown').ph_locations({'location_type': 'barangays'});
     $('#my-barangay-dropdown').ph_locations( 'fetch_list', [{"city_code": this.value}]);
   });
+
+  function showPass() {
+    var x = document.getElementById("password");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
+
+
+  function calculateAge(birthday) { // birthday is a date
+    var ageDifMs = Date.now() - birthday.getTime();
+    var ageDate = new Date(ageDifMs); // miliseconds from epoch
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+  }
+
+  function getAge(dateString) {
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
+  }
+
+  $('#birthdate').on('change', function(){
+    let raw_date = $(this).val();
+    var date_val = getAge(raw_date);
+    $('#age').val(date_val);
+  });
+
+  $('#school_year').on('change', function(){
+    let year_val = $(this).val();
+    
+    $.ajax({  
+      url:"../function_php/fetch_section.php?school_year="+year_val, 
+      method:"POST",  
+      contentType:false,
+      cache:false,
+      processData:false,
+
+      beforeSend:function() {
+      }, 
+
+      success:function(data){  
+        $('#section').empty();
+        // $('#section')
+        //   .append($("<option></option>")
+        //   .attr("value", "")
+        //   .text("All")); 
+
+        if (data != '') 
+        {
+          var jsArray = JSON.parse(data);
+          $.each(jsArray, function(key, value) {   
+            $('#section')
+            .append($("<option></option>")
+            .attr("value", key)
+            .text(value)); 
+          });
+        }
+      }
+
+    });  
+
+
+  });
+
+
+
 
 </script>
 

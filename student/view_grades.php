@@ -124,7 +124,15 @@ $active = $exec1->fetch_assoc();
                           <td><?php echo (empty($rowGrade['second']) ? 0 : $rowGrade['second']); ?></td>
                           <td><?php echo (empty($rowGrade['third']) ? 0 : $rowGrade['third']); ?></td>
                           <td><?php echo (empty($rowGrade['fourth']) ? 0 : $rowGrade['fourth']); ?></td>
-                          <td><b><?php echo ((empty($rowGrade['first']) ? 0 : $rowGrade['first']) + (empty($rowGrade['second']) ? 0 : $rowGrade['second']) + (empty($rowGrade['third']) ? 0 : $rowGrade['third']) + (empty($rowGrade['fourth']) ? 0 : $rowGrade['fourth'])) / 4; ?></b> </td>
+                          <td>
+                            <b>
+                              <?php if ( empty($rowGrade['first']) || empty($rowGrade['second']) || empty($rowGrade['third']) || empty($rowGrade['fourth']) ): ?>
+                                <?php echo 0; ?>
+                              <?php else: ?>
+                                <?php echo ((empty($rowGrade['first']) ? 0 : $rowGrade['first']) + (empty($rowGrade['second']) ? 0 : $rowGrade['second']) + (empty($rowGrade['third']) ? 0 : $rowGrade['third']) + (empty($rowGrade['fourth']) ? 0 : $rowGrade['fourth'])) / 4; ?>
+                              <?php endif ?>
+                            </b> 
+                          </td>
                           <!-- <td>
                             <center>
                               <div class="btn-group">
@@ -238,7 +246,15 @@ $active = $exec1->fetch_assoc();
                                 <td><?php echo (empty($rowGrade['second']) ? 0 : $rowGrade['second']); ?></td>
                                 <td><?php echo (empty($rowGrade['third']) ? 0 : $rowGrade['third']); ?></td>
                                 <td><?php echo (empty($rowGrade['fourth']) ? 0 : $rowGrade['fourth']); ?></td>
-                                <td><b><?php echo ((empty($rowGrade['first']) ? 0 : $rowGrade['first']) + (empty($rowGrade['second']) ? 0 : $rowGrade['second']) + (empty($rowGrade['third']) ? 0 : $rowGrade['third']) + (empty($rowGrade['fourth']) ? 0 : $rowGrade['fourth'])) / 4; ?></b> </td>
+                                <td>
+                                  <b>
+                                    <?php if ( empty($rowGrade['first']) || empty($rowGrade['second']) || empty($rowGrade['third']) || empty($rowGrade['fourth']) ): ?>
+                                      <?php echo 0; ?>
+                                    <?php else: ?>
+                                      <?php echo ((empty($rowGrade['first']) ? 0 : $rowGrade['first']) + (empty($rowGrade['second']) ? 0 : $rowGrade['second']) + (empty($rowGrade['third']) ? 0 : $rowGrade['third']) + (empty($rowGrade['fourth']) ? 0 : $rowGrade['fourth'])) / 4; ?>
+                                    <?php endif ?>
+                                  </b> 
+                                </td>
                                 <!-- <td>
                                   <center>
                                     <div class="btn-group">
@@ -247,7 +263,17 @@ $active = $exec1->fetch_assoc();
                                   </center>
                                 </td> -->
                               </tr>
-                            <?php $average_sum = $average_sum + ((empty($rowGrade['first']) ? 0 : $rowGrade['first']) + (empty($rowGrade['second']) ? 0 : $rowGrade['second']) + (empty($rowGrade['third']) ? 0 : $rowGrade['third']) + (empty($rowGrade['fourth']) ? 0 : $rowGrade['fourth'])) / 4; $counter++; }  ?>
+                            <?php 
+                            if ( empty($rowGrade['first']) || empty($rowGrade['second']) || empty($rowGrade['third']) || empty($rowGrade['fourth']) )
+                            {
+                              $average_sum = 0 ;
+                            }
+                            else
+                            {
+                              $average_sum = $average_sum + ((empty($rowGrade['first']) ? 0 : $rowGrade['first']) + (empty($rowGrade['second']) ? 0 : $rowGrade['second']) + (empty($rowGrade['third']) ? 0 : $rowGrade['third']) + (empty($rowGrade['fourth']) ? 0 : $rowGrade['fourth'])) / 4; 
+                            }
+                            $counter++; }
+                            ?>
 
                           </tbody>   
                           <tfoot>

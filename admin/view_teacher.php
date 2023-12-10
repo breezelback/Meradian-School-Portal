@@ -147,11 +147,13 @@
                                     a.saturday,
                                     a.sunday,
                                     a.school_year,
-                                    a.section,
+                                    -- a.section,
                                     b.subject_name,
-                                    b.subject_code
+                                    b.subject_code,
+                                    c.section
                                 FROM tbl_schedule a
                                 LEFT JOIN tbl_subject b ON b.id = a.subject_id
+                                LEFT JOIN tbl_section c ON c.id = a.section
                                 WHERE teacher_id = '.$_GET['id'].' ';
                               $exec = $conn->query($sql);
                               while ( $sub = $exec->fetch_assoc() ) {
@@ -216,20 +218,9 @@
           </div>
           <div class="modal-body">
             <input disabled="" type="text" class="form-control" name="subject_code" id="subject_code" placeholder="<?php echo $row['id_number']; ?> | <?php echo $row['firstname']; ?> <?php echo $row['lastname']; ?>">
-            <label for="name-l" style="color: grey;">Subject</i></label>
             <input type="hidden" name="teacher_id" value="<?php echo $row['id']; ?>">
-            <select class="form-control" name="subject_id" id="subject_id">
-              <?php 
-                $sql = ' SELECT `id`, `subject_name`, `subject_code`, `date_created` FROM `tbl_subject` ';
-                $exec = $conn->query($sql);
-                while ($sub = $exec->fetch_assoc()) {
-               ?>
-               <option value="<?php echo $sub['id']; ?>"><?php echo $sub['subject_name']; ?></option>
-
-              <?php } ?>
-            </select>
             <label for="email" style="color: grey;">Year</label>
-            <select class="form-control" name="school_year">
+            <select class="form-control" name="school_year" id="school_year">
               <option value="Kinder">Kinder</option>
               <option value="Grade 1">Grade 1</option>
               <option value="Grade 2">Grade 2</option>
@@ -249,14 +240,12 @@
               <option value="Fourth Year">Fourth Year</option>
             </select>
             <label for="name-l" style="color: grey;">Section</i></label>
-            <select class="form-control" name="section" id="section">
-              <?php 
-                $sql = ' SELECT DISTINCT(section) AS section FROM `tbl_user` WHERE user_type = "student" ';
-                $exec = $conn->query($sql);
-                while ($section = $exec->fetch_assoc()) {
-               ?>
-               <option value="<?php echo $section['section']; ?>"><?php echo $section['section']; ?></option>
-              <?php } ?>
+            <select class="form-control" name="section" id="section" required="">
+              
+            </select>
+            <label for="name-l" style="color: grey;">Subject</i></label>
+            <select class="form-control" name="subject_id" id="subject" required="">
+              
             </select>
             <label for="name-l" style="color: grey;">Time</i></label>
             <div class="row">
@@ -353,6 +342,78 @@
       "responsive": true,
     });
   });
+
+
+  $('#school_year').on('change', function(){
+    let year_val = $(this).val();
+    
+    //section
+    $.ajax({  
+      url:"../function_php/fetch_section.php?school_year="+year_val, 
+      method:"POST",  
+      contentType:false,
+      cache:false,
+      processData:false,
+
+      beforeSend:function() {
+      }, 
+
+      success:function(data){  
+        $('#section').empty();
+        // $('#section')
+        //   .append($("<option></option>")
+        //   .attr("value", "")
+        //   .text("All")); 
+
+        if (data != '') 
+        {
+          var jsArray = JSON.parse(data);
+          $.each(jsArray, function(key, value) {   
+            $('#section')
+            .append($("<option></option>")
+            .attr("value", key)
+            .text(value)); 
+          });
+        }
+      }
+
+    });  
+    
+    //subject
+    $.ajax({  
+      url:"../function_php/fetch_subject.php?school_year="+year_val, 
+      method:"POST",  
+      contentType:false,
+      cache:false,
+      processData:false,
+
+      beforeSend:function() {
+      }, 
+
+      success:function(data){  
+        $('#subject').empty();
+        // $('#subject')
+        //   .append($("<option></option>")
+        //   .attr("value", "")
+        //   .text("All")); 
+
+        if (data != '') 
+        {
+          var jsArray = JSON.parse(data);
+          $.each(jsArray, function(key, value) {   
+            $('#subject')
+            .append($("<option></option>")
+            .attr("value", key)
+            .text(value)); 
+          });
+        }
+      }
+
+    });  
+
+
+  });
+
 </script>
 
 </body>

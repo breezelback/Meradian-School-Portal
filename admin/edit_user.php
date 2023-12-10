@@ -3,6 +3,11 @@
   $sql = ' SELECT `id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, `birthdate`, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `username`, `password`, `user_type`, `status`, `date_created` FROM `tbl_user` WHERE id = '.$_GET['id'].' ';
   $exec = $conn->query($sql);
   $row = $exec->fetch_assoc();
+
+
+  $selectSection = 'SELECT `id`, `school_year`, `section`, `status`, `date_created` FROM `tbl_section` WHERE id = '.$row['section'];
+  $execSection = $conn->query($selectSection);
+  $section = $execSection->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
@@ -152,7 +157,7 @@
                     <div class="row">
                       <div class="col-sm-3 form-group">
                         <label for="email">Year</label>
-                        <select class="form-control" name="school_year">
+                        <select class="form-control" name="school_year" id="school_year">
                           <option value="Kinder" <?php if($row['school_year'] == "Kinder") {echo 'selected';} ?>>Kinder</option>
                           <option value="Grade 1" <?php if($row['school_year'] == "Grade 1") {echo 'selected';} ?>>Grade 1</option>
                           <option value="Grade 2" <?php if($row['school_year'] == "Grade 2") {echo 'selected';} ?>>Grade 2</option>
@@ -174,7 +179,10 @@
                       </div>
                       <div class="col-sm-3 form-group">
                         <label for="email">Section</label>
-                        <input type="text" class="form-control" name="section" value="<?php echo $row['section']; ?>" id="section">
+                        <!-- <input type="text" class="form-control" name="section" value="<?php echo $row['section']; ?>" id="section"> -->
+                        <select type="text" class="form-control" name="section" id="section">
+                          <option value="<?php echo $section['id']; ?>"><?php echo $section['section']; ?></option>
+                        </select>
                       </div>
                     </div>
                     <hr>
@@ -251,6 +259,43 @@
     $('#my-barangay-dropdown').prop('selectedIndex',0);
     $('#my-barangay-dropdown').ph_locations({'location_type': 'barangays'});
     $('#my-barangay-dropdown').ph_locations( 'fetch_list', [{"city_code": this.value}]);
+  });
+
+  $('#school_year').on('change', function(){
+    let year_val = $(this).val();
+    
+    $.ajax({  
+      url:"../function_php/fetch_section.php?school_year="+year_val, 
+      method:"POST",  
+      contentType:false,
+      cache:false,
+      processData:false,
+
+      beforeSend:function() {
+      }, 
+
+      success:function(data){  
+        $('#section').empty();
+        // $('#section')
+        //   .append($("<option></option>")
+        //   .attr("value", "")
+        //   .text("All")); 
+
+        if (data != '') 
+        {
+          var jsArray = JSON.parse(data);
+          $.each(jsArray, function(key, value) {   
+            $('#section')
+            .append($("<option></option>")
+            .attr("value", key)
+            .text(value)); 
+          });
+        }
+      }
+
+    });  
+
+
   });
 
 </script>

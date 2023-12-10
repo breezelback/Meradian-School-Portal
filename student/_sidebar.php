@@ -47,7 +47,8 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <center><b class="text-white">Student</b></center>
+      <div class="user-panel mt-2 pb-3 mb-3 d-flex">
         <div class="image">
           <?php if ($_SESSION['profile_picture'] == ""): ?>
             <img src="../images/user_image.jpg" class="img-circle elevation-2" alt="User Image">

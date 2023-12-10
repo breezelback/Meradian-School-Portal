@@ -55,6 +55,7 @@ $dtr_option = $execDtrA->fetch_assoc();
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
+      <!-- <center><b class="text-white">Administrator</b></center> -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
           <img src="../images/user_image.jpg" class="img-circle elevation-2" alt="User Image">
@@ -141,6 +142,12 @@ $dtr_option = $execDtrA->fetch_assoc();
                   </a>
                 </li>
               <?php endif ?>
+              <li class="nav-item">
+                <a href="sections.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Sections</p>
+                </a>
+              </li>
             </ul>
           </li>
       <!--     <li class="nav-item">
@@ -196,6 +203,15 @@ $dtr_option = $execDtrA->fetch_assoc();
               <i class="nav-icon fa fa-exclamation-circle"></i>
               <p>
                 Announcements
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="logs.php" class="nav-link">
+              <i class="nav-icon fa fa-clipboard-list"></i>
+              <p>
+                Logs
               </p>
             </a>
           </li>

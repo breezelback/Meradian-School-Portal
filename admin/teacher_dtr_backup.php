@@ -80,6 +80,8 @@ $active = $exec1->fetch_assoc();
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                     <tr>
+                      <th><center>YEAR & SECTION</center></th>
+                      <th><center>SCHEDULE</center></th>
                       <th><center>DTR DATE</center></th>
                       <th><center>TIME IN</center></th>
                       <th><center>TIME OUT</center></th>
@@ -89,21 +91,40 @@ $active = $exec1->fetch_assoc();
                     </thead>
                     <tbody>
                       <?php 
-                      $sql = ' SELECT `id`, `teacher_id`, DATE_FORMAT(dtr_date, "%M %d, %Y") AS dtr_date_text, time_out, DATE_FORMAT(`time_in`,"%W") AS dtr_day, DATE_FORMAT(`time_in`,"%r") AS time_in_time, DATE_FORMAT(`time_out`,"%r") AS time_out_time, ABS(TIMESTAMPDIFF(HOUR,`time_in`,`time_out`)) as Hour, ABS(TIMESTAMPDIFF(MINUTE,`time_in`,`time_out`)) as minute, `status`, `academic_year_id` FROM `tbl_dtr1` WHERE teacher_id = '.$_GET['id'].' AND academic_year_id = '.$active['id'].' ORDER BY dtr_date ASC ';
+                      $sql = ' SELECT `id`, `schedule_id`, `teacher_id`, DATE_FORMAT(`time_in`,"%M %d, %Y") AS dtr_date, time_out, DATE_FORMAT(`time_in`,"%W") AS dtr_day, DATE_FORMAT(`time_in`,"%r") AS time_in_time, DATE_FORMAT(`time_out`,"%r") AS time_out_time, ABS(TIMESTAMPDIFF(HOUR,`time_in`,`time_out`)) as Hour, ABS(TIMESTAMPDIFF(MINUTE,`time_in`,`time_out`)) as minute, `status`, `academic_year_id` FROM `tbl_dtr` WHERE teacher_id = '.$_GET['id'].' AND academic_year_id = '.$active['id'].' ';
                       $exec = $conn->query($sql);
                       while ($row = $exec->fetch_assoc()) {
-                        $time_in = ($row['time_in_time'] == "12:00:00 AM" ? "----" : $row['time_in_time']  );
-                        
+
+                        $getSched = ' SELECT `id`, `teacher_id`, `subject_id`, `teaching_day`, `teaching_time`, `schedule_code`, `status`, `date_created`, `teaching_time_to`, `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`, `school_year`, `section` FROM `tbl_schedule` WHERE id = '.$row['schedule_id'].' ';
+                        $execSched = $conn->query($getSched);
+                        $sched = $execSched->fetch_assoc();
+                      
                        ?>
                         <tr>
                           <td style="font-size: 13px;">
                             <center>
-                              <?php echo $row['dtr_date_text']; ?>
+                            <?php echo $sched['school_year']; ?> | <?php echo $sched['section']; ?>
                             </center>
                           </td>
                           <td style="font-size: 13px;">
                             <center>
-                              <?php echo $time_in ?>
+                              <?php echo ($sched['monday'] == true ? "<span class='schedule_day'>Mon</span>" : "" ); ?>
+                              <?php echo ($sched['tuesday'] == true ? "<span class='schedule_day'>Tue</span>" : "" ); ?> 
+                              <?php echo ($sched['wednesday'] == true ? "<span class='schedule_day'>Wed</span>" : "" ); ?> 
+                              <?php echo ($sched['thursday'] == true ? "<span class='schedule_day'>Thu</span>" : "" ); ?> 
+                              <?php echo ($sched['friday'] == true ? "<span class='schedule_day'>Fri</span>" : "" ); ?> 
+                              <?php echo ($sched['saturday'] == true ? "<span class='schedule_day'>Sat</span>" : "" ); ?> 
+                              <?php echo ($sched['sunday'] == true ? "<span class='schedule_day'>Sun</span>" : "" ); ?>  <br>  <?php echo date('h:i A', strtotime($sched['teaching_time'])); ?> - <?php echo date('h:i A', strtotime($sched['teaching_time_to'])); ?>
+                            </center>
+                          </td>
+                          <td style="font-size: 13px;">
+                            <center>
+                              <?php echo $row['dtr_date']; ?> | <span class='schedule_day' style="background-color: #0069ff;"><?php echo $row['dtr_day']; ?></span>
+                            </center>
+                          </td>
+                          <td style="font-size: 13px;">
+                            <center>
+                              <?php echo $row['time_in_time']; ?>
                             </center>
                           </td>
                           <td style="font-size: 13px;">
@@ -128,12 +149,15 @@ $active = $exec1->fetch_assoc();
 
                               <?php //echo date('h:i A', strtotime($row['time_out_time'])); ?>
                               <br>
-                              <?php if (strtotime($row['time_in_time']) > strtotime("08:00:00 AM")): ?>
+                              <?php if (strtotime($row['time_in_time']) > strtotime($sched['teaching_time'])): ?>
                                 <span style="  background-color: #dd0a34; padding: 2px; color: white; border-radius: 5px; margin: 1px; font-size: 13px;">- Late -</span>
                               <?php endif ?>
 
+                              <?php if (strtotime($sched['teaching_time_to']) > strtotime($row['time_out_time']) && $row['time_out'] != "0000-00-00 00:00:00"): ?>
+                                <span style="  background-color: #b3bb12; padding: 2px; color: white; border-radius: 5px; margin: 1px; font-size: 13px;">- Undertime -</span>
+                              <?php endif ?>
 
-                              <?php if (strtotime($row['time_out_time'] && $row['time_out'] != "0000-00-00 00:00:00") > "05:00:00 PM"): ?>
+                              <?php if (strtotime($row['time_out_time'] && $row['time_out'] != "0000-00-00 00:00:00") > strtotime($sched['teaching_time_to'])): ?>
                                 <span style="  background-color: seagreen; padding: 2px; color: white; border-radius: 5px; margin: 1px; font-size: 13px;">- Overtime -</span> 
                               <?php endif ?>
 
@@ -208,6 +232,7 @@ $active = $exec1->fetch_assoc();
       "responsive": true,
     });
   });
+
 
 
 </script>

@@ -179,7 +179,8 @@
                      <?php if ($execLia->num_rows > 0): ?>
                       <button class="btn btn-warning btn-sm text-white" disabled="" onclick="enroll_now(<?php echo $_SESSION['id']; ?>);">Enroll Now!</button>
                      <?php else: ?>
-                      <button class="btn btn-warning btn-sm text-white" onclick="enroll_now(<?php echo $_SESSION['id']; ?>);">Enroll Now!</button>
+                      <!-- <button class="btn btn-warning btn-sm text-white" onclick="enroll_now(<?php echo $_SESSION['id']; ?>);">Enroll Now!</button> -->
+                      <button class="btn btn-warning btn-sm text-white" data-toggle="modal" data-target="#modalInformation">Enroll Now!</button>
                      <?php endif ?>
                     <?php
                   }
@@ -336,6 +337,65 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="modalInformation" tabindex="-1" role="dialog" aria-labelledby="modalInformationLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalInformationLabel">Enrollment</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-sm-12">
+              <center>
+                Subject List
+                <?php
+                $selectSubject = ' SELECT `id`, `subject_name`, `subject_code`, `date_created`, `school_year` FROM `tbl_subject` WHERE school_year = "'.$_SESSION['school_year'].'" ';
+                $execSubject = $conn->query($selectSubject);
+                while($subject = $execSubject->fetch_assoc()){
+                ?>
+                  <input class="form-control my-1" type="text" value="<?php echo $subject['subject_code'];?> | <?php echo $subject['subject_name'];?>" readonly="">
+                <?php } ?>
+                <hr>
+                Tuition Fee
+                <table class="table table-bordered">
+                  <tr>
+                    <td>Tuition Fee</td>
+                    <td>₱10,000</td>
+                  </tr>
+                  <tr>
+                    <td>Other School Fee</td>
+                    <td>₱3,000</td>
+                  </tr>
+                  <tr>
+                    <td>Miscellaneous Fees</td>
+                    <td>₱1,500</td>
+                  </tr>
+                  <tr></tr>
+                  <tr>
+                    <td><b>TOTAL</b></td>
+                    <td><b>₱14,500</b></td>
+                  </tr>
+                </table>
+              </center>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <?php if ($execSubject->num_rows > 0): ?>
+            <button type="button" class="btn btn-primary" onclick="enroll_now(<?php echo $_SESSION['id']; ?>);">Enroll Now</button>
+          <?php else: ?>
+            <button type="button" class="btn btn-primary" disabled="" onclick="enroll_now(<?php echo $_SESSION['id']; ?>);">Enroll Now</button>
+          <?php endif ?>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <?php include'_footer.php'; ?>
   <!-- Control Sidebar -->

@@ -37,10 +37,17 @@ if ($captcha_code == $_SESSION['captcha']) {
 	$exec = $conn->query($sql);
 
 
+
+
 	if ($exec->num_rows > 0) 
 	{
 		$row = $exec->fetch_assoc();
 
+
+	    $selectSection = 'SELECT `id`, `school_year`, `section`, `status`, `date_created` FROM `tbl_section` WHERE id = '.$row['section'];
+	    $execSection = $conn->query($selectSection);
+	    $section = $execSection->fetch_assoc();
+    
 		$_SESSION['id'] = $row['id'];
 		$_SESSION['profile_picture'] = $row['profile_picture'];
 		$_SESSION['id_number'] = $row['id_number'];
@@ -58,7 +65,7 @@ if ($captcha_code == $_SESSION['captcha']) {
 		$_SESSION['barangay'] = $row['barangay'];
 		$_SESSION['house_no'] = $row['house_no'];
 		$_SESSION['school_year'] = $row['school_year'];
-		$_SESSION['section'] = $row['section'];
+		$_SESSION['section'] = $section['section'];
 		$_SESSION['user_type'] = $row['user_type'];
 
 		if ($row['user_type'] == 'student') {

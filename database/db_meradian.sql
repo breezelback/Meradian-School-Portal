@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 03, 2023 at 03:14 PM
+-- Generation Time: Dec 10, 2023 at 01:36 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -43987,7 +43987,9 @@ CREATE TABLE `tbl_academic_year` (
 
 INSERT INTO `tbl_academic_year` (`id`, `academic_year`, `status`, `date_created`) VALUES
 (3, '2022-2023', 'Inactive', '2023-09-06 22:07:33'),
-(4, '2023-2024', 'Active', '2023-09-06 22:09:00');
+(4, '2023-2024', 'Active', '2023-09-06 22:09:00'),
+(10, '2021-2022', 'Inactive', '2023-11-12 01:18:41'),
+(11, '2024-2025', 'Inactive', '2023-11-12 01:20:33');
 
 -- --------------------------------------------------------
 
@@ -44045,6 +44047,59 @@ INSERT INTO `tbl_dtr` (`id`, `schedule_id`, `teacher_id`, `time_in`, `time_out`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_dtr1`
+--
+
+CREATE TABLE `tbl_dtr1` (
+  `id` int(11) NOT NULL,
+  `teacher_id` int(11) NOT NULL,
+  `time_in` datetime NOT NULL,
+  `time_out` datetime NOT NULL,
+  `dtr_date` date NOT NULL,
+  `status` int(11) NOT NULL,
+  `academic_year_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `tbl_dtr1`
+--
+
+INSERT INTO `tbl_dtr1` (`id`, `teacher_id`, `time_in`, `time_out`, `dtr_date`, `status`, `academic_year_id`) VALUES
+(113, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2023-12-01', 0, 4),
+(114, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2023-12-02', 0, 4),
+(115, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2023-12-03', 0, 4),
+(116, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2023-12-04', 0, 4),
+(117, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2023-12-05', 0, 4),
+(118, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2023-12-06', 0, 4),
+(119, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2023-12-07', 0, 4),
+(120, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2023-12-08', 0, 4),
+(121, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2023-12-09', 0, 4),
+(122, 2, '2023-12-10 19:40:20', '2023-12-10 19:40:26', '2023-12-10', 0, 4),
+(123, 2, '2023-12-10 19:17:45', '2023-12-10 19:17:51', '2023-12-11', 0, 4),
+(124, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2023-12-12', 0, 4),
+(125, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2023-12-13', 0, 4),
+(126, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2023-12-14', 0, 4),
+(127, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2023-12-15', 0, 4),
+(128, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2023-12-16', 0, 4),
+(129, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2023-12-17', 0, 4),
+(130, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2023-12-18', 0, 4),
+(131, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2023-12-19', 0, 4),
+(132, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2023-12-20', 0, 4),
+(133, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2023-12-21', 0, 4),
+(134, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2023-12-22', 0, 4),
+(135, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2023-12-23', 0, 4),
+(136, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2023-12-24', 0, 4),
+(137, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2023-12-25', 0, 4),
+(138, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2023-12-26', 0, 4),
+(139, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2023-12-27', 0, 4),
+(140, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2023-12-28', 0, 4),
+(141, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2023-12-29', 0, 4),
+(142, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2023-12-30', 0, 4),
+(143, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2023-12-31', 0, 4);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_dtr_availability`
 --
 
@@ -44073,17 +44128,17 @@ CREATE TABLE `tbl_enrollment` (
   `student_id` int(11) NOT NULL,
   `status` varchar(255) NOT NULL,
   `date_created` datetime NOT NULL,
-  `date_drop` datetime NOT NULL
+  `date_drop` datetime NOT NULL,
+  `school_year` varchar(255) NOT NULL,
+  `gender` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `tbl_enrollment`
 --
 
-INSERT INTO `tbl_enrollment` (`id`, `academic_year_id`, `student_id`, `status`, `date_created`, `date_drop`) VALUES
-(7, 4, 9, 'Enrolled', '2023-10-21 02:06:37', '0000-00-00 00:00:00'),
-(8, 4, 10, 'Drop', '2023-10-21 02:06:37', '2023-10-21 02:06:45'),
-(10, 3, 1, 'Enrolled', '2023-10-22 21:45:41', '0000-00-00 00:00:00');
+INSERT INTO `tbl_enrollment` (`id`, `academic_year_id`, `student_id`, `status`, `date_created`, `date_drop`, `school_year`, `gender`) VALUES
+(33, 4, 1, 'Enrolled', '2023-12-10 20:33:04', '0000-00-00 00:00:00', '', '');
 
 -- --------------------------------------------------------
 
@@ -44108,27 +44163,8 @@ CREATE TABLE `tbl_grades` (
 --
 
 INSERT INTO `tbl_grades` (`id`, `stud_schedule_id`, `first`, `second`, `third`, `fourth`, `average`, `academic_year_id`, `date_created`) VALUES
-(4, 9, 90, 90, 90, 90, 0, 0, '2023-09-23 01:16:03'),
-(5, 10, 80, 86, 82, 80, 0, 0, '2023-09-23 01:21:16'),
-(6, 11, 79, 78, 77, 79, 0, 0, '2023-09-23 01:21:16'),
-(7, 12, 87, 85, 82, 82, 0, 0, '2023-09-23 01:21:16'),
-(8, 13, 83, 82, 84, 88, 0, 0, '2023-09-23 13:25:41'),
-(9, 14, 78, 78, 78, 79, 0, 0, '2023-09-23 13:25:41'),
-(10, 15, 85, 88, 87, 90, 0, 0, '2023-09-23 14:23:13'),
-(11, 21, 78, 0, 0, 0, 0, 0, '2023-10-23 23:52:17'),
-(12, 22, 68, 0, 0, 0, 0, 0, '2023-10-23 23:52:17'),
-(13, 23, 0, 0, 0, 0, 0, 0, '2023-10-23 23:53:18'),
-(14, 28, 0, 0, 0, 0, 0, 0, '2023-10-29 03:13:46'),
-(15, 29, 0, 0, 0, 0, 0, 0, '2023-10-29 03:13:46'),
-(16, 35, 0, 0, 0, 0, 0, 0, '2023-10-29 03:13:46'),
-(17, 30, 0, 0, 0, 0, 0, 0, '2023-10-29 03:15:25'),
-(18, 36, 0, 0, 0, 0, 0, 0, '2023-10-29 03:15:25'),
-(19, 24, 0, 0, 0, 0, 0, 0, '2023-11-03 21:36:25'),
-(20, 25, 0, 0, 0, 0, 0, 0, '2023-11-03 21:36:25'),
-(21, 26, 0, 0, 0, 0, 0, 0, '2023-11-03 21:36:25'),
-(22, 27, 0, 0, 0, 0, 0, 0, '2023-11-03 21:36:25'),
-(23, 34, 0, 0, 0, 0, 0, 0, '2023-11-03 21:36:25'),
-(24, 37, 80, 80, 0, 0, 0, 0, '2023-11-03 21:36:25');
+(31, 57, 0, 0, 0, 0, 0, 0, '2023-12-10 19:48:19'),
+(32, 58, 85, 80, 86, 88, 0, 0, '2023-12-10 19:51:10');
 
 -- --------------------------------------------------------
 
@@ -44147,18 +44183,47 @@ CREATE TABLE `tbl_liabilities` (
   `pay_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `tbl_liabilities`
+-- Table structure for table `tbl_logs`
 --
 
-INSERT INTO `tbl_liabilities` (`id`, `student_id`, `academic_year_id`, `amount`, `status`, `date_created`, `title`, `pay_date`) VALUES
-(9, 1, 4, 1000, 1, '2023-10-12 22:02:16', 'Misc. Fee', '2023-10-17'),
-(10, 1, 4, 5000, 1, '2023-10-17 22:47:33', 'Tuition', '2023-10-19'),
-(11, 1, 4, 2000, 1, '2023-10-21 01:07:23', 'Misc. Fee', '2023-10-21'),
-(12, 1, 4, 5000, 1, '2023-10-21 13:40:44', 'Tuition', '2023-10-21'),
-(13, 1, 4, 200, 1, '2023-10-21 15:27:10', 'Misc. Fee', '2023-10-21'),
-(14, 1, 3, 1000, 1, '2023-10-22 21:41:11', 'Misc. Fee', '2023-10-22'),
-(15, 1, 4, 11, 0, '2023-11-03 20:49:27', '1', NULL);
+CREATE TABLE `tbl_logs` (
+  `id` int(11) NOT NULL,
+  `id_number` varchar(255) NOT NULL,
+  `firstname` varchar(255) NOT NULL,
+  `middlename` varchar(255) NOT NULL,
+  `lastname` varchar(255) NOT NULL,
+  `suffix` varchar(255) NOT NULL,
+  `gender` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `contact_number` varchar(255) NOT NULL,
+  `telephone` varchar(255) NOT NULL,
+  `birthdate` datetime NOT NULL,
+  `province` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `barangay` varchar(255) NOT NULL,
+  `house_no` varchar(255) NOT NULL,
+  `school_year` varchar(255) NOT NULL,
+  `section` varchar(255) NOT NULL,
+  `profile_picture` longtext NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `user_type` varchar(255) NOT NULL,
+  `status` int(11) NOT NULL COMMENT '0 = active, 1= inactive',
+  `date_created` datetime NOT NULL,
+  `student_status` varchar(255) NOT NULL,
+  `enrollment_status` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `tbl_logs`
+--
+
+INSERT INTO `tbl_logs` (`id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, `birthdate`, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `username`, `password`, `user_type`, `status`, `date_created`, `student_status`, `enrollment_status`) VALUES
+(17, 'TCHR003', 'aa', 'aa', 'aa', '', 'Male', 'a@gmail.com', '1', '', '2023-10-23 00:00:00', '0712', '071214', '071214013', '1', 'Second Year', '11', '', '', '6dGryjZ8ERk=', 'teacher', 0, '2023-10-23 21:21:59', '', 'Not Enrolled'),
+(22, 'STDNT0010', '31', '312', '123', '', 'Male', '1646464932@gmail.com', '12', '312', '2023-11-28 00:00:00', '0215', '021517', '021517016', '12', 'Kinder', '12', '', '', '4VcqfA==', 'student', 0, '2023-11-28 21:23:58', 'New', 'Not Enrolled');
 
 -- --------------------------------------------------------
 
@@ -44192,15 +44257,7 @@ CREATE TABLE `tbl_schedule` (
 --
 
 INSERT INTO `tbl_schedule` (`id`, `teacher_id`, `subject_id`, `teaching_day`, `teaching_time`, `schedule_code`, `status`, `date_created`, `teaching_time_to`, `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`, `school_year`, `section`) VALUES
-(6, 2, 19, '', '09:00:00', '', 0, '2023-10-24 21:40:34', '11:00:00', 1, 0, 1, 1, 0, 0, 0, 'Grade 10', 'Gumamela'),
-(7, 2, 21, '', '10:00:00', '', 0, '2023-10-24 21:41:16', '11:00:00', 1, 0, 1, 0, 1, 0, 0, 'Grade 10', 'Gumamela'),
-(8, 2, 21, '', '09:41:00', '', 0, '2023-10-24 21:41:40', '11:41:00', 1, 1, 1, 1, 1, 0, 0, 'Kinder', 'K1'),
-(9, 2, 20, '', '09:42:00', '', 0, '2023-10-24 21:42:16', '10:42:00', 1, 1, 1, 1, 1, 0, 0, 'Third Year', '301'),
-(10, 2, 19, '', '13:00:00', '', 0, '2023-10-24 21:43:17', '16:00:00', 1, 1, 1, 1, 1, 0, 0, 'Third Year', '301'),
-(11, 2, 19, '', '08:00:00', '', 0, '2023-10-24 21:44:07', '10:00:00', 1, 1, 1, 1, 1, 0, 0, 'Grade 10', 'Santan'),
-(12, 18, 20, '', '09:46:00', '', 0, '2023-10-24 21:46:23', '10:46:00', 1, 1, 1, 1, 1, 0, 0, 'Grade 10', 'Santan'),
-(13, 2, 19, '', '01:30:00', '', 0, '2023-10-29 01:30:56', '02:30:00', 0, 0, 0, 0, 0, 1, 1, 'Kinder', 'K1'),
-(14, 2, 21, '', '03:11:00', '', 0, '2023-10-29 03:11:12', '04:11:00', 1, 0, 0, 0, 0, 1, 1, 'Kinder', 'K1');
+(21, 2, 26, '', '19:50:00', '', 0, '2023-12-10 19:50:16', '20:50:00', 1, 0, 1, 0, 1, 0, 0, 'Fourth Year', '13');
 
 -- --------------------------------------------------------
 
@@ -44223,8 +44280,36 @@ CREATE TABLE `tbl_scholarship` (
 --
 
 INSERT INTO `tbl_scholarship` (`id`, `student_id`, `academic_year_id`, `amount`, `title`, `status`, `date_created`) VALUES
-(1, 1, 4, 1000, 'Scholarship', 0, '2023-10-21 00:58:35'),
-(4, 9, 4, 2500, 'Voucher', 0, '2023-11-03 21:06:45');
+(12, 1, 4, 1000, 'Test', 0, '2023-12-10 20:31:55');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_section`
+--
+
+CREATE TABLE `tbl_section` (
+  `id` int(11) NOT NULL,
+  `school_year` varchar(255) NOT NULL,
+  `section` varchar(255) NOT NULL,
+  `status` int(11) NOT NULL,
+  `date_created` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `tbl_section`
+--
+
+INSERT INTO `tbl_section` (`id`, `school_year`, `section`, `status`, `date_created`) VALUES
+(5, 'Kinder', 'K1', 0, '2023-12-04 22:49:22'),
+(6, 'Kinder', 'K2', 0, '2023-12-04 22:49:27'),
+(7, 'Kinder', 'K3', 0, '2023-12-04 22:49:31'),
+(8, 'Grade 1', 'G1A', 0, '2023-12-04 22:49:39'),
+(9, 'Grade 1', 'G1B', 0, '2023-12-04 22:49:46'),
+(10, 'Grade 2', 'G2A', 0, '2023-12-04 22:49:58'),
+(11, 'Grade 2', 'G2B', 0, '2023-12-04 22:50:05'),
+(12, 'Fourth Year', '4201', 0, '2023-12-08 21:03:28'),
+(13, 'Fourth Year', '4202', 0, '2023-12-08 21:03:37');
 
 -- --------------------------------------------------------
 
@@ -44246,14 +44331,7 @@ CREATE TABLE `tbl_student_schedule` (
 --
 
 INSERT INTO `tbl_student_schedule` (`id`, `student_id`, `schedule_id`, `date_created`, `academic_year_id`, `teacher_id`) VALUES
-(24, 9, 9, '2023-10-24 22:15:58', 4, 2),
-(25, 9, 10, '2023-10-24 22:15:58', 4, 2),
-(26, 10, 9, '2023-10-24 22:16:44', 4, 2),
-(27, 10, 10, '2023-10-24 22:16:44', 4, 2),
-(34, 9, 13, '2023-10-29 01:32:23', 4, 2),
-(37, 13, 6, '2023-10-29 03:24:22', 4, 2),
-(38, 9, 10, '2023-11-01 12:05:48', 3, 2),
-(39, 9, 11, '2023-11-01 12:05:48', 3, 2);
+(58, 10, 21, '2023-12-10 19:51:03', 4, 2);
 
 -- --------------------------------------------------------
 
@@ -44274,11 +44352,12 @@ CREATE TABLE `tbl_subject` (
 --
 
 INSERT INTO `tbl_subject` (`id`, `subject_name`, `subject_code`, `date_created`, `school_year`) VALUES
-(18, 'Filipino 101', 'FIL101', '2023-10-24 21:34:56', ''),
-(19, 'Filipino 102', 'FIL102', '2023-10-24 21:35:08', ''),
-(20, 'Psychology 200', 'PSY200', '2023-10-24 21:35:20', ''),
-(21, 'Science 100', 'SCI100', '2023-10-24 21:35:49', ''),
-(22, 'Science 102', 'SCI102', '2023-10-24 21:36:07', '');
+(18, 'Filipino 101', 'FIL101', '2023-10-24 21:34:56', 'Third Year'),
+(19, 'Filipino 102', 'FIL102', '2023-10-24 21:35:08', 'Kinder'),
+(20, 'Psychology 200', 'PSY200', '2023-10-24 21:35:20', 'Kinder'),
+(24, 'GG', 'GG', '2023-12-08 20:58:41', 'Fourth Year'),
+(26, 'English 4', 'ENG4', '2023-12-10 19:49:46', 'Fourth Year'),
+(28, 'Filipino 101', 'FIL101', '2023-12-10 20:28:14', 'Grade 1');
 
 -- --------------------------------------------------------
 
@@ -44319,16 +44398,17 @@ CREATE TABLE `tbl_user` (
 --
 
 INSERT INTO `tbl_user` (`id`, `id_number`, `firstname`, `middlename`, `lastname`, `suffix`, `gender`, `email`, `contact_number`, `telephone`, `birthdate`, `province`, `city`, `barangay`, `house_no`, `school_year`, `section`, `profile_picture`, `username`, `password`, `user_type`, `status`, `date_created`, `student_status`, `enrollment_status`) VALUES
-(1, 'STDNT001', 'John1', 'D1', 'Doe1', '1', 'Female', 'breezelback@gmail.com', '091234567891', '1', '2023-10-19 00:00:00', '1013', '101313', '101313002', '111', 'Kinder', 'K1', '1697982278.jpg', '', '5DN6OZpIJd8=', 'student', 0, '2023-09-22 21:19:56', 'New', 'Not Enrolled'),
-(2, 'TCHR001', 'BlakeX', 'RX', 'GriffinX', 'X', 'Female', 'breezelback@gmail.com', '09123456789', '222', '2023-10-20 00:00:00', '0712', '071214', '071214013', '1231', 'Kinder', '1A', '1697818195.png', '', '4VcqfA==', 'teacher', 0, '2023-09-22 21:20:38', '', ''),
-(9, 'STDNT003', 'Monkey', 'D', 'Luffy', '', 'Male', 'a@gmail.com', '09123456789', '111', '2023-10-21 00:00:00', '1013', '101314', '101314015', '212', 'Third Year', '301', '1698064993.jpg', '', '4VcqfA==', 'student', 0, '2023-08-02 01:53:22', 'Transferee', 'Not Enrolled'),
-(10, 'STDNT004', 'Roronoa', '', 'Zorro', '', 'Male', 'a@gmail.com', '09123456789', '1', '2023-10-19 00:00:00', '1013', '101315', '101315016', '222', 'Third Year', '301', '', '', '5DN6OZpIJd8=', 'student', 0, '2023-07-11 01:55:42', 'New', 'Not Enrolled'),
-(12, 'Admin', 'Meradian Shool', 'RX', 'Administrator', '', 'Female', 'breezelback@gmail.com', '09123456789', '222', '2023-10-20 00:00:00', '0712', '071214', '071214013', '1231', 'Kinder', '1A', '1697818195.png', '', '4VcqfMk/L9o=', 'admin', 0, '2023-09-22 21:20:38', '', ''),
-(13, 'ST001', 'Tony', '', 'Starks', '', 'Male', 'a@gmail.com', '09123456789', '', '2023-10-23 00:00:00', '0314', '031416', '031416014', '111', 'Grade 10', 'Gumamela', '1698065409.png', '', '4VcqfA==', 'student', 0, '2023-10-23 20:49:39', 'New', 'Not Enrolled'),
-(15, 'T001', 'To be', '', 'Announced', '', 'Male', 'a@gmail.com', '09123456789', '', '2023-10-23 00:00:00', '1411', '141102', '141102023', '200', 'Second Year', '1', '', '', '1234', 'teacher', 0, '2023-10-23 20:56:56', '', 'Not Enrolled'),
-(16, 'TCHR002', 'Peter', '', 'Parker', '', 'Male', 'a@gmail.com', '09123456789', '', '2023-10-23 00:00:00', '0434', '043419', '043419001', '200', 'Kinder', '401', '1698066022.png', '', '1234', 'teacher', 0, '2023-10-23 21:00:22', '', 'Not Enrolled'),
-(17, 'TCHR003', 'aa', 'aa', 'aa', '', 'Male', 'a@gmail.com', '1', '', '2023-10-23 00:00:00', '0712', '071214', '071214013', '1', 'First Year', '11', '', '', '6dGryjZ8ERk=', 'teacher', 0, '2023-10-23 21:21:59', '', 'Not Enrolled'),
-(18, 'TCHR003', 'Bruce', '', 'Willis', '', 'Male', 'breezelback@gmail.com', '09123456789', '', '2023-10-23 00:00:00', '0314', '031415', '031415017', '111', 'Second Year', '222', '', '', '4VcqfMk=', 'teacher', 0, '2023-10-23 21:28:50', '', 'Not Enrolled');
+(1, 'STDNT001', 'John1', 'D1', 'Doe1', '1', 'Female', 'breezelback@gmail.com', '091234567891', '1', '2013-10-19 00:00:00', '0215', '021518', '021518016', '111', 'Grade 1', '8', '1697982278.jpg', '', '4VcqfA==', 'student', 0, '2023-09-22 21:19:56', 'New', 'Not Enrolled'),
+(2, 'TCHR001', 'BlakeX', 'RX', 'GriffinX', 'X', 'Female', 'breezelback@gmail.com', '09123456789', '222', '2023-10-20 00:00:00', '0712', '071214', '071214013', '1231', 'First Year', '9', '1697818195.png', '', '4VcqfA==', 'teacher', 0, '2023-09-22 21:20:38', '', ''),
+(9, 'STDNT003', 'Monkey', 'D', 'Luffy', '', 'Male', 'a@gmail.com', '09123456789', '111', '2023-10-21 00:00:00', '1013', '101314', '101314015', '212', 'Fourth Year', '9', '1698064993.jpg', '', '4VcqfA==', 'student', 0, '2023-08-02 01:53:22', 'Transferee', 'Not Enrolled'),
+(10, 'STDNT004', 'Roronoa', '', 'Zorro', '', 'Female', 'a@gmail.com', '09123456789', '1', '2023-10-19 00:00:00', '1013', '101315', '101315016', '222', 'Fourth Year', '9', '', '', '5SFXfrNTaKsNm6ys', 'student', 0, '2023-07-11 01:55:42', 'New', 'Not Enrolled'),
+(12, 'Admin', 'Meradian Shool', 'RX', 'Administrator', '', 'Female', 'breezelback@gmail.com', '09123456789', '222', '2023-10-20 00:00:00', '0712', '071214', '071214013', '1231', 'First Year', '9', '1697818195.png', '', '4VcqfA==', 'admin', 0, '2023-09-22 21:20:38', '', ''),
+(13, 'ST001', 'Tony', '', 'Starks', '', 'Male', 'a@gmail.com', '09123456789', '', '2023-10-23 00:00:00', '0314', '031416', '031416014', '111', 'Grade 1', '8', '1698065409.png', '', '5DN6OZpIJd8=', 'student', 0, '2023-10-23 20:49:39', 'New', 'Not Enrolled'),
+(15, 'T001', 'To be', '', 'Announced', '', 'Male', 'a@gmail.com', '09123456789', '', '2023-10-23 00:00:00', '1411', '141102', '141102023', '200', 'Second Year', '9', '', '', '1234', 'teacher', 0, '2023-10-23 20:56:56', '', 'Not Enrolled'),
+(16, 'TCHR002', 'Peter', '', 'Parker', '', 'Male', 'a@gmail.com', '09123456789', '', '2023-10-23 00:00:00', '0434', '043419', '043419001', '200', 'Fourth Year', '9', '1698066022.png', '', '1234', 'teacher', 0, '2023-10-23 21:00:22', '', 'Not Enrolled'),
+(18, 'TCHR003', 'Bruce', '', 'Willis', '', 'Male', 'breezelback@gmail.com', '09123456789', '', '2023-10-23 00:00:00', '0314', '031415', '031415017', '111', 'Second Year', '9', '', '', '4VcqfMk=', 'teacher', 0, '2023-10-23 21:28:50', '', 'Not Enrolled'),
+(20, 'STDNT005', 'Thor', '', 'Odinson', '', 'Male', 'breezelback@gmail.com', '09123456789', '', '2023-11-11 00:00:00', '0215', '021518', '021518015', '123', 'Fourth Year', '9', '', '', '4VcqfA==', 'student', 0, '2023-11-11 22:25:04', 'Transferee', 'Not Enrolled'),
+(23, '312', 'sfs', '1312', '312', '32131', 'Male', 'a@gmail.com', '12312312312', '', '2023-12-05 00:00:00', '0516', '051611', '051611013', '123', 'Grade 1', '9', '', '', '41Qre807', 'teacher', 0, '2023-12-05 21:53:42', '', 'Not Enrolled');
 
 --
 -- Indexes for dumped tables
@@ -44383,6 +44463,12 @@ ALTER TABLE `tbl_dtr`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbl_dtr1`
+--
+ALTER TABLE `tbl_dtr1`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tbl_dtr_availability`
 --
 ALTER TABLE `tbl_dtr_availability`
@@ -44407,6 +44493,12 @@ ALTER TABLE `tbl_liabilities`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbl_logs`
+--
+ALTER TABLE `tbl_logs`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tbl_schedule`
 --
 ALTER TABLE `tbl_schedule`
@@ -44416,6 +44508,12 @@ ALTER TABLE `tbl_schedule`
 -- Indexes for table `tbl_scholarship`
 --
 ALTER TABLE `tbl_scholarship`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_section`
+--
+ALTER TABLE `tbl_section`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -44474,7 +44572,7 @@ ALTER TABLE `refregion`
 -- AUTO_INCREMENT for table `tbl_academic_year`
 --
 ALTER TABLE `tbl_academic_year`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tbl_announcement`
@@ -44489,6 +44587,12 @@ ALTER TABLE `tbl_dtr`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
+-- AUTO_INCREMENT for table `tbl_dtr1`
+--
+ALTER TABLE `tbl_dtr1`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
+
+--
 -- AUTO_INCREMENT for table `tbl_dtr_availability`
 --
 ALTER TABLE `tbl_dtr_availability`
@@ -44498,49 +44602,61 @@ ALTER TABLE `tbl_dtr_availability`
 -- AUTO_INCREMENT for table `tbl_enrollment`
 --
 ALTER TABLE `tbl_enrollment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `tbl_grades`
 --
 ALTER TABLE `tbl_grades`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `tbl_liabilities`
 --
 ALTER TABLE `tbl_liabilities`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `tbl_logs`
+--
+ALTER TABLE `tbl_logs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tbl_schedule`
 --
 ALTER TABLE `tbl_schedule`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `tbl_scholarship`
 --
 ALTER TABLE `tbl_scholarship`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `tbl_section`
+--
+ALTER TABLE `tbl_section`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tbl_student_schedule`
 --
 ALTER TABLE `tbl_student_schedule`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `tbl_subject`
 --
 ALTER TABLE `tbl_subject`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

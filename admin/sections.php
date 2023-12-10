@@ -1,4 +1,10 @@
-<?php require('../function_php/conn.php'); ?>
+<?php require('../function_php/conn.php');
+
+    $sql1 = ' SELECT `id`, `academic_year`, `status`, `date_created` FROM `tbl_academic_year` WHERE status = "Active" ';
+    $exec1 = $conn->query($sql1);
+    $active = $exec1->fetch_assoc();
+  ?>
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,12 +27,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Subjects</h1>
+            <h1 class="m-0">Sections</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Subjects</li>
+              <li class="breadcrumb-item active">Sections</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -52,7 +58,7 @@
                 <div class="card-tools">
                   <ul class="nav nav-pills ml-auto">
                     <li class="nav-item">
-                      <button class="nav-link btn-success text-white"  data-toggle="modal" data-target="#modal_add_subject">Add New Subject &nbsp;<i class="fa fa-plus"></i></button>
+                      <button class="nav-link btn-success text-white"  data-toggle="modal" data-target="#modal_add_subject">Add New Section &nbsp;<i class="fa fa-plus"></i></button>
                     </li>
                   </ul>
                 </div>
@@ -62,49 +68,30 @@
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                      <th><center>SUBJECT CODE</center></th>
-                      <th><center>NAME</center></th>
-                      <th><center>YEAR</center></th>
-                      <th><center>DATE CREATED</center></th>
+                      <th><center>SCHOOL YEAR</center></th>
+                      <th><center>SECTION</center></th>
                       <th><center>ACTION</center></th>
                     </tr>
                     </thead>
                     <tbody>
 
                       <?php 
-                        $sql = ' SELECT `id`, `subject_name`, `subject_code`, DATE_FORMAT(`date_created`, "%M %d, %Y") AS date_created, `school_year` FROM `tbl_subject` ';
+                        $sql = ' SELECT `id`, `school_year`, `section`, `status`, `date_created` FROM `tbl_section` ';
                         $exec = $conn->query($sql);
                         while ( $row = $exec->fetch_assoc() ) {
                       ?>
                         <tr style="font-size: 14px;">
-                          <td><center><?php echo $row['subject_code']; ?></center></td>
-                          <td><center><?php echo $row['subject_name']; ?></center></td>
                           <td><center><?php echo $row['school_year']; ?></center></td>
-                          <td><center><?php echo $row['date_created']; ?></td>
+                          <td><center><?php echo $row['section']; ?></center></td>
                           <td><center>
                             <div class="btn-group">
-                              <a href="update_subject.php?id=<?php echo $row['id']; ?>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
-                              <!-- <a href="../function_php/delete_subject.php?id=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a> -->
-                              <button onclick="delete_subject(<?php echo $row['id']; ?>);" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></butto>
+                              <button onclick="delete_section(<?php echo $row['id']; ?>)" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                           </td>
                         </tr>
                       <?php } ?>
 
                     </tbody>  
 
-              <!--       <tfoot>
-                    <tr>
-                      <th><center>ID NUMBER</center></th>
-                      <th><center>NAME</center></th>
-                      <th><center>GENDER</center></th>
-                      <th><center>EMAIL</center></th>
-                      <th><center>CONTACT NUMBER</center></th>
-                      <th><center>BIRTHDATE</center></th>
-                      <th><center>ADDRES</center></th>
-                      <th><center>YEAR & SECTION</center></th>
-                      <th><center>ACTION</center></th>
-                    </tr>
-                    </tfoot> -->
                   </table>
                 </div>
               </div><!-- /.card-body -->
@@ -122,22 +109,19 @@
   <!-- /.content-wrapper -->
 
   <!-- Modal -->
-  <form action="../function_php/add_new_subject.php" method="POST">
+  <form action="../function_php/add_section.php" method="POST">
     <div class="modal fade" id="modal_add_subject" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add New Subject</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Add Section</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <label for="name-l" style="color: grey;">Subject Code</i></label>
-            <input type="text" class="form-control" name="subject_code" id="subject_code" placeholder="">
-            <label for="name-l" style="color: grey;">Subject Name</i></label>
-            <input type="text" class="form-control" name="subject_name" id="subject_name" placeholder="">
-            <label for="email">Year</label>
+
+            <label for="name-l" style="color: grey;">School Year</i></label>
             <select class="form-control" name="school_year">
               <option value="Kinder">Kinder</option>
               <option value="Grade 1">Grade 1</option>
@@ -157,6 +141,8 @@
               <option value="Third Year">Third Year</option>
               <option value="Fourth Year">Fourth Year</option>
             </select>
+            <label for="name-l" style="color: grey;">Section</i></label>
+            <input type="text" class="form-control" name="section" id="section" placeholder="">
           </div>
           <div class="modal-footer">  
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -198,14 +184,16 @@
   });
 
 
-   function delete_subject(id)
+  function delete_section(id)
   {
     if (confirm('Are you sure you want to delete this record?')) {
-      window.location.href = "../function_php/delete_subject.php?id="+id;
+      window.location.href = "../function_php/delete_section.php?id="+id;
     } else {
       // Do nothing!
     }
   }
+
+
 </script>
 </body>
 </html>

@@ -14,6 +14,17 @@ if($execVoucher->num_rows > 0)
 else
 {
 	$sql = ' INSERT INTO `tbl_enrollment`(`academic_year_id`, `student_id`, `status`, `date_created`) VALUES ('.$academic_year_id.', '.$id.', "Pending", NOW()) ';
+	
+
+
+	$insertLia = ' INSERT INTO `tbl_liabilities`(`student_id`, `academic_year_id`, `amount`, `date_created`, `title`) VALUES ('.$id.', '.$academic_year_id.', 10000, NOW(), "Tuition Fee") ';
+	$conn->query($insertLia);
+
+	$insertLia1 = ' INSERT INTO `tbl_liabilities`(`student_id`, `academic_year_id`, `amount`, `date_created`, `title`) VALUES ('.$id.', '.$academic_year_id.', 3000, NOW(), "Other School Fee") ';
+	$conn->query($insertLia1);
+
+	$insertLia2 = ' INSERT INTO `tbl_liabilities`(`student_id`, `academic_year_id`, `amount`, `date_created`, `title`) VALUES ('.$id.', '.$academic_year_id.', 1000, NOW(), "Miscellaneous Fees") ';
+	$conn->query($insertLia2);
 }
 
 

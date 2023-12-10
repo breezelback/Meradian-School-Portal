@@ -37,6 +37,15 @@ else
 		}
 
 
+		$insertLia = ' INSERT INTO `tbl_liabilities`(`student_id`, `academic_year_id`, `amount`, `date_created`, `title`) VALUES ('.$check_id[$i].', '.$year_id.', 10000, NOW(), "Tuition Fee") ';
+		$conn->query($insertLia);
+
+		$insertLia1 = ' INSERT INTO `tbl_liabilities`(`student_id`, `academic_year_id`, `amount`, `date_created`, `title`) VALUES ('.$check_id[$i].', '.$year_id.', 3000, NOW(), "Other School Fee") ';
+		$conn->query($insertLia1);
+
+		$insertLia2 = ' INSERT INTO `tbl_liabilities`(`student_id`, `academic_year_id`, `amount`, `date_created`, `title`) VALUES ('.$check_id[$i].', '.$year_id.', 1000, NOW(), "Miscellaneous Fees") ';
+		$conn->query($insertLia2);
+
 	}
 
 	header('location: ../admin/student_academic_data.php');

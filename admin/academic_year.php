@@ -123,7 +123,28 @@
           </div>
           <div class="modal-body">
             <label for="name-l" style="color: grey;">Academic Year</i></label>
-            <input type="text" class="form-control" name="academic_year" id="academic_year" placeholder="">
+            <!-- <input type="text" class="form-control" name="academic_year" id="academic_year" placeholder=""> -->
+            <select name="academic_year" id="academic_year" class="form-control">
+              <option value="2022-2023">2022-2023</option>
+              <option value="2023-2024">2023-2024</option>
+              <option value="2024-2025">2024-2025</option>
+              <option value="2025-2026">2025-2026</option>
+              <option value="2026-2027">2026-2027</option>
+              <option value="2027-2028">2027-2028</option>
+              <option value="2028-2029">2028-2029</option>
+              <option value="2029-2030">2029-2030</option>
+              <option value="2030-2031">2030-2031</option>
+              <option value="2031-2032">2031-2032</option>
+              <option value="2032-2033">2032-2033</option>
+              <option value="2033-2034">2033-2034</option>
+              <option value="2034-2035">2034-2035</option>
+              <option value="2035-2036">2035-2036</option>
+              <option value="2036-2037">2036-2037</option>
+              <option value="2037-2038">2037-2038</option>
+              <option value="2038-2039">2038-2039</option>
+              <option value="2039-2040">2039-2040</option>
+              <option value="2040-2041">2040-2041</option>
+            </select>
           </div>
           <div class="modal-footer">  
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -41,6 +41,12 @@
       border-radius: 5px;
       margin: 3px;
     }
+    @media only screen and (min-width: 800px) {
+      .table-responsive
+      {
+        display: revert;
+      }
+    }
     
   </style>
 </head>
@@ -116,7 +122,7 @@
                     <hr>
                     <div class="row">
                       <div class="col-md-12">
-                  <h3>Current Academic Year: <span style="color: darkred; font-weight: bold;"><?php if(!empty($active['academic_year'])) { echo $active['academic_year'];} else {echo "";}  ?></span></h3>
+                        <h3>Current Academic Year: <span style="color: darkred; font-weight: bold;"><?php if(!empty($active['academic_year'])) { echo $active['academic_year'];} else {echo "";}  ?></span></h3>
                         <table id="example1" class="table table-bordered table-striped table-responsive">
                           <thead>
                           <tr>
@@ -271,7 +277,18 @@
                           <td><?php echo (empty($rowGrade['second']) ? 0 : $rowGrade['second']); ?></td>
                           <td><?php echo (empty($rowGrade['third']) ? 0 : $rowGrade['third']); ?></td>
                           <td><?php echo (empty($rowGrade['fourth']) ? 0 : $rowGrade['fourth']); ?></td>
-                          <td><b><?php echo ((empty($rowGrade['first']) ? 0 : $rowGrade['first']) + (empty($rowGrade['second']) ? 0 : $rowGrade['second']) + (empty($rowGrade['third']) ? 0 : $rowGrade['third']) + (empty($rowGrade['fourth']) ? 0 : $rowGrade['fourth'])) / 4; ?></b> </td>
+
+                          <td>
+                            <b>
+                              <?php if ( empty($rowGrade['first']) || empty($rowGrade['second']) || empty($rowGrade['third']) || empty($rowGrade['fourth']) ): ?>
+                                <?php echo 0; ?>
+                              <?php else: ?>
+                                <?php echo ((empty($rowGrade['first']) ? 0 : $rowGrade['first']) + (empty($rowGrade['second']) ? 0 : $rowGrade['second']) + (empty($rowGrade['third']) ? 0 : $rowGrade['third']) + (empty($rowGrade['fourth']) ? 0 : $rowGrade['fourth'])) / 4; ?>
+                              <?php endif ?>
+                                
+                            </b> 
+                          </td>
+
                           <!-- <td>
                             <center>
                               <div class="btn-group">
@@ -381,7 +398,18 @@
                           <td><?php echo (empty($rowGrade['second']) ? 0 : $rowGrade['second']); ?></td>
                           <td><?php echo (empty($rowGrade['third']) ? 0 : $rowGrade['third']); ?></td>
                           <td><?php echo (empty($rowGrade['fourth']) ? 0 : $rowGrade['fourth']); ?></td>
-                          <td><b><?php echo ((empty($rowGrade['first']) ? 0 : $rowGrade['first']) + (empty($rowGrade['second']) ? 0 : $rowGrade['second']) + (empty($rowGrade['third']) ? 0 : $rowGrade['third']) + (empty($rowGrade['fourth']) ? 0 : $rowGrade['fourth'])) / 4; ?></b> </td>
+
+
+                          <td><b>
+                          <?php if ( empty($rowGrade['first']) || empty($rowGrade['second']) || empty($rowGrade['third']) || empty($rowGrade['fourth']) ): ?>
+                            <?php echo 0; ?>
+                          <?php else: ?>
+                            <?php echo ((empty($rowGrade['first']) ? 0 : $rowGrade['first']) + (empty($rowGrade['second']) ? 0 : $rowGrade['second']) + (empty($rowGrade['third']) ? 0 : $rowGrade['third']) + (empty($rowGrade['fourth']) ? 0 : $rowGrade['fourth'])) / 4; ?>
+                          <?php endif ?>
+                          </b> </td>
+
+
+                         <!--  <td><b><?php echo ((empty($rowGrade['first']) ? 0 : $rowGrade['first']) + (empty($rowGrade['second']) ? 0 : $rowGrade['second']) + (empty($rowGrade['third']) ? 0 : $rowGrade['third']) + (empty($rowGrade['fourth']) ? 0 : $rowGrade['fourth'])) / 4; ?></b> </td> -->
                           <!-- <td>
                             <center>
                               <div class="btn-group">
@@ -390,7 +418,18 @@
                             </center>
                           </td> -->
                         </tr>
-                      <?php $average_sum = $average_sum + ((empty($rowGrade['first']) ? 0 : $rowGrade['first']) + (empty($rowGrade['second']) ? 0 : $rowGrade['second']) + (empty($rowGrade['third']) ? 0 : $rowGrade['third']) + (empty($rowGrade['fourth']) ? 0 : $rowGrade['fourth'])) / 4; $counter++; }  ?>
+                      <?php 
+                         if ( empty($rowGrade['first']) || empty($rowGrade['second']) || empty($rowGrade['third']) || empty($rowGrade['fourth']) ){
+                       
+                              $average_sum = 0;
+                            }
+                            else
+                            {
+                              $average_sum = $average_sum + ((empty($rowGrade['first']) ? 0 : $rowGrade['first']) + (empty($rowGrade['second']) ? 0 : $rowGrade['second']) + (empty($rowGrade['third']) ? 0 : $rowGrade['third']) + (empty($rowGrade['fourth']) ? 0 : $rowGrade['fourth'])) / 4; 
+                            }
+
+                        $counter++; }  
+                      ?>
 
                     </tbody>   
                     <tfoot>
@@ -490,17 +529,18 @@
                           a.saturday,
                           a.sunday,
                           a.school_year,
-                          a.section,
                           b.subject_name,
                           b.subject_code,
                           c.id_number,
                           c.firstname,
                           c.lastname,
-                          c.middlename
+                          c.middlename,
+                          d.section
                       FROM tbl_schedule a
                       LEFT JOIN tbl_subject b ON b.id = a.subject_id
                       LEFT JOIN tbl_user c ON c.id = a.teacher_id
-                      WHERE a.id NOT IN (SELECT schedule_id FROM tbl_student_schedule WHERE student_id = '.$_GET['id'].' AND academic_year_id = '.$active['id'].')
+                      LEFT JOIN tbl_section d ON d.id = c.section 
+                      WHERE a.school_year = "'.$row['school_year'].'" AND a.id NOT IN (SELECT schedule_id FROM tbl_student_schedule WHERE student_id = '.$_GET['id'].' AND academic_year_id = '.$active['id'].')
                       ';
                     $exec = $conn->query($sql);
                     while ( $sub = $exec->fetch_assoc() ) {
